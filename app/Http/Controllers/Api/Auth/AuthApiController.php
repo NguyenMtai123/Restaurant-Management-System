@@ -45,16 +45,7 @@ class AuthApiController extends Controller
             default => redirect()->route('login')->withErrors(['role' => 'Vai trò không hợp lệ']),
         };
 
-        // Trả JSON cho frontend (không redirect)
-        // return response()->json([
-        //     'message' => 'Đăng nhập thành công',
-        //     'user' => [
-        //         'id' => $user->id,
-        //         'name' => $user->name,
-        //         'email' => $user->email,
-        //         'role' => $user->role,
-        //     ]
-        // ]);
+
     }
 
     // API logout

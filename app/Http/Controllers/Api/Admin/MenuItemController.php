@@ -11,6 +11,7 @@ use App\Http\Requests\StoreMenuItemRequest;
 
 class MenuItemController extends Controller
 {
+
     public function store(StoreMenuItemRequest $request): JsonResponse
     {
         $data = $request->validated();

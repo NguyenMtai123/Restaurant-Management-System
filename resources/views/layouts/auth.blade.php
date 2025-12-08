@@ -28,5 +28,7 @@
 
 <!-- JS chung -->
 @stack('scripts')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 </body>
 </html>

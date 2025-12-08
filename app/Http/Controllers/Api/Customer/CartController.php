@@ -19,7 +19,6 @@ class CartController extends Controller
         return response()->json($cart);
     }
 
-    // Thêm món vào giỏ
     public function add(Request $request)
     {
         $request->validate([
@@ -34,26 +33,28 @@ class CartController extends Controller
             'item_id' => $request->item_id
         ]);
 
-        $cartItem->quantity = $cartItem->exists ? $cartItem->quantity + ($request->quantity ?? 1) : ($request->quantity ?? 1);
-        $cartItem->save();
+        $cartItem->quantity = $cartItem->exists
+            ? $cartItem->quantity + ($request->quantity ?? 1)
+            : ($request->quantity ?? 1);
 
+        $cartItem->save();
         $cart->load('items.menuItem');
         return response()->json($cart);
     }
 
-    // Xóa món khỏi giỏ
     public function remove(Request $request)
     {
         $request->validate(['item_id' => 'required|exists:menu_items,id']);
         $cart = Cart::where('user_id', Auth::id())->first();
         if ($cart) {
-            CartItem::where('cart_id', $cart->id)->where('item_id', $request->item_id)->delete();
+            CartItem::where('cart_id', $cart->id)
+                ->where('item_id', $request->item_id)
+                ->delete();
         }
         $cart->load('items.menuItem');
         return response()->json($cart);
     }
 
-    // Cập nhật số lượng
     public function update(Request $request)
     {
         $request->validate([

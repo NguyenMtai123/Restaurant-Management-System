@@ -2,15 +2,20 @@
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\FoodController;
-use App\Http\Controllers\Api\Admin\MenuItemController;
-use App\Http\Controllers\Customer\CartController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Api\Auth\AuthApiController;
-use App\Http\Controllers\Api\Customer\HomeController;
-use App\Http\Controllers\Api\Staff\Home_Staff_Controller;
+use App\Http\Controllers\Api\Customer\CartController;
+use App\Http\Controllers\Api\Admin\MenuItemController;
+use App\Http\Controllers\Api\Customer\TableController;
+
+  Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'index']);
+    Route::post('/add', [CartController::class, 'add']);
+    Route::post('/remove', [CartController::class, 'remove']);
+    Route::post('/update', [CartController::class, 'update']);
+});
+
+
 
 Route::get('/menu-items', [MenuItemController::class, 'index']);
 Route::post('/menu-items', [MenuItemController::class, 'store']);
@@ -101,12 +106,9 @@ Route::get('/tables', function() {
     ];
 });
 
-// // Thêm món (POST)
-// Route::get('/foods', [FoodController::class, 'index']);
-// Route::post('/foods', [FoodController::class, 'store']);
-
-
-// Route::get('/cart', [CartController::class, 'list']);
-// Route::post('/cart', [CartController::class, 'add']);
-// Route::put('/cart/{index}', [CartController::class, 'update']);
-// Route::delete('/cart/{index}', [CartController::class, 'remove']);
+Route::prefix('customer')->group(function() {
+    Route::get('tables', [TableController::class, 'index']); // GET: danh sách bàn
+    Route::post('reserve', [TableController::class, 'reserve']); // POST: đặt bàn
+    Route::get('reservations', [TableController::class, 'current']); // GET: danh sách hiện tại
+    Route::delete('reservations/{index}', [TableController::class, 'cancel']); // DELETE: hủy bàn
+});
