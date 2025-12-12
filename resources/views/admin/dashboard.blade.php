@@ -9,7 +9,14 @@
 <body>
    <h1>Admin Dashboard</h1>
     <p>Xin chào, {{ session('user.name') }}</p>
-    <a href="{{ route('logout') }}">Đăng xuất</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
+<a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    Đăng xuất
+</a>
+
 
 </body>
 </html>

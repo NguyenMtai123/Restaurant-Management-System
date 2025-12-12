@@ -27,7 +27,6 @@ class CartController extends Controller
         ]);
 
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
-
         $cartItem = CartItem::firstOrNew([
             'cart_id' => $cart->id,
             'item_id' => $request->item_id

@@ -9,7 +9,6 @@
         <div class="card-body">
             <form id="addMenuItemForm" enctype="multipart/form-data">
                 @csrf
-
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Danh mục</label>
                     <select name="category_id" id="category_id" class="form-select" required>
@@ -36,9 +35,14 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="price" class="form-label">Mô tả</label>
+                    <textarea type="text" name="description" id="description" class="form-control"></textarea>
+                </div>
+
+                {{-- <div class="mb-3">
                     <label for="image" class="form-label">Ảnh món ăn</label>
                     <input type="file" name="image" id="image" class="form-control">
-                </div>
+                </div> --}}
 
                 <button type="submit" class="btn btn-success">Thêm món</button>
             </form>

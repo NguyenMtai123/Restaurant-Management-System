@@ -1,201 +1,5 @@
 // Menu items data
-const menuItems = [
-  {
-    id: 1,
-    name: "Phở Bò",
-    description: "Phở bò truyền thống với nước dùng đậm đà, thịt bò tươi ngon",
-    price: 45000,
-    category: "vietnamese",
-    image:
-      "https://images.unsplash.com/photo-1552465011-b4e30bf7349d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    popular: true,
-    details: {
-      calories: "450 kcal",
-      prepTime: "15 phút",
-      ingredients: "Bánh phở, thịt bò, hành, rau thơm, nước dùng",
-      spicyLevel: "Không cay",
-    },
-  },
-  {
-    id: 2,
-    name: "Bánh Mì Thịt",
-    description: "Bánh mì giòn tan với thịt nguội, chả lụa, rau thơm",
-    price: 25000,
-    category: "vietnamese",
-    image:
-      "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    popular: false,
-    details: {
-      calories: "350 kcal",
-      prepTime: "10 phút",
-      ingredients: "Bánh mì, thịt nguội, chả lụa, rau thơm, pate",
-      spicyLevel: "Không cay",
-    },
-  },
-  {
-    id: 3,
-    name: "Cơm Tấm Sườn",
-    description: "Cơm tấm sườn nướng thơm lừng với bì, chả trứng",
-    price: 55000,
-    category: "vietnamese",
-    image:
-      "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
-    popular: true,
-    details: {
-      calories: "650 kcal",
-      prepTime: "20 phút",
-      ingredients: "Cơm tấm, sườn nướng, bì, chả trứng, đồ chua",
-      spicyLevel: "Cay nhẹ",
-    },
-  },
-  {
-    id: 4,
-    name: "Sushi Hỗn Hợp",
-    description: "Đĩa sushi hỗn hợp với cá hồi, cá ngừ, tôm và trứng cá",
-    price: 120000,
-    category: "asian",
-    image:
-      "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1227&q=80",
-    popular: true,
-    details: {
-      calories: "380 kcal",
-      prepTime: "25 phút",
-      ingredients: "Cơm sushi, cá hồi, cá ngừ, tôm, trứng cá, rong biển",
-      spicyLevel: "Không cay",
-    },
-  },
-  {
-    id: 5,
-    name: "Mì Xào Hải Sản",
-    description: "Mì xào cùng tôm, mực, bạch tuộc và rau củ tươi",
-    price: 75000,
-    category: "asian",
-    image:
-      "https://images.unsplash.com/photo-1555126634-323283e090fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    popular: false,
-    details: {
-      calories: "520 kcal",
-      prepTime: "18 phút",
-      ingredients: "Mì tươi, tôm, mực, bạch tuộc, rau củ, nước tương",
-      spicyLevel: "Cay vừa",
-    },
-  },
-  {
-    id: 6,
-    name: "Hamburger Bò",
-    description:
-      "Hamburger với thịt bò nướng, phô mai, rau sống và sốt đặc biệt",
-    price: 65000,
-    category: "fastfood",
-    image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1299&q=80",
-    popular: true,
-    details: {
-      calories: "680 kcal",
-      prepTime: "12 phút",
-      ingredients: "Bánh burger, thịt bò, phô mai, rau sống, sốt đặc biệt",
-      spicyLevel: "Cay nhẹ",
-    },
-  },
-  {
-    id: 7,
-    name: "Pizza Pepperoni",
-    description:
-      "Pizza với xúc xích pepperoni, phô mai mozzarella và sốt cà chua",
-    price: 150000,
-    category: "fastfood",
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1281&q=80",
-    popular: true,
-    details: {
-      calories: "850 kcal",
-      prepTime: "30 phút",
-      ingredients:
-        "Vỏ bánh, sốt cà chua, pepperoni, phô mai mozzarella, rau thơm",
-      spicyLevel: "Cay vừa",
-    },
-  },
-  {
-    id: 8,
-    name: "Trà Sữa Trân Châu",
-    description: "Trà sữa thơm ngon với trân châu dai mềm",
-    price: 35000,
-    category: "drinks",
-    image:
-      "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80",
-    popular: false,
-    details: {
-      calories: "280 kcal",
-      prepTime: "8 phút",
-      ingredients: "Trà, sữa, đường, trân châu",
-      spicyLevel: "Không cay",
-    },
-  },
-  {
-    id: 9,
-    name: "Sinh Tố Dâu",
-    description: "Sinh tố dâu tây tươi ngon, bổ dưỡng",
-    price: 40000,
-    category: "drinks",
-    image:
-      "https://images.unsplash.com/photo-1628992682633-bf2d40cb595f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80",
-    popular: true,
-    details: {
-      calories: "180 kcal",
-      prepTime: "7 phút",
-      ingredients: "Dâu tây, sữa, đường, đá",
-      spicyLevel: "Không cay",
-    },
-  },
-  {
-    id: 10,
-    name: "Bánh Tiramisu",
-    description: "Bánh tiramisu Italy với hương vị cà phê đặc trưng",
-    price: 45000,
-    category: "dessert",
-    image:
-      "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    popular: true,
-    details: {
-      calories: "320 kcal",
-      prepTime: "15 phút",
-      ingredients: "Bánh quy, mascarpone, cà phê, cacao",
-      spicyLevel: "Không cay",
-    },
-  },
-  {
-    id: 11,
-    name: "Bún Chả Hà Nội",
-    description: "Bún chả Hà Nội với chả viên và thịt nướng thơm ngon",
-    price: 50000,
-    category: "vietnamese",
-    image:
-      "https://images.unsplash.com/photo-1552465011-b4e30bf7349d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    popular: true,
-    details: {
-      calories: "480 kcal",
-      prepTime: "20 phút",
-      ingredients: "Bún, chả viên, thịt nướng, rau sống, nước mắm",
-      spicyLevel: "Cay nhẹ",
-    },
-  },
-  {
-    id: 12,
-    name: "Gà Rán",
-    description: "Gà rán giòn rụm với sốt đặc biệt",
-    price: 60000,
-    category: "fastfood",
-    image:
-      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    popular: true,
-    details: {
-      calories: "720 kcal",
-      prepTime: "22 phút",
-      ingredients: "Đùi gà, bột chiên, sốt đặc biệt, khoai tây",
-      spicyLevel: "Cay vừa",
-    },
-  },
-];
+
 
 // Cart functionality
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -213,12 +17,12 @@ const searchBox = document.getElementById("searchBox");
 const searchInput = document.getElementById("searchInput");
 const userToggle = document.getElementById("userToggle");
 const userDropdown = document.getElementById("userDropdown");
-const cartToggle = document.getElementById("cartToggle");
-const cartSidebar = document.getElementById("cartSidebar");
+// const cartToggle = document.getElementById("cartToggle");
+// const cartSidebar = document.getElementById("cartSidebar");
 const cartOverlay = document.getElementById("cartOverlay");
-const closeCart = document.getElementById("closeCart");
-const cartItemsContainer = document.getElementById("cartItems");
-const cartCount = document.querySelector(".cart-count");
+// const closeCart = document.getElementById("closeCart");
+// const cartItemsContainer = document.getElementById("cartItems");
+// const cartCount = document.querySelector(".cart-count");
 const cartSubtotal = document.querySelector(".cart-subtotal");
 const cartShipping = document.querySelector(".cart-shipping");
 const cartTotal = document.querySelector(".cart-total");
@@ -364,21 +168,21 @@ function initCart() {
   });
 
   // Checkout button
-  checkoutBtn.addEventListener("click", function () {
-    if (cart.length === 0) {
-      showToast("Giỏ hàng của bạn đang trống!", "error");
-      return;
-    }
+//   checkoutBtn.addEventListener("click", function () {
+//     if (cart.length === 0) {
+//       showToast("Giỏ hàng của bạn đang trống!", "error");
+//       return;
+//     }
 
-    const total = calculateTotal();
-    showToast(
-      `Chuyển hướng đến trang thanh toán. Tổng tiền: ${total.toLocaleString()} đ`,
-      "success"
-    );
+//     const total = calculateTotal();
+//     showToast(
+//       `Chuyển hướng đến trang thanh toán. Tổng tiền: ${total.toLocaleString()} đ`,
+//       "success"
+//     );
 
-    // In a real application, you would redirect to checkout page
-    // window.location.href = '/checkout.html';
-  });
+//     // In a real application, you would redirect to checkout page
+//     // window.location.href = '/checkout.html';
+//   });
 }
 
 // Initialize menu

@@ -5,7 +5,7 @@
             <img src="{{ asset('images/logo.jpg') }}" alt="Logo">
         </div>
         <h2>Đăng ký</h2>
-        <form action="{{ route('register.post') }}" method="POST" enctype="multipart/form-data">
+        <form  action="{{ route('register.post') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="input-group">
                 <span class="material-icons icon-left">person</span>
