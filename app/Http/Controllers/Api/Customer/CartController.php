@@ -15,8 +15,8 @@ class CartController extends Controller
     public function index()
     {
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
-        $cart->load('items.menuItem');
-        return response()->json($cart);
+        $cart->load('items.menuItem.images');
+            return response()->json($cart);
     }
 
     public function add(Request $request)
@@ -37,7 +37,7 @@ class CartController extends Controller
             : ($request->quantity ?? 1);
 
         $cartItem->save();
-        $cart->load('items.menuItem');
+         $cart->load('items.menuItem.images');
         return response()->json($cart);
     }
 
@@ -50,7 +50,7 @@ class CartController extends Controller
                 ->where('item_id', $request->item_id)
                 ->delete();
         }
-        $cart->load('items.menuItem');
+         $cart->load('items.menuItem.images');
         return response()->json($cart);
     }
 
@@ -70,7 +70,7 @@ class CartController extends Controller
             }
         }
 
-        $cart->load('items.menuItem');
+         $cart->load('items.menuItem.images');
         return response()->json($cart);
     }
 }

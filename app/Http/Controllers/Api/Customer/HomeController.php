@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $categories = Category::all();
-        $menuItems = MenuItem::with('category')->get();
+        $menuItems = MenuItem::with(['category', 'images'])->get();
 
         $cartCount = $user
             ? CartItem::whereHas('cart', fn($q) => $q->where('user_id', $user->id))

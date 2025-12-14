@@ -52,14 +52,8 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Thêm user thành công');
     }
 
-
-    // Form chỉnh sửa user
-    public function edit(User $user)
-    {
-        return view('admin.users.edit', compact('user'));
-    }
-
     // Cập nhật user
+        // Cập nhật user
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -70,9 +64,10 @@ class UserController extends Controller
             'address' => 'nullable|string|max:255',
             'role' => 'required|in:customer,staff,admin',
             'status' => 'required|in:active,inactive,banned',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // thêm validation avatar
         ]);
 
-        $user->update([
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
@@ -80,10 +75,25 @@ class UserController extends Controller
             'address' => $request->address,
             'role' => $request->role,
             'status' => $request->status,
-        ]);
+        ];
+
+        // Upload avatar nếu có
+        if ($request->hasFile('avatar')) {
+            $avatarName = time() . '_' . $request->file('avatar')->getClientOriginalName();
+            $request->file('avatar')->move(public_path('images/avatars'), $avatarName);
+            $data['avatar'] = $avatarName;
+
+            // Optional: xóa avatar cũ nếu có
+            if($user->avatar && file_exists(public_path('images/avatars/'.$user->avatar))){
+                @unlink(public_path('images/avatars/'.$user->avatar));
+            }
+        }
+
+        $user->update($data);
 
         return redirect()->route('users.index')->with('success', 'Cập nhật user thành công');
     }
+
 
     // Xóa user
     public function destroy(User $user)

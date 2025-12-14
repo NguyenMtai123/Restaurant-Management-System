@@ -11,8 +11,6 @@ return new class extends Migration {
             $table->id();
             $table->string('order_number')->unique();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('booking_id')->nullable()->constrained('bookings')->nullOnDelete();
-            $table->enum('order_type', ['dine-in','take-away']);
             $table->decimal('subtotal', 10, 2);
             $table->decimal('tax', 10, 2)->default(0);
             $table->decimal('total_amount', 10, 2);

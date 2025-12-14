@@ -32,7 +32,6 @@ class CheckoutController extends Controller
         $order = Order::create([
             'order_number' => 'ORD-'.time(),
             'user_id' => $user->id,
-            'order_type' => $request->order_type ?? 'take-away',
             'subtotal' => $subtotal,
             'tax' => $tax,
             'total_amount' => $total,

@@ -41,4 +41,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed', // Laravel 10+ tự hash khi lưu
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

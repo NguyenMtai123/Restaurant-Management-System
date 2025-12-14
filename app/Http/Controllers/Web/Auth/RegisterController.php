@@ -23,11 +23,14 @@ class RegisterController extends Controller
            "password" => "required|min:6|confirmed"
         ]);
 
-        $user = User::create([
-            "name" => $request->name,
-            "email" => $request->email,
+       $user = User::create([
+            "name"     => $request->name,
+            "email"    => $request->email,
             "password" => Hash::make($request->password),
+            "phone"    => $request->phone ?? null,      // thêm dòng này
+            "address"  => $request->address ?? null,    // thêm dòng này
         ]);
+
 
         Auth::login($user);
 

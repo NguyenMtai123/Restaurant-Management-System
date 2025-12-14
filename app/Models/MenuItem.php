@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,35 +17,51 @@ class MenuItem extends Model
         'is_available',
     ];
 
-    /**
-     * MenuItem thuộc về 1 category
-     */
+    // Nếu muốn, expose featured_image_url trong JSON
+    protected $appends = ['featured_image_url'];
+
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
 
-    /**
-     * MenuItem có nhiều hình ảnh
-     */
-    // public function images()
-    // {
-    //     return $this->hasMany(MenuItemImage::class, 'menu_item_id');
-    // }
-
-    /**
-     * MenuItem có thể được nhiều cart item
-     */
-    public function cartItems()
+    public function images()
     {
-        return $this->hasMany(CartItem::class, 'item_id');
+        return $this->hasMany(MenuItemImage::class);
     }
 
-    /**
-     * MenuItem có thể được nhiều order item
-     */
-    // public function orderItems()
-    // {
-    //     return $this->hasMany(OrderItem::class, 'menu_item_id');
-    // }
+    public function featuredImage()
+    {
+        return $this->hasOne(MenuItemImage::class)->where('is_featured', true);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'commentable_id');
+    }
+
+    // Trả về url của ảnh mặc định (featured) hoặc fallback
+    public function getFeaturedImageUrlAttribute()
+    {
+        // Nếu relation images đã được eager-loaded, dùng collection để tránh query
+        if ($this->relationLoaded('images')) {
+            $img = $this->images->firstWhere('is_featured', 1);
+            if ($img) {
+                return $img->url;
+            }
+        }
+
+        // fallback: nếu relation featuredImage đã được eager-loaded
+        if ($this->relationLoaded('featuredImage') && $this->featuredImage) {
+            return $this->featuredImage->url;
+        }
+
+        // cuối cùng: thử lấy via relation (lazy) hoặc trả ảnh mặc định
+        $img = $this->images()->where('is_featured', 1)->first();
+        if ($img) {
+            return $img->url;
+        }
+
+        return asset('images/menu/default.png');
+    }
 }

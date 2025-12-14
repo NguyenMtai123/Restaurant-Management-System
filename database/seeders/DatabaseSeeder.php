@@ -19,12 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             RestaurantsSeeder::class,
-            RestaurantTablesSeeder::class,
-        ]);
-
-        // 3. Bookings (cần user và table)
-        $this->call([
-            BookingsSeeder::class,
         ]);
 
         // 4. Cart và CartItem (cần user và menu_items)

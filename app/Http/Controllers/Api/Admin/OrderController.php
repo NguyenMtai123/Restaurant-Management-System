@@ -18,8 +18,8 @@ class OrderController extends Controller
     // Xem chi tiết hóa đơn
     public function show(Order $order)
     {
-        $order->load('user', 'items.menuItem', 'booking');
-        return view('admin.orders.show', compact('order'));
+         $order->load('user', 'orderItems.menuItem');
+         return view('admin.orders.show', compact('order'));
     }
 
     // Cập nhật trạng thái hóa đơn

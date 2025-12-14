@@ -1,11 +1,10 @@
-@extends('customer.layouts.app')
+{{-- @extends('customer.layouts.app')
 
 @section('title', 'Chi tiết đơn hàng')
 
-@section('content')
+@section('content') --}}
     <h1>Chi tiết đơn hàng #{{ $order->order_number }}</h1>
     <p>Trạng thái: {{ ucfirst($order->status) }}</p>
-    <p>Loại đơn: {{ ucfirst($order->order_type) }}</p>
     <p>Tạm tính: {{ number_format($order->subtotal, 0, ',', '.') }} đ</p>
     <p>Thuế: {{ number_format($order->tax, 0, ',', '.') }} đ</p>
     <p>Tổng: {{ number_format($order->total_amount, 0, ',', '.') }} đ</p>
@@ -33,4 +32,5 @@
     </table>
 
 </div>
-@endsection
+{{-- @endsection --}}
+<a href="/customer/home">Quay lại</a>

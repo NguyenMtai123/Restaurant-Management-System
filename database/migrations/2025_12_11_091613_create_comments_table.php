@@ -13,9 +13,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('parent_id')->nullable()->constrained('comments')->cascadeOnDelete();
 
-            $table->text('content');
-
-            $table->enum('commentable_type', ['menu_item','restaurant'])->default('restaurant');
+            $table->text('content_menu');
             $table->unsignedBigInteger('commentable_id')->nullable();
 
             $table->integer('rating')->nullable()->check('rating >= 1 and rating <= 5');

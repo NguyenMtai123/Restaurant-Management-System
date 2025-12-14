@@ -28,10 +28,13 @@
       @foreach($menuItems as $item)
       <div class="menu-item" data-category="{{ $item->category->slug }}">
         <div class="menu-image">
-          <img src="{{ asset('images/menu/' . $item->image) }}" alt="{{ $item->name }}">
+            <img src="{{ asset($item->images->where('is_featured', 1)->first()?->url ?? 'images/default.png') }}" alt="{{ $item->name }}">
+
         </div>
         <div class="menu-content">
-          <h4>{{ $item->name }}</h4>
+            <h4>
+                <a href="{{ route('customer.menu.show', $item->slug) }}">{{ $item->name }}</a>
+            </h4>
           <p>{{ $item->description }}</p>
           <span class="menu-price">{{ number_format($item->price) }} đ</span>
           <button class="btn btn-primary add-to-cart" data-id="{{ $item->id }}">

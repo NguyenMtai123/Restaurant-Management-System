@@ -155,10 +155,10 @@
             const cartItemElement = document.createElement("div");
             cartItemElement.className = "cart-item";
             cartItemElement.dataset.id = item.menu_item.id;
-
+            const imageUrl = item.menu_item.featured_image_url ?? '/images/menu/default.png';
             cartItemElement.innerHTML = `
                 <div class="cart-item-image">
-                    <img src="/images/menu/${item.menu_item.image}" alt="${item.menu_item.name}">
+                    <img src="${imageUrl}" alt="${item.menu_item.name}">
                 </div>
                 <div class="cart-item-info">
                     <div class="cart-item-header">
