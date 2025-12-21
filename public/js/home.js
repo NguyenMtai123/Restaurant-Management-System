@@ -14,7 +14,6 @@ const mobileMenuToggle = document.getElementById("mobileMenuToggle");
 const nav = document.querySelector(".nav");
 const searchToggle = document.getElementById("searchToggle");
 const searchBox = document.getElementById("searchBox");
-const searchInput = document.getElementById("searchInput");
 const userToggle = document.getElementById("userToggle");
 const userDropdown = document.getElementById("userDropdown");
 // const cartToggle = document.getElementById("cartToggle");
@@ -30,9 +29,6 @@ const applyCoupon = document.getElementById("applyCoupon");
 const couponInput = document.getElementById("couponInput");
 const checkoutBtn = document.getElementById("checkoutBtn");
 const menuItemsContainer = document.getElementById("menuItems");
-const categoryButtons = document.querySelectorAll(".category-btn");
-const sortSelect = document.getElementById("sortSelect");
-const loadMoreBtn = document.getElementById("loadMore");
 const quickViewModal = document.getElementById("quickViewModal");
 const quickViewOverlay = document.getElementById("quickViewOverlay");
 const quickViewContent = document.getElementById("quickViewContent");
@@ -49,9 +45,7 @@ const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
 
 // Variables
-let currentCategory = "all";
-let currentSort = "default";
-let displayedItems = 6;
+
 let currentQuickViewItem = null;
 
 // Initialize the page
@@ -353,121 +347,10 @@ function initEventListeners() {
 }
 
 // Get filtered items based on current category, search and sort
-function getFilteredItems() {
-  let filteredItems = [...menuItems];
+// Get filtered items based on current category, search and sort
 
-  // Filter by category
-  if (currentCategory !== "all") {
-    filteredItems = filteredItems.filter(
-      (item) => item.category === currentCategory
-    );
-  }
-
-  // Filter by search
-  const searchTerm = searchInput.value.toLowerCase().trim();
-  if (searchTerm) {
-    filteredItems = filteredItems.filter(
-      (item) =>
-        item.name.toLowerCase().includes(searchTerm) ||
-        item.description.toLowerCase().includes(searchTerm)
-    );
-  }
-
-  // Sort items
-  if (currentSort === "price-asc") {
-    filteredItems.sort((a, b) => a.price - b.price);
-  } else if (currentSort === "price-desc") {
-    filteredItems.sort((a, b) => b.price - a.price);
-  } else if (currentSort === "name") {
-    filteredItems.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (currentSort === "popular") {
-    filteredItems.sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0));
-  }
-
-  return filteredItems;
-}
 
 // Render menu items
-function renderMenuItems() {
-  const filteredItems = getFilteredItems();
-  const itemsToShow = filteredItems.slice(0, displayedItems);
-
-  // Clear current items
-  menuItemsContainer.innerHTML = "";
-
-  if (itemsToShow.length === 0) {
-    menuItemsContainer.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-search"></i>
-                <h3>Không tìm thấy món ăn phù hợp</h3>
-                <p>Hãy thử tìm kiếm với từ khóa khác hoặc chọn danh mục khác</p>
-            </div>
-        `;
-    loadMoreBtn.style.display = "none";
-    return;
-  }
-
-  // Render each item
-  itemsToShow.forEach((item) => {
-    const menuItemElement = document.createElement("div");
-    menuItemElement.className = "menu-item";
-    menuItemElement.innerHTML = `
-            <div class="menu-item-image">
-                <img src="${item.image}" alt="${item.name}">
-                ${
-                  item.popular
-                    ? '<div class="menu-item-badge">Phổ biến</div>'
-                    : ""
-                }
-            </div>
-            <div class="menu-item-content">
-                <div class="menu-item-header">
-                    <h3 class="menu-item-title">${item.name}</h3>
-                    <span class="menu-item-price">${item.price.toLocaleString()} đ</span>
-                </div>
-                <p class="menu-item-description">${item.description}</p>
-                <div class="menu-item-footer">
-                    <span class="menu-item-category">
-                        <i class="fas fa-tag"></i>
-                        ${getCategoryName(item.category)}
-                    </span>
-                    <div class="menu-item-actions">
-                        <button class="quick-view-btn" data-id="${item.id}">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="add-to-cart-btn" data-id="${item.id}">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-
-    menuItemsContainer.appendChild(menuItemElement);
-  });
-
-  // Add event listeners to buttons
-  document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      const itemId = parseInt(this.getAttribute("data-id"));
-      addToCart(itemId);
-    });
-  });
-
-  document.querySelectorAll(".quick-view-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      const itemId = parseInt(this.getAttribute("data-id"));
-      showQuickView(itemId);
-    });
-  });
-
-  // Show/hide load more button
-  if (displayedItems >= filteredItems.length) {
-    loadMoreBtn.style.display = "none";
-  } else {
-    loadMoreBtn.style.display = "inline-flex";
-  }
-}
 
 // Get category name in Vietnamese
 function getCategoryName(category) {
@@ -678,3 +561,28 @@ function initAnimations() {
 
 // Initialize animations when page loads
 window.addEventListener("load", initAnimations);
+function sortMenuItems() {
+    const itemsContainer = document.querySelector(".menu-items");
+    const items = Array.from(itemsContainer.querySelectorAll(".menu-item"));
+
+    let sortedItems = items;
+
+    if (currentSort === "price-asc") {
+        sortedItems = items.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+    } else if (currentSort === "price-desc") {
+        sortedItems = items.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+    } else if (currentSort === "name") {
+        sortedItems = items.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+    }else if (currentSort === "popular") {
+    sortedItems = items.sort((a, b) => parseInt(b.dataset.popular) - parseInt(a.dataset.popular));
+    }
+
+
+    // Xóa items cũ và append items đã sort
+    itemsContainer.innerHTML = "";
+    sortedItems.forEach(item => itemsContainer.appendChild(item));
+}
+document.getElementById("sortSelect").addEventListener("change", function() {
+    currentSort = this.value;
+    sortMenuItems();
+});

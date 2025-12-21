@@ -11,6 +11,7 @@ class MenuItemsSeeder extends Seeder
     {
         DB::table('menu_items')->insert([
             [
+                'code' => 'SP001',
                 'name' => 'Gà rán',
                 'description' => 'Gà rán giòn, thơm ngon',
                 'price' => 120000,
@@ -21,6 +22,7 @@ class MenuItemsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'code' => 'SP002',
                 'name' => 'Salad trộn',
                 'description' => 'Rau củ trộn tươi mát',
                 'price' => 45000,
@@ -31,6 +33,7 @@ class MenuItemsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'code' => 'SP003',
                 'name' => 'Kem vani',
                 'description' => 'Kem vani mát lạnh',
                 'price' => 35000,
@@ -41,6 +44,7 @@ class MenuItemsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'code' => 'SP004',
                 'name' => 'Cà phê sữa',
                 'description' => 'Cà phê đậm đà',
                 'price' => 30000,
@@ -51,6 +55,7 @@ class MenuItemsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'code' => 'SP005',
                 'name' => 'Khoai tây chiên',
                 'description' => 'Giòn rụm, ăn kèm nước sốt',
                 'price' => 50000,

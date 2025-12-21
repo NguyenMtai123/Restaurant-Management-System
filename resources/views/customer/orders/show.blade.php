@@ -1,36 +1,72 @@
-{{-- @extends('customer.layouts.app')
+@extends('customer.layouts.app')
 
-@section('title', 'Chi tiết đơn hàng')
+@section('content')
+<div class="invoice-container" style="max-width: 800px; margin: 50px auto; padding: 30px; background: #fff; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+    <h2 style="text-align:center; margin-bottom: 20px;">Hóa đơn thanh toán #{{ $order->order_number }}</h2>
+    <p style="text-align:center; font-weight:bold; color: {{ $order->status == 'paid' ? '#198754' : '#ffc107' }};">
+        Trạng thái: {{ ucfirst($order->status) }}
+    </p>
 
-@section('content') --}}
-    <h1>Chi tiết đơn hàng #{{ $order->order_number }}</h1>
-    <p>Trạng thái: {{ ucfirst($order->status) }}</p>
-    <p>Tạm tính: {{ number_format($order->subtotal, 0, ',', '.') }} đ</p>
-    <p>Thuế: {{ number_format($order->tax, 0, ',', '.') }} đ</p>
-    <p>Tổng: {{ number_format($order->total_amount, 0, ',', '.') }} đ</p>
+    <div style="display:flex; justify-content:space-between; margin-bottom: 20px;">
+        <div>
+            <p><strong>Khách hàng:</strong> {{ $order->user->name }}</p>
+            <p><strong>Email:</strong> {{ $order->user->email }}</p>
+        </div>
+        <div>
+            <p><strong>Ngày đặt:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
+            <p><strong>Phương thức:</strong> {{ $order->payments->last()?->method ?? 'Chưa thanh toán' }}</p>
+        </div>
+    </div>
 
-    <h2>Danh sách món:</h2>
-    <table>
-        <thead>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
+        <thead style="background:#f8f9fa;">
             <tr>
-                <th>Món</th>
-                <th>Số lượng</th>
-                <th>Giá</th>
-                <th>Thành tiền</th>
+                <th style="padding:10px; border:1px solid #dee2e6;">Món</th>
+                <th style="padding:10px; border:1px solid #dee2e6;">Số lượng</th>
+                <th style="padding:10px; border:1px solid #dee2e6;">Giá</th>
+                <th style="padding:10px; border:1px solid #dee2e6;">Thành tiền</th>
             </tr>
         </thead>
         <tbody>
             @foreach($order->orderItems as $item)
             <tr>
-                <td>{{ $item->menuItem->name }}</td>
-                <td>{{ $item->quantity }}</td>
-                <td>{{ number_format($item->unit_price, 0, ',', '.') }} đ</td>
-                <td>{{ number_format($item->quantity * $item->unit_price, 0, ',', '.') }} đ</td>
+                <td style="padding:10px; border:1px solid #dee2e6;">{{ $item->menuItem->name }}</td>
+                <td style="padding:10px; border:1px solid #dee2e6; text-align:center;">{{ $item->quantity }}</td>
+                <td style="padding:10px; border:1px solid #dee2e6; text-align:right;">{{ number_format($item->unit_price, 0, ',', '.') }} đ</td>
+                <td style="padding:10px; border:1px solid #dee2e6; text-align:right;">{{ number_format($item->quantity * $item->unit_price, 0, ',', '.') }} đ</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
+    <div style="text-align:right; margin-bottom:20px;">
+        <p>Tạm tính: <strong>{{ number_format($order->subtotal, 0, ',', '.') }} đ</strong></p>
+        <p>Thuế (VAT 10%): <strong>{{ number_format($order->tax, 0, ',', '.') }} đ</strong></p>
+        <p style="font-size:1.2rem;">Tổng cộng: <strong>{{ number_format($order->total_amount, 0, ',', '.') }} đ</strong></p>
+    </div>
+
+    <div style="text-align:center;">
+        <a href="/customer/home" style="display:inline-block; padding:10px 20px; background:#0d6efd; color:#fff; border-radius:5px; text-decoration:none;">Quay về trang chủ</a>
+    </div>
 </div>
-{{-- @endsection --}}
-<a href="/customer/home">Quay lại</a>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Thanh toán thành công 🎉',
+            html: `<p>{{ session('success') }}</p>`,
+            confirmButtonText: 'OK'
+        });
+    @elseif(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Thanh toán thất bại ❌',
+            html: `<p>{{ session('error') }}</p>`,
+            confirmButtonText: 'OK'
+        });
+    @endif
+});
+</script>
+@endsection

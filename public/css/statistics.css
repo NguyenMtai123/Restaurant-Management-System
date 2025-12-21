@@ -1,0 +1,52 @@
+/* Kế thừa biến màu từ style.css */
+
+/* Card Header sạch sẽ hơn */
+.card-header {
+    background: transparent;
+}
+
+/* Input ngày tháng */
+input[type="date"] {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+input[type="date"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.15);
+}
+
+/* Style cho bảng Top sản phẩm */
+#topProductsTable td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: var(--text-color);
+}
+
+.top-product-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.rank-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #eee;
+    color: #666;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.rank-1 { background: #f1c40f; color: #fff; box-shadow: 0 2px 5px rgba(241, 196, 15, 0.4); }
+.rank-2 { background: #95a5a6; color: #fff; }
+.rank-3 { background: #d35400; color: #fff; }

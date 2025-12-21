@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         // 2. Users, Restaurants, Tables
         $this->call([
             UsersTableSeeder::class,
-            RestaurantsSeeder::class,
         ]);
 
         // 4. Cart và CartItem (cần user và menu_items)
@@ -45,6 +44,17 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ActivityLogsSeeder::class
+        ]);
+
+        $this->call([
+            PostCategorySeeder::class,
+            PostSeeder::class,
+        ]);
+
+         $this->call([
+            AboutSeeder::class,
+            ContactSeeder::class,
+            FavoriteSeeder::class,
         ]);
     }
 }

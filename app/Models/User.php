@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Favorite;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,7 @@ class User extends Authenticatable
         'avatar',
         'role',
         'status',
+        'email_verified_at',
     ];
 
     /**
@@ -45,5 +47,23 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function favoriteMenuItems()
+    {
+        return $this->belongsToMany(
+            MenuItem::class,
+            'favorites'
+        )->withTimestamps();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

@@ -1,0 +1,84 @@
+/* Style cho bảng khách hàng */
+.customer-table thead th {
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 2px solid #f1f2f6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.customer-table tbody td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    vertical-align: middle;
+    color: var(--text-color);
+}
+
+/* Avatar trong bảng */
+.customer-info-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.customer-avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #eee;
+}
+
+/* Badge hạng thành viên */
+.badge-vip {
+    background: linear-gradient(45deg, #f1c40f, #d35400);
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(241, 196, 15, 0.4);
+}
+
+.badge-member {
+    background: #eef2f7;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+/* Card thống kê nhỏ */
+.stats-card-customer {
+    border-radius: 12px;
+    transition: transform 0.2s;
+}
+.stats-card-customer:hover {
+    transform: translateY(-3px);
+}
+.icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+/* Nút hành động trong bảng */
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: all 0.2s;
+    background: #f8f9fa;
+    color: #666;
+    margin-left: 5px;
+}
+
+.action-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.action-btn.delete:hover {
+    background: #e74c3c;
+}

@@ -12,7 +12,7 @@ class OrdersSeeder extends Seeder
         DB::table('orders')->insert([
             [
                 'order_number' => 'ORD001',
-                'user_id' => 1,
+                'user_id' => 3,
                 'subtotal' => 270000,
                 'tax' => 27000,
                 'total_amount' => 297000,
@@ -23,7 +23,7 @@ class OrdersSeeder extends Seeder
             ],
             [
                 'order_number' => 'ORD002',
-                'user_id' => 2,
+                'user_id' => 4,
                 'subtotal' => 135000,
                 'tax' => 13500,
                 'total_amount' => 148500,
@@ -34,7 +34,7 @@ class OrdersSeeder extends Seeder
             ],
             [
                 'order_number' => 'ORD003',
-                'user_id' => 3,
+                'user_id' => 5,
                 'subtotal' => 100000,
                 'tax' => 10000,
                 'total_amount' => 110000,

@@ -24,11 +24,16 @@ class LoginController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->withErrors(["email" => "Sai email hoặc mật khẩu"]);
+        if (!$user) {
+            return back()->withErrors(['email' => 'Email không tồn tại'])->withInput();
         }
 
-        Auth::login($user);
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'Mật khẩu không chính xác']);
+        }
+
+        // Đăng nhập thành công, ghi nhớ nếu tick checkbox
+        Auth::login($user, $request->filled('remember'));
 
         return match($user->role) {
             'admin' => redirect()->route('admin.dashboard'),
@@ -37,9 +42,19 @@ class LoginController extends Controller
         };
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+
+        // 2. Xóa session cũ
+        $request->session()->invalidate();
+
+        // 3. Tạo lại CSRF token mới (bảo mật)
+        $request->session()->regenerateToken();
+
+        // 4. Xóa cookie "remember me" của Laravel
+        \Cookie::queue(\Cookie::forget(Auth::getRecallerName()));
+
         return redirect()->route('login');
     }
 }

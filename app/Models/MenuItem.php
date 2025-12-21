@@ -1,14 +1,16 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Favorite;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MenuItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'code',
         'category_id',
         'name',
         'slug',
@@ -23,6 +25,11 @@ class MenuItem extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 
     public function images()
@@ -64,4 +71,10 @@ class MenuItem extends Model
 
         return asset('images/menu/default.png');
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
 }

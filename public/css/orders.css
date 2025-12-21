@@ -1,0 +1,64 @@
+/* Custom Badge cho trạng thái đơn hàng */
+.badge-pending {
+    background: rgba(241, 196, 15, 0.15); 
+    color: #d35400;
+}
+.badge-completed {
+    background: rgba(46, 204, 113, 0.15); 
+    color: #27ae60;
+}
+.badge-cancelled {
+    background: rgba(231, 76, 60, 0.15); 
+    color: #c0392b;
+}
+
+/* Style cho bảng đơn hàng */
+.order-table thead th {
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 2px solid #f1f2f6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.order-table tbody td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: var(--text-color);
+}
+
+/* Avatar khách hàng nhỏ trong bảng */
+.customer-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 14px;
+    font-weight: bold;
+}
+/* Nút hành động trong bảng */
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: all 0.2s;
+    background: #f8f9fa;
+    color: #666;
+    margin-left: 5px;
+}
+
+.action-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.action-btn.delete:hover {
+    background: #e74c3c;
+}

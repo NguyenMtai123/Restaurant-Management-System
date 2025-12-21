@@ -1,303 +1,321 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý người dùng</title>
+@extends('admin.layouts.master')
 
-    <!-- Bootstrap CSS + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
-<div class="container mt-5">
+@section('title', 'Quản lý khách hàng - Take Away Express')
+@section('page-title', 'Khách hàng')
 
-    <!-- HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>👥 Quản lý người dùng</h2>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createUserModal">
-            <i class="bi bi-plus-circle me-1"></i> Thêm user
-        </button>
-    </div>
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/customers.css') }}">
+@endpush
 
-    <!-- ALERT -->
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
-
-    <!-- TABLE -->
-    <div class="card shadow-sm rounded-4">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle mb-0">
-                    <thead class="table-light text-center">
-                        <tr>
-                            <th>ID</th>
-                            <th>Avatar</th>
-                            <th class="text-start">Tên</th>
-                            <th>Email</th>
-                            <th>Điện thoại</th>
-                            <th class="text-start">Địa chỉ</th>
-                            <th>Role</th>
-                            <th>Trạng thái</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($users as $user)
-                        <tr class="text-center">
-                            <td>{{ $user->id }}</td>
-                            <td>
-                                <img src="{{ $user->avatar ? asset('images/avatars/' . $user->avatar) : asset('images/avatars/default.png') }}"
-                                     class="rounded-circle" width="50" height="50" alt="Avatar">
-                            </td>
-                            <td class="text-start">{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->phone ?? '-' }}</td>
-                            <td class="text-start">{{ $user->address ?? '-' }}</td>
-                            <td>
-                                <span class="badge bg-primary">{{ ucfirst($user->role) }}</span>
-                            </td>
-                            <td>
-                                @if($user->status === 'active')
-                                    <span class="badge bg-success">Active</span>
-                                @elseif($user->status === 'inactive')
-                                    <span class="badge bg-secondary">Inactive</span>
-                                @else
-                                    <span class="badge bg-danger">Banned</span>
-                                @endif
-                            </td>
-                            <td>
-                                <!-- Edit button -->
-                                <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editUserModal-{{ $user->id }}">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-
-                                <!-- Delete button -->
-                                <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('Xác nhận xóa?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        <!-- Modal Edit -->
-                        <div class="modal fade" id="editUserModal-{{ $user->id }}" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Sửa user: {{ $user->name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{ route('admin.users.update', $user) }}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            @method('PUT')
-
-                                            <!-- Avatar -->
-                                            <div class="d-flex justify-content-center mb-3">
-                                                <label for="avatar-{{ $user->id }}" class="position-relative" style="cursor:pointer;">
-                                                    <img src="{{ $user->avatar ? asset('images/avatars/'.$user->avatar) : asset('images/avatars/default.png') }}"
-                                                        id="avatarPreview{{ $user->id }}" class="rounded-circle border" width="100" height="100" alt="Avatar">
-                                                    <span class="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle p-1">
-                                                        <i class="bi bi-camera-fill"></i>
-                                                    </span>
-                                                </label>
-                                                <input type="file" name="avatar" class="d-none avatar-input" accept="image/*"
-                                                    id="avatar-{{ $user->id }}" data-preview="avatarPreview{{ $user->id }}">
-
-                                            </div>
-
-                                            <!-- Name & Email -->
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <label class="form-label">Tên</label>
-                                                    <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
-                                                </div>
-                                                <div class="col">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
-                                                </div>
-                                            </div>
-
-                                            <!-- Password & Confirm -->
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <label class="form-label">Mật khẩu (để trống nếu không đổi)</label>
-                                                    <input type="password" name="password" class="form-control">
-                                                </div>
-                                                <div class="col">
-                                                    <label class="form-label">Xác nhận mật khẩu</label>
-                                                    <input type="password" name="password_confirmation" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <!-- Phone, Role, Status -->
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <label class="form-label">Điện thoại</label>
-                                                    <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
-                                                </div>
-                                                <div class="col">
-                                                    <label class="form-label">Role</label>
-                                                    <select name="role" class="form-select" required>
-                                                        <option value="customer" {{ $user->role=='customer'?'selected':'' }}>Customer</option>
-                                                        <option value="staff" {{ $user->role=='staff'?'selected':'' }}>Staff</option>
-                                                        <option value="admin" {{ $user->role=='admin'?'selected':'' }}>Admin</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col">
-                                                    <label class="form-label">Trạng thái</label>
-                                                    <select name="status" class="form-select" required>
-                                                        <option value="active" {{ $user->status=='active'?'selected':'' }}>Active</option>
-                                                        <option value="inactive" {{ $user->status=='inactive'?'selected':'' }}>Inactive</option>
-                                                        <option value="banned" {{ $user->status=='banned'?'selected':'' }}>Banned</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- Address -->
-                                            <div class="mb-3">
-                                                <label class="form-label">Địa chỉ</label>
-                                                <input type="text" name="address" class="form-control" value="{{ $user->address }}">
-                                            </div>
-
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="bi bi-save me-1"></i> Cập nhật
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+@section('content')
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-box bg-primary-subtle text-primary me-3">
+                                <i class='bx bx-user'></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Tổng khách hàng</h6>
+                                <h4 class="fw-bold mb-0">{{ $users->count() }}</h4>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        @empty
-                        <tr>
-                            <td colspan="9" class="text-center text-muted">Chưa có user nào</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-box bg-success-subtle text-success me-3">
+                                <i class='bx bx-user-check'></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Đang hoạt động</h6>
+                                <h4 class="fw-bold mb-0">
+                                    {{ $users->where('status','active')->count() }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-box bg-danger-subtle text-danger me-3">
+                                <i class='bx bx-user-x'></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Bị khóa</h6>
+                                <h4 class="fw-bold mb-0">
+                                    {{ $users->where('status','banned')->count() }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-</div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row g-3 align-items-center">
+                        {{-- FORM FILTER --}}
+                        <form method="GET" class="col-md-9 row g-2">
+                           <div class="col-md-5">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white">
+                                        <i class='bx bx-search'></i>
+                                    </span>
+                                    <input type="text"
+                                        name="keyword"
+                                        class="form-control"
+                                        placeholder="Tìm theo tên, SĐT hoặc Email"
+                                        value="{{ request('keyword') }}">
+                                </div>
+                            </div>
 
-<!-- Modal Create -->
-<div class="modal fade" id="createUserModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thêm user mới</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <div class="col-md-4">
+                                <select name="sort" class="form-select" onchange="this.form.submit()">
+                                    <option value="date_desc" {{ request('sort')=='date_desc'?'selected':'' }}>
+                                        Mới nhất
+                                    </option>
+                                    <option value="date_asc" {{ request('sort')=='date_asc'?'selected':'' }}>
+                                        Cũ nhất
+                                    </option>
+                                    <option value="name_asc" {{ request('sort')=='name_asc'?'selected':'' }}>
+                                        Tên A → Z
+                                    </option>
+                                    <option value="name_desc" {{ request('sort')=='name_desc'?'selected':'' }}>
+                                        Tên Z → A
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 text-start">
+                                <button class="btn btn-primary">
+                                    <i class="bx bx-filter"></i> Lọc
+                                </button>
+                            </div>
+
+                        </form>
+
+                        {{-- ADD BUTTON --}}
+                        <div class="col-md-3 text-end">
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#addCustomerModal">
+                                <i class='bx bx-user-plus'></i> Thêm khách hàng
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
 
-                    <!-- Avatar -->
-                    <div class="d-flex justify-content-center mb-3">
-                        <label for="avatar-create" class="position-relative" style="cursor:pointer;">
-                            <img src="{{ asset('images/avatars/default.png') }}" id="avatarPreviewCreate" class="rounded-circle border" width="100" height="100" alt="Avatar">
-                            <span class="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle p-1">
-                                <i class="bi bi-camera-fill"></i>
-                            </span>
-                        </label>
-                    <input type="file" name="avatar" class="d-none avatar-input" accept="image/*"
-                         id="avatar-create" data-preview="avatarPreviewCreate">
-                    </div>
+            <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-4">Khách hàng</th>
+                                    <th>Liên hệ</th>
+                                    <th>Ngày tham gia</th>
+                                    <th>Đơn hàng</th>
+                                    <th>Tổng chi tiêu</th>
+                                    <th>Trạng thái</th>
+                                    <th class="text-end pe-4">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($users as $user)
+                                    <tr>
+                                        {{-- KHÁCH --}}
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center">
+                                                <img src="{{ $user->avatar
+                                                    ? asset('images/avatars/'.$user->avatar)
+                                                    : asset('images/avatar-default.png') }}"
+                                                    class="rounded-circle me-2"
+                                                    width="40" height="40">
+                                                <div>
+                                                    <div class="fw-semibold">{{ $user->name }}</div>
+                                                    <small class="text-muted">{{ ucfirst($user->role) }}</small>
+                                                </div>
+                                            </div>
+                                        </td>
 
-                    <!-- Name & Email -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class="form-label">Tên</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
-                        <div class="col">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
-                    </div>
+                                        {{-- LIÊN HỆ --}}
+                                        <td>
+                                            <div><i class="bx bx-phone"></i> {{ $user->phone ?? '—' }}</div>
+                                            <div class="small text-muted">
+                                                <i class="bx bx-envelope"></i> {{ $user->email }}
+                                            </div>
+                                        </td>
 
-                    <!-- Password & Confirm -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class="form-label">Mật khẩu</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                        <div class="col">
-                            <label class="form-label">Xác nhận mật khẩu</label>
-                            <input type="password" name="password_confirmation" class="form-control" required>
-                        </div>
-                    </div>
+                                        {{-- NGÀY --}}
+                                        <td>{{ $user->created_at->format('d/m/Y') }}</td>
 
-                    <!-- Phone, Role, Status -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class="form-label">Điện thoại</label>
-                            <input type="text" name="phone" class="form-control">
-                        </div>
-                        <div class="col">
-                            <label class="form-label">Role</label>
-                            <select name="role" class="form-select" required>
-                                <option value="customer">Customer</option>
-                                <option value="staff">Staff</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label class="form-label">Trạng thái</label>
-                            <select name="status" class="form-select" required>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                                <option value="banned">Banned</option>
-                            </select>
-                        </div>
-                    </div>
+                                        {{-- SỐ ĐƠN --}}
+                                        <td class="text-center">
+                                            {{ $user->orders()->count() }} đơn
+                                        </td>
 
-                    <!-- Address -->
-                    <div class="mb-3">
-                        <label class="form-label">Địa chỉ</label>
-                        <input type="text" name="address" class="form-control">
-                    </div>
+                                        {{-- TỔNG CHI --}}
+                                        <td class="fw-bold text-danger">
+                                            {{ number_format($user->orders()->sum('total_amount')) }} đ
+                                        </td>
 
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-success">
-                            <i class="bi bi-save me-1"></i> Thêm
-                        </button>
+                                        {{-- TRẠNG THÁI --}}
+                                        <td>
+                                            @php
+                                                $map = [
+                                                    'active' => ['Hoạt động','success'],
+                                                    'inactive' => ['Tạm khóa','secondary'],
+                                                    'banned' => ['Bị cấm','danger'],
+                                                ];
+                                                [$text,$color] = $map[$user->status];
+                                            @endphp
+                                            <span class="badge bg-{{ $color }}">{{ $text }}</span>
+                                        </td>
+
+                                        {{-- ACTION --}}
+                                        <td class="text-end pe-4">
+                                           <button
+                                                class="action-btn btn-view-customer "
+                                                data-id="{{ $user->id }}"
+                                                title="Xem chi tiết">
+                                                <i class="bx bx-show"></i>
+                                            </button>
+
+                                            <button class="action-btn editor-link text-warning"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editCustomerModal-{{ $user->id }}">
+                                                <i class="bx bx-edit"></i>
+                                            </button>
+
+                                            <button class="action-btn delete-link text-danger"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteCustomerModal-{{ $user->id }}">
+                                                <i class="bx bx-trash"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-4">
+                                        <i class="bx bx-search-alt-2 fs-4 d-block mb-1"></i>
+                                        Không tìm thấy khách hàng phù hợp
+                                    </td>
+                                </tr>
+                                @endforelse
+
+                            </tbody>
+                        </table>
+
                     </div>
-                </form>
+                </div>
+                <div class="card-footer bg-white border-0 py-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            Hiển thị {{ $users->firstItem() }} –
+                            {{ $users->lastItem() }} / {{ $users->total() }} khách
+                        </small>
+
+                        {{ $users->links('pagination::bootstrap-5') }}
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // tất cả input file có class .avatar-input
-    document.querySelectorAll('.avatar-input').forEach(function(input) {
-        input.addEventListener('change', function() {
-            if(this.files && this.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    // lấy id từ data-preview attribute
-                    const previewId = this.getAttribute('data-preview');
-                    document.getElementById(previewId).src = e.target.result;
+        @include('admin.partials.modals.add_customer')
+        @include('admin.partials.modals.edit_customer')
+        @include('admin.partials.modals.delete_customer')
+        @include('admin.partials.modals.detail_customer')
+@endsection
+
+@push('scripts')
+    <script src="{{ asset('js/customers.js') }}"></script>
+     <script>
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.btn-view-customer');
+        if (!btn) return;
+
+        const userId = btn.dataset.id;
+
+        fetch(`/admin/customers/${userId}`)
+            .then(res => res.json())
+            .then(data => {
+
+                // BASIC INFO
+                document.getElementById('modalAvatar').src   = data.avatar;
+                document.getElementById('modalName').innerText   = data.name;
+                document.getElementById('modalEmail').innerText  = data.email ?? '—';
+                document.getElementById('modalPhone').innerText  = data.phone ?? '—';
+                document.getElementById('modalAddress').innerText= data.address ?? '—';
+
+                // ORDER HISTORY
+                let html = '';
+                if (data.orders.length === 0) {
+                    html = `<tr><td colspan="4" class="text-muted text-center">Chưa có đơn hàng</td></tr>`;
+                } else {
+                    data.orders.forEach(o => {
+                        html += `
+                            <tr>
+                                <td>${o.order_number}</td>
+                                <td>${o.date}</td>
+                                <td class="fw-bold text-danger">${o.total}</td>
+                                <td>
+                                    <span class="badge bg-${statusColor(o.status)}">
+                                        ${statusText(o.status)}
+                                    </span>
+                                </td>
+                            </tr>`;
+                    });
                 }
+
+                document.getElementById('modalHistoryBody').innerHTML = html;
+
+                // SHOW MODAL
+                new bootstrap.Modal(document.getElementById('customerDetailModal')).show();
+            });
+    });
+
+    // STATUS FORMAT
+    function statusText(status) {
+        return {
+            pending: 'Chờ xử lý',
+            delivered: 'Đang giao',
+            completed: 'Hoàn thành',
+            cancelled: 'Đã hủy'
+        }[status] ?? status;
+    }
+
+    function statusColor(status) {
+        return {
+            pending: 'warning',
+            delivered: 'info',
+            completed: 'success',
+            cancelled: 'danger'
+        }[status] ?? 'secondary';
+    }
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.avatar-input').forEach(input => {
+        input.addEventListener('change', function () {
+            if (this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e =>
+                    document.getElementById(this.dataset.preview).src = e.target.result;
                 reader.readAsDataURL(this.files[0]);
             }
         });
     });
 });
+
 </script>
+@endpush

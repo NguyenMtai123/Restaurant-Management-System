@@ -1,152 +1,172 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý danh mục</title>
+@extends('admin.layouts.master')
 
-    <!-- Bootstrap CSS + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+@section('title', 'Quản lý danh mục sản phẩm - Take Away Express')
+@section('page-title', 'Danh mục sản phẩm')
 
-</head>
-<body>
-<div class="container mt-5">
+@push('styles')
+    {{-- <link rel="stylesheet" href="{{ asset('css/products.css') }}"> --}}
+@endpush
 
-    <!-- HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>📂 Danh sách danh mục món</h2>
-        <!-- Button mở modal Thêm mới -->
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-            <i class="bi bi-plus-circle me-1"></i> Thêm danh mục mới
-        </button>
-    </div>
-
-    <!-- ALERT -->
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
-
-    <!-- TABLE -->
-    <div class="card shadow-sm rounded-4">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle mb-0">
-                    <thead class="table-light text-center">
-                        <tr>
-                            <th>ID</th>
-                            <th class="text-start">Tên danh mục</th>
-                            <th>Slug</th>
-                            <th class="text-start">Mô tả</th>
-                            <th>Ngày tạo</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($categories as $cat)
-                        <tr class="text-center">
-                            <td>{{ $cat->id }}</td>
-                            <td class="text-start">{{ $cat->name }}</td>
-                            <td>{{ $cat->slug }}</td>
-                            <td class="text-start">{{ $cat->description ?: '—' }}</td>
-                            <td>{{ $cat->created_at->format('d/m/Y') }}</td>
-                            <td>
-                                <!-- Button mở modal edit -->
-                                <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal-{{ $cat->id }}">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-
-                                <!-- Form xóa -->
-                                <form action="{{ route('admin.categories.destroy', $cat->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa danh mục này?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        <!-- Modal Edit -->
-                        <div class="modal fade" id="editModal-{{ $cat->id }}" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Sửa danh mục: {{ $cat->name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{ route('admin.categories.update', $cat->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-
-                                            <div class="mb-3">
-                                                <label for="name-{{ $cat->id }}" class="form-label">Tên danh mục</label>
-                                                <input type="text" class="form-control" id="name-{{ $cat->id }}" name="name" value="{{ $cat->name }}" required>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="description-{{ $cat->id }}" class="form-label">Mô tả</label>
-                                                <textarea class="form-control" id="description-{{ $cat->id }}" name="description" rows="3">{{ $cat->description }}</textarea>
-                                            </div>
-
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="bi bi-save me-1"></i> Cập nhật
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center text-muted">Chưa có danh mục nào</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+@section('content')
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+                <div class="card-body p-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Quản lý danh mục</h5>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                        <i class='bx bx-plus'></i> Thêm danh mục
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>
 
-</div>
+            <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-4">#</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Slug</th>
+                                    <th>Mô tả</th>
+                                    <th>Ngày tạo</th>
+                                    <th class="text-end pe-4">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($categories as $cat)
+                                    <tr>
+                                        <td class="ps-4 fw-bold text-muted">{{ $loop->iteration }}</td>
+                                        <td>{{ $cat->name }}</td>
+                                        <td>{{ $cat->slug }}</td>
+                                        <td>{{ $cat->description ?? '—' }}</td>
+                                        <td>{{ $cat->created_at->format('d/m/Y H:i') }}</td>
+                                        <td class="text-end pe-4">
+                                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editCategoryModal-{{ $cat->id }}">
+                                                <i class="bx bx-edit"></i>
+                                            </button>
+                                            <!-- Button mở modal xóa -->
+                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal-{{ $cat->id }}">
+                                                <i class="bx bx-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
 
-<!-- Modal Thêm mới -->
-<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thêm danh mục mới</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    <!-- Modal Edit -->
+                                    <div class="modal fade" id="editCategoryModal-{{ $cat->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <form action="{{ route('admin.categories.update', $cat->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Sửa danh mục: {{ $cat->name }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Tên danh mục</label>
+                                                            <input type="text" name="name" class="form-control" value="{{ $cat->name }}" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Mô tả</label>
+                                                            <textarea name="description" class="form-control">{{ $cat->description }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Xóa -->
+                                    <div class="modal fade" id="deleteCategoryModal-{{ $cat->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <form action="{{ route('admin.categories.destroy', $cat->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-danger">Xóa danh mục</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Bạn có chắc chắn muốn xóa danh mục <strong>{{ $cat->name }}</strong> không?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
+    <!-- Modal Add Category -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
                 <form action="{{ route('admin.categories.store') }}" method="POST">
                     @csrf
-                    <div class="mb-3">
-                        <label for="name-new" class="form-label">Tên danh mục</label>
-                        <input type="text" class="form-control" id="name-new" name="name" required>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thêm danh mục mới</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="description-new" class="form-label">Mô tả</label>
-                        <textarea class="form-control" id="description-new" name="description" rows="3"></textarea>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Tên danh mục</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả</label>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
                     </div>
-
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-success">
-                            <i class="bi bi-save me-1"></i> Thêm
-                        </button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+    <!-- Modal Add Category -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{ route('admin.categories.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thêm danh mục mới</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Tên danh mục</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả</label>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@push('scripts')
+@endpush

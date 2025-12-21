@@ -1,33 +1,38 @@
-<!-- Bootstrap 5 + Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+@extends('admin.layouts.master')
 
-<div class="container mt-4">
-    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+@section('title', 'Quản lý sản phẩm - Take Away Express')
+@section('page-title', 'Sản phẩm')
 
-        <!-- HEADER -->
-        <div class="card-header text-white py-3"
-             style="background:linear-gradient(135deg,#0d6efd,#6610f2)">
-            <h4 class="mb-0">
-                <i class="bi bi-plus-circle me-2"></i> Thêm món ăn mới
-            </h4>
-        </div>
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/products.css') }}">
+@endpush
 
-        <div class="card-body">
-            <form action="{{ route('admin.menu-items.store') }}"
-                  method="POST"
-                  enctype="multipart/form-data">
-                @csrf
+@section('content')
+<div class="card shadow-lg border-0 overflow-hidden">
 
-                <div class="row g-4">
+    <!-- HEADER -->
+    <div class="card-header py-3">
+        <h4 class="mb-0">
+            <i class="bi bi-plus-circle me-2"></i> Thêm món ăn mới
+        </h4>
+    </div>
 
-                    <!-- LEFT -->
-                    <div class="col-md-6">
+    <div class="card-body">
+        <form action="{{ route('admin.menu-items.store') }}"
+              method="POST"
+              enctype="multipart/form-data">
+            @csrf
 
-                        <!-- Danh mục -->
-                        <div class="mb-3">
+            <div class="row g-4">
+
+                <!-- LEFT -->
+                <div class="col-md-6">
+
+                    <!-- Danh mục -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Danh mục</label>
-                            <select name="category_id" class="form-select" required>
+                            <select name="category_id" class="form-select">
                                 <option value="">-- Chọn danh mục --</option>
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>
@@ -35,106 +40,133 @@
                                     </option>
                                 @endforeach
                             </select>
-                            @error('category_id') <small class="text-danger">{{ $message }}</small> @enderror
+                            @error('category_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
-                        <!-- Tên -->
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Tên món</label>
-                            <input type="text"
-                                   name="name"
-                                   class="form-control"
-                                   placeholder="VD: Cơm gà xối mỡ"
-                                   value="{{ old('name') }}"
-                                   required>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label fw-semibold">Mã sản phẩm</label>
+                            <input type="text" class="form-control" name="code" value="{{ $nextCode }}" readonly>
                         </div>
-
-                        <!-- Slug -->
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Slug</label>
-                            <input type="text"
-                                   name="slug"
-                                   class="form-control"
-                                   placeholder="Tuỳ chọn"
-                                   value="{{ old('slug') }}">
-                        </div>
-
-                        <!-- Giá -->
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Giá (VNĐ)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">₫</span>
-                                <input type="number"
-                                       name="price"
-                                       class="form-control"
-                                       placeholder="50000"
-                                       value="{{ old('price') }}"
-                                       required>
-                            </div>
-                        </div>
-
-                        <!-- Trạng thái -->
-                        <div class="form-check form-switch mt-4">
-                            <input class="form-check-input"
-                                   type="checkbox"
-                                   name="is_available"
-                                   value="1"
-                                   checked>
-                            <label class="form-check-label fw-semibold">
-                                Đang bán
-                            </label>
-                        </div>
-
                     </div>
 
-                    <!-- RIGHT -->
-                    <div class="col-md-6">
-
-                        <!-- Mô tả -->
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Mô tả</label>
-                            <textarea name="description"
-                                      class="form-control"
-                                      rows="5"
-                                      placeholder="Mô tả món ăn...">{{ old('description') }}</textarea>
-                        </div>
-
-                        <!-- Upload ảnh -->
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Ảnh món ăn</label>
-                            <input type="file"
-                                   name="images[]"
-                                   class="form-control"
-                                   multiple
-                                   id="imageInput">
-
-                            <!-- Preview -->
-                            <div class="row mt-3 g-2" id="previewImages"></div>
-                        </div>
-
+                    <!-- Tên -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Tên món</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               placeholder="VD: Cơm gà xối mỡ"
+                               value="{{ old('name') }}"
+                               >
+                        @error('name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
+
+                    <!-- Slug -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Slug</label>
+                        <input type="text"
+                               name="slug"
+                               class="form-control"
+                               placeholder="Tuỳ chọn"
+                               value="{{ old('slug') }}">
+                        @error('slug')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <!-- Giá -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Giá (VNĐ)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₫</span>
+                            <input type="number"
+                                   name="price"
+                                   class="form-control"
+                                   placeholder="50000"
+                                   value="{{ old('price') }}"
+                                   >
+                        </div>
+                        @error('price')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <!-- Trạng thái -->
+                    <div class="form-check form-switch mt-4">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="is_available"
+                               value="1"
+                               {{ old('is_available', 1) ? 'checked' : '' }}>
+                        <label class="form-check-label fw-semibold">
+                            Đang bán
+                        </label>
+                        @error('is_available')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
                 </div>
 
-                <hr>
+                <!-- RIGHT -->
+                <div class="col-md-6">
 
-                <!-- ACTION -->
-                <div class="d-flex justify-content-between">
-                    <a href="{{ route('admin.menu-items.index') }}"
-                       class="btn btn-outline-secondary">
-                        <i class="bi bi-arrow-left me-1"></i> Quay lại
-                    </a>
+                    <!-- Mô tả -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Mô tả</label>
+                        <textarea name="description"
+                                  class="form-control"
+                                  rows="5"
+                                  placeholder="Mô tả món ăn...">{{ old('description') }}</textarea>
+                        @error('description')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
 
-                    <button type="submit"
-                            class="btn btn-success px-4">
-                        <i class="bi bi-save me-1"></i> Lưu món ăn
-                    </button>
+                    <!-- Upload ảnh -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Ảnh món ăn</label>
+                        <input type="file"
+                               name="images[]"
+                               class="form-control"
+                               multiple
+                               id="imageInput">
+                        @error('images')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+
+                        <!-- Preview -->
+                        <div class="row mt-3 g-2" id="previewImages"></div>
+                    </div>
+
                 </div>
+            </div>
 
-            </form>
-        </div>
+            <hr>
+
+            <!-- ACTION -->
+            <div class="d-flex justify-content-between">
+                <a href="{{ route('admin.menu-items.index') }}"
+                   class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i> Quay lại
+                </a>
+
+                <button type="submit"
+                        class="btn btn-primary px-4">
+                    <i class="bi bi-save me-1"></i> Lưu món ăn
+                </button>
+            </div>
+
+        </form>
     </div>
 </div>
+@endsection
 
+@push('scripts')
 <script>
 document.getElementById('imageInput').addEventListener('change', function () {
     const preview = document.getElementById('previewImages');
@@ -157,3 +189,4 @@ document.getElementById('imageInput').addEventListener('change', function () {
     });
 });
 </script>
+@endpush

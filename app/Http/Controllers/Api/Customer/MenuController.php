@@ -4,49 +4,73 @@ namespace App\Http\Controllers\Api\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\MenuItem;
-use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
-    // Xem chi tiết món ăn
+    // CHI TIẾT MÓN
     public function show($slug)
     {
-        $menuItem = MenuItem::with(['category', 'images', 'comments.user'])
+        $menuItem = MenuItem::with(['category', 'images'])
             ->where('slug', $slug)
             ->firstOrFail();
 
-        // Lấy đánh giá đã duyệt
-        $comments = $menuItem->comments()->where('is_approved', true)->latest()->get();
+        $comments = $menuItem->comments()
+            ->where('is_approved', true)
+            ->latest()
+            ->take(2)
+            ->with('user')
+            ->get();
 
-        // Trung bình đánh giá
-        $avgRating = $comments->avg('rating');
+        $avgRating = round(
+            $menuItem->comments()
+                ->where('is_approved', true)
+                ->avg('rating'),
+            1
+        );
 
-        return view('customer.menu.show', compact('menuItem', 'comments', 'avgRating'));
+        $totalComments = $menuItem->comments()
+            ->where('is_approved', true)
+            ->count();
+
+        return view('customer.menu.show', compact(
+            'menuItem',
+            'comments',
+            'avgRating',
+            'totalComments'
+        ));
     }
 
-    // Thêm bình luận / đánh giá
+    // AJAX COMMENT
     public function comment(Request $request, MenuItem $menuItem)
     {
-        $request->validate([
-            'content_menu' => 'required|string|max:1000',
-            'rating' => 'nullable|integer|min:1|max:5'
-        ]);
-
-        $user = Auth::user();
-        if (!$user) {
-            return redirect()->back()->with('error', 'Bạn cần đăng nhập để bình luận.');
+        if (!Auth::check()) {
+            return response()->json([
+                'message' => 'Bạn cần đăng nhập'
+            ], 401);
         }
 
-        $menuItem->comments()->create([
-            'user_id' => $user->id,
-            'content_menu' => $request->content_menu,
-            'rating' => $request->rating,
-            'commentable_id' => $menuItem->id,
-            'is_approved' => true, // hoặc false nếu cần duyệt admin
+        $request->validate([
+            'content_menu' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5'
         ]);
 
-        return redirect()->back()->with('success', 'Bình luận đã được gửi thành công!');
+        $comment = $menuItem->comments()->create([
+            'user_id' => Auth::id(),
+            'content_menu' => $request->content_menu,
+            'rating' => $request->rating,
+            'is_approved' => true,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'comment' => [
+                'user' => Auth::user()->name,
+                'content' => $comment->content_menu,
+                'rating' => $comment->rating,
+                'created_at' => now()->diffForHumans(),
+            ]
+        ]);
     }
 }

@@ -20,26 +20,41 @@ class CartController extends Controller
     }
 
     public function add(Request $request)
-    {
-        $request->validate([
-            'item_id' => 'required|exists:menu_items,id',
-            'quantity' => 'nullable|integer|min:1'
-        ]);
-
-        $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
-        $cartItem = CartItem::firstOrNew([
-            'cart_id' => $cart->id,
-            'item_id' => $request->item_id
-        ]);
-
-        $cartItem->quantity = $cartItem->exists
-            ? $cartItem->quantity + ($request->quantity ?? 1)
-            : ($request->quantity ?? 1);
-
-        $cartItem->save();
-         $cart->load('items.menuItem.images');
-        return response()->json($cart);
+{
+    if (!Auth::check()) {
+        return response()->json([
+            'success' => false,
+            'need_login' => true,
+            'message' => 'Bạn cần đăng nhập để thêm món vào giỏ hàng'
+        ], 401);
     }
+
+    $request->validate([
+        'item_id' => 'required|exists:menu_items,id',
+        'quantity' => 'nullable|integer|min:1'
+    ]);
+
+    $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
+
+    $cartItem = CartItem::firstOrNew([
+        'cart_id' => $cart->id,
+        'item_id' => $request->item_id
+    ]);
+
+    $cartItem->quantity = $cartItem->exists
+        ? $cartItem->quantity + ($request->quantity ?? 1)
+        : ($request->quantity ?? 1);
+
+    $cartItem->save();
+
+    $cart->load('items.menuItem.images');
+
+    return response()->json([
+        'success' => true,
+        'cart' => $cart
+    ]);
+}
+
 
     public function remove(Request $request)
     {

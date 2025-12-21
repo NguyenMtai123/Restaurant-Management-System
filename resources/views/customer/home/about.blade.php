@@ -2,8 +2,8 @@
   <div class="container">
     <div class="section-header">
       <span class="section-subtitle">Về chúng tôi</span>
-      <h2 class="section-title">Take Away Express</h2>
-      <p class="section-desc">Mang hương vị đến tận nhà bạn</p>
+      <h2 class="section-title">{{ $about->title ?? 'Take Away Express' }}</h2>
+      <p class="section-desc">{{ Str::limit($about->content_contact, 50) ?? 'Mang hương vị đến tận nhà bạn' }}</p>
     </div>
 
     <div class="about-content">

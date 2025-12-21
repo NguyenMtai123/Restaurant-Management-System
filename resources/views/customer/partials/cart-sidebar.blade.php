@@ -12,28 +12,31 @@
       </div>
     </div>
     <div class="cart-summary">
-      <div class="summary-row">
-        <span>Tạm tính:</span>
-        <span class="cart-subtotal">0 đ</span>
-      </div>
-      <div class="summary-row">
-        <span>Phí vận chuyển:</span>
-        <span class="cart-shipping">0 đ</span>
-      </div>
-      <div class="summary-row total">
-        <span>Tổng tiền:</span>
-        <span class="cart-total">0 đ</span>
-      </div>
+        <div class="summary-row">
+            <span>Tạm tính:</span>
+            <span class="cart-subtotal">0 đ</span>
+        </div>
+        <div class="summary-row">
+            <span>Phí vận chuyển (VAT 10%):</span>
+            <span class="cart-shipping">0 đ</span>
+        </div>
+        <div class="summary-row total">
+            <span>Tổng tiền:</span>
+            <span class="cart-total">0 đ</span>
+        </div>
       <div class="coupon-section">
         <input type="text" placeholder="Nhập mã giảm giá" id="couponInput"/>
         <button class="btn btn-outline" id="applyCoupon">Áp dụng</button>
       </div>
     </div>
     <div class="cart-footer">
-      <button class="btn btn-primary checkout-btn" id="checkoutBtn">
-        <i class="fas fa-credit-card"></i>
-        <span>Thanh toán</span>
-      </button>
+      <button
+    type="button"
+    class="btn btn-primary checkout-btn"
+    id="checkoutBtn">
+    <i class="fas fa-credit-card"></i>
+    <span>Đặt hàng</span>
+</button>
       <a href="#menu" class="btn btn-outline continue-btn">
         <i class="fas fa-utensils"></i>
         <span>Tiếp tục mua hàng</span>
@@ -42,46 +45,77 @@
   </div>
 </div>
 <div class="cart-overlay" id="cartOverlay"></div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-document.getElementById('checkoutBtn').addEventListener('click', function() {
-    // Thêm feedback cho người dùng biết đang xử lý
-    this.disabled = true;
-    this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xử lý...';
+document.getElementById('checkoutBtn').addEventListener('click', function () {
+    const btn = this;
 
-    fetch('/checkout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        // Thêm body rỗng để đảm bảo request hợp lệ hơn, mặc dù không cần dữ liệu cụ thể
-        body: JSON.stringify({ order_type: 'take-away' })
-    })
-    .then(res => {
-        // Luôn kiểm tra res.ok trước khi gọi res.json()
-        if (!res.ok) {
-            // Nếu response status là 4xx hoặc 5xx, đọc lỗi từ server
-            return res.json().then(err => { throw new Error(err.error || 'Lỗi mạng hoặc server'); });
-        }
-        return res.json();
-    })
-    .then(data => {
-        if(data.success) {
-            alert(data.message); // hoặc show toast
-           window.location.href = '/payment/' + data.order.id;
-        } else {
-            // Trường hợp server trả về success: false với thông báo lỗi tùy chỉnh
-            alert(data.error || 'Có lỗi xảy ra');
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Lỗi: ' + err.message);
-    })
-    .finally(() => {
-        // Đảm bảo nút được kích hoạt lại nếu có lỗi
-        this.disabled = false;
-        this.innerHTML = '<i class="fas fa-credit-card"></i><span>Thanh toán</span>';
+    // 1. Xác nhận đặt hàng
+    Swal.fire({
+        title: 'Xác nhận đặt hàng?',
+        text: 'Bạn có chắc chắn muốn đặt hàng không?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Đặt hàng',
+        cancelButtonText: 'Hủy',
+        confirmButtonColor: '#0d6efd',
+        cancelButtonColor: '#6c757d'
+    }).then(result => {
+        if (!result.isConfirmed) return;
+
+        // 2. Loading
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Đang xử lý...`;
+
+        fetch('/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ order_type: 'take-away' })
+        })
+        .then(res => {
+            if (!res.ok) {
+                return res.json().then(err => {
+                    throw new Error(err.error || 'Lỗi server');
+                });
+            }
+            return res.json();
+        })
+        .then(data => {
+            if (!data.success) {
+                throw new Error(data.error || 'Đặt hàng thất bại');
+            }
+
+            // 3. THÔNG BÁO THÀNH CÔNG (MODAL)
+            Swal.fire({
+                icon: 'success',
+                title: 'Đặt hàng thành công 🎉',
+                html: `
+                    <p><b>Mã đơn:</b> ${data.order.order_number}</p>
+                    <p><b>Tổng tiền:</b> ${Number(data.order.total_amount).toLocaleString()} đ</p>
+                `,
+                confirmButtonText: 'Thanh toán ngay'
+            }).then(() => {
+                window.location.href = '/payment/' + data.order.id;
+            });
+        })
+        .catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Đặt hàng thất bại ❌',
+                text: err.message,
+                confirmButtonText: 'Thử lại'
+            });
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerHTML = `
+                <i class="fas fa-credit-card"></i>
+                <span>Đặt hàng</span>
+            `;
+        });
     });
 });
 </script>

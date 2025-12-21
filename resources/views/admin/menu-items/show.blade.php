@@ -1,11 +1,18 @@
-<!-- Bootstrap 5 + Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-<div class="container mt-4">
+@extends('admin.layouts.master')
 
+@section('title', 'Quản lý sản phẩm - Take Away Express')
+@section('page-title', 'Sản phẩm')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/products.css') }}">
+
+@endpush
+
+@section('content')
+   <div class="container mt-4">
     <!-- HEADER -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-2">
-        <h4 class="mb-2 mb-md-0">👁️ Chi tiết món ăn</h4>
+        <h4 class="mb-2 mb-md-0">Chi tiết món ăn</h4>
         <div class="btn-group">
             <a href="{{ route('admin.menu-items.edit', $menuItem->id) }}"
                class="btn btn-warning">
@@ -60,8 +67,8 @@
                     <table class="table table-borderless table-striped">
                         <tbody>
                             <tr>
-                                <th width="35%">ID</th>
-                                <td>{{ $menuItem->id }}</td>
+                                <th width="35%">Mã sản phẩm</th>
+                                <td>{{ $menuItem->code }}</td>
                             </tr>
                             <tr>
                                 <th>Tên món</th>
@@ -108,9 +115,6 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- Optional CSS cho hiệu ứng hover -->
 <style>
 .hover-scale {
     transition: transform 0.3s;
@@ -119,3 +123,9 @@
     transform: scale(1.1);
 }
 </style>
+
+
+@endsection
+
+@push('scripts')
+@endpush

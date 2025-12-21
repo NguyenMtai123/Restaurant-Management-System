@@ -9,9 +9,10 @@ return new class extends Migration {
     {
         Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
+            $table->string('code', 50)->unique();
             $table->string('name', 100);
-            $table->text('description');
-            $table->decimal('price', 10, 2)->check('price >= 0');
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2)->check('price >= 0')->default(0);
             $table->foreignId('category_id')->constrained('menu_categories')->cascadeOnDelete();
             $table->string('slug')->unique();
             $table->boolean('is_available')->default(true);

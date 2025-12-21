@@ -26,7 +26,11 @@
 
     <div class="menu-items">
       @foreach($menuItems as $item)
-      <div class="menu-item" data-category="{{ $item->category->slug }}">
+        <div class="menu-item"
+            data-category="{{ $item->category->slug }}"
+            data-price="{{ $item->price }}"
+            data-name="{{ strtolower($item->name) }}"
+            data-popular="{{ $item->total_sold ?? 0 }}">
         <div class="menu-image">
             <img src="{{ asset($item->images->where('is_featured', 1)->first()?->url ?? 'images/default.png') }}" alt="{{ $item->name }}">
 
@@ -36,7 +40,10 @@
                 <a href="{{ route('customer.menu.show', $item->slug) }}">{{ $item->name }}</a>
             </h4>
           <p>{{ $item->description }}</p>
-          <span class="menu-price">{{ number_format($item->price) }} đ</span>
+           <div class="menu-price-category">
+        <span class="menu-price">{{ number_format($item->price) }} đ</span>
+        <span class="menu-item-category">{{ $item->category->name }}</span>
+    </div>
           <button class="btn btn-primary add-to-cart" data-id="{{ $item->id }}">
             <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
           </button>

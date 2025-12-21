@@ -1,0 +1,93 @@
+/* Kế thừa các biến root từ style.css, file này chỉ custom thêm */
+
+/* Tinh chỉnh nút Primary cho đẹp hơn */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    font-weight: 500;
+}
+.btn-primary:hover {
+    background-color: #e55a2b !important;
+    border-color: #e55a2b !important;
+}
+
+/* Style cho bảng sản phẩm */
+.product-table thead th {
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 2px solid #f1f2f6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.product-table tbody td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: var(--text-color);
+}
+
+/* Ảnh thumbnail sản phẩm */
+.product-img-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.product-thumb {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    object-fit: cover;
+    background-color: #f1f2f6;
+}
+
+.product-info h6 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+.product-info small {
+    color: #888;
+    font-size: 12px;
+}
+
+/* Các Badge trạng thái */
+.badge-stock {
+    background: rgba(46, 204, 113, 0.1); 
+    color: #27ae60;
+    padding: 6px 10px;
+}
+.badge-low {
+    background: rgba(243, 156, 18, 0.1); 
+    color: #f39c12;
+    padding: 6px 10px;
+}
+.badge-out {
+    background: rgba(231, 76, 60, 0.1); 
+    color: #e74c3c;
+    padding: 6px 10px;
+}
+
+/* Nút hành động trong bảng */
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: all 0.2s;
+    background: #f8f9fa;
+    color: #666;
+    margin-left: 5px;
+}
+
+.action-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.action-btn.delete:hover {
+    background: #e74c3c;
+}

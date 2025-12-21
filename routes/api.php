@@ -3,8 +3,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthApiController;
 use App\Http\Controllers\Api\Customer\CartController;
-use App\Http\Controllers\Api\Admin\MenuItemController;
-use App\Http\Controllers\Api\Customer\TableController;
 use App\Http\Controllers\Api\Auth\RegisterApiController;
 use App\Http\Controllers\Api\Customer\PaymentController;
 
@@ -14,9 +12,6 @@ Route::prefix('cart')->group(function () {
     Route::post('/remove', [CartController::class, 'remove']);
     Route::post('/update', [CartController::class, 'update']);
 });
-
-Route::get('/menu-items', [MenuItemController::class, 'index']);
-Route::post('/menu-items', [MenuItemController::class, 'store']);
 
 Route::post('/login', [AuthApiController::class, 'login']);
 Route::post('/register', [RegisterApiController::class, 'register']);

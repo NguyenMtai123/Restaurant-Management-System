@@ -10,17 +10,51 @@ use App\Http\Controllers\Controller;
 
 class MenuItemController extends Controller
 {
-    public function index()
-    {
-        $menuItems = MenuItem::with('category', 'featuredImage')->latest()->paginate(20);
-        return view('admin.menu-items.index', compact('menuItems'));
-    }
-
-    public function create()
+    public function index(Request $request)
     {
         $categories = Category::all();
-        return view('admin.menu-items.create', compact('categories'));
+
+        $query = MenuItem::with('category', 'featuredImage');
+
+        // 🔍 Tìm kiếm theo tên
+        if ($request->filled('keyword')) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        // 🗂 Lọc theo danh mục
+        if ($request->filled('category_id') && $request->category_id !== 'all') {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // 📄 Phân trang
+        $menuItems = $query
+            ->latest()
+            ->paginate(5)
+            ->withQueryString(); // giữ query khi chuyển trang
+
+        return view('admin.menu-items.index', compact(
+            'menuItems',
+            'categories'
+        ));
     }
+
+
+   public function create()
+    {
+        $categories = Category::all();
+
+        // Sinh code tiếp theo để hiển thị readonly
+        $lastItem = MenuItem::orderByDesc('id')->first();
+        if($lastItem) {
+            $number = (int)substr($lastItem->code, 2) + 1;
+        } else {
+            $number = 1;
+        }
+        $nextCode = 'SP' . str_pad($number, 4, '0', STR_PAD_LEFT);
+
+        return view('admin.menu-items.create', compact('categories', 'nextCode'));
+    }
+
 
     public function store(Request $request)
     {
@@ -37,7 +71,6 @@ class MenuItemController extends Controller
         $data = $request->only(['category_id','name','description','price']);
         $data['is_available'] = $request->has('is_available') ? (bool)$request->is_available : true;
 
-        // slug
         if (empty($request->slug)) {
             $slug = Str::slug($request->name);
             $count = MenuItem::where('slug', 'like', $slug . '%')->count();
@@ -46,6 +79,14 @@ class MenuItemController extends Controller
             $data['slug'] = $request->slug;
         }
 
+        // **Sinh code tự động**
+        $lastItem = MenuItem::orderByDesc('id')->first();
+        if($lastItem) {
+            $number = (int)substr($lastItem->code, 2) + 1; // lấy số cuối mã SP
+        } else {
+            $number = 1;
+        }
+        $data['code'] = 'SP' . str_pad($number, 4, '0', STR_PAD_LEFT);
         $menuItem = MenuItem::create($data);
 
         // Nếu có ảnh upload qua form create (images[])
