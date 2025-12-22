@@ -41,9 +41,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
 Route::get('/register/verify-otp', [RegisterController::class, 'showOtpForm'])->name('register.show-otp');
 Route::post('/register/verify-otp', [RegisterController::class, 'verifyOtp'])->name('register.verify-otp');
-// ---------------------------
-// CUSTOMER ROUTES
-// ---------------------------
+
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/customer/home', [HomeController::class, 'index'])->name('customer.home');
