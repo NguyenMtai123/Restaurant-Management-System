@@ -1,0 +1,26 @@
+/* Custom Tabs trong Modal */
+.nav-pills .nav-link {
+    color: #666;
+    background: #f1f2f6;
+    margin: 0 5px;
+    font-weight: 600;
+}
+.nav-pills .nav-link.active {
+    background-color: var(--primary-color); /* Màu cam chủ đạo */
+    color: #fff;
+}
+
+/* Thanh cuộn nhỏ gọn cho phần nội dung modal */
+.tab-content::-webkit-scrollbar {
+    width: 6px;
+}
+.tab-content::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+.tab-content::-webkit-scrollbar-thumb {
+    background: #ddd; 
+    border-radius: 10px;
+}
+.tab-content::-webkit-scrollbar-thumb:hover {
+    background: #ccc; 
+}

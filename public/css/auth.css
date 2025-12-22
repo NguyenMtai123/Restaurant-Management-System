@@ -1,0 +1,209 @@
+* {
+    margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;
+}
+
+/* Container chính */
+.auth-container {
+    display:flex;
+    min-height:100vh;
+}
+
+/* Cover (phần background bên trái) */
+.cover {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    padding:50px;
+    text-align:center;
+    position:relative;
+}
+.cover::after {
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+}
+.cover h1, .cover p {
+    position:relative;
+    z-index:1;
+    animation: floatText 3s ease-in-out infinite;
+}
+.cover h1 {
+    font-size:38px;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+.cover p {
+    font-size:20px;
+}
+@keyframes floatText {
+    0%,100% { transform:translateY(0);}
+    50% { transform:translateY(-10px);}
+}
+
+/* Form đăng ký / login */
+.login-form {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    width:100%;
+    max-width:420px;
+}
+
+/* Logo */
+.login-form .logo img {
+    width:60px;
+    margin-bottom:15px;
+}
+
+/* Tiêu đề */
+.login-form h2 {
+    margin-bottom:25px;
+    font-size:28px;
+    font-weight:600;
+    color:#333;
+    text-align:center;
+}
+
+/* Form */
+.login-form form {
+    width:100%;
+}
+
+/* Input group */
+.input-group {
+    position:relative;
+    margin-bottom:15px;
+}
+.input-group input {
+    width:100%;
+    padding:14px 45px 14px 45px; /* padding đủ để icon */
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+}
+.input-group .icon-left {
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#888;
+    font-size:22px;
+}
+.input-group .show-password {
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#555;
+    font-size:22px;
+}
+
+/* Thông báo lỗi */
+.input-group .text-danger {
+    display:block;
+    font-size:0.85rem;
+    color:red;
+    margin-top:4px;
+    margin-bottom:0;
+}
+
+/* Button */
+button {
+    width:100%;
+    padding:14px;
+    background:#ff5722;
+    border:none;
+    color:#fff;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover {
+    background:#e64a19;
+}
+
+/* Register link */
+.register-link {
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+}
+.register-link a {
+    color:#ff5722;
+    font-weight:500;
+    text-decoration:none;
+}
+
+/* Responsive */
+@media(max-width:900px) {
+    .auth-container {
+        flex-direction:column;
+        align-items:center;
+    }
+    .cover {
+        display:none;
+    }
+    .login-form {
+        max-width:100%;
+        padding:15px;
+    }
+}
+
+.options{ display:flex; justify-content:space-between; font-size:14px; margin-bottom:20px; }
+.options a{ color:#ff5722; text-decoration:none; }
+
+/* Button */
+button{ width:100%; padding:14px; background:#ff5722; border:none; color:#fff; border-radius:10px; font-size:16px; cursor:pointer; transition:0.3s; }
+button:hover{ background:#e64a19; }
+.input-group {
+    position: relative;
+    margin-bottom: 25px; /* tăng một chút để chứa lỗi */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 45px 14px 45px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.input-group .icon-left {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 22px;
+}
+
+.input-group .show-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    font-size: 22px;
+}
+
+/* Thông báo lỗi */
+.input-group .text-danger {
+    position: absolute;
+    bottom: -20px; /* nằm ngay dưới input */
+    left: 0;
+    font-size: 0.85rem;
+    color: red;
+}

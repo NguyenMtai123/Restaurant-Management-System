@@ -1,0 +1,93 @@
+/* Style bảng nhân viên */
+.employee-table thead th {
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 2px solid #f1f2f6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.employee-table tbody td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    vertical-align: middle;
+    color: var(--text-color);
+}
+
+/* Badge chức vụ */
+.badge-role {
+    font-weight: 500;
+    padding: 5px 10px;
+}
+
+.role-manager {
+    background: #34495e; 
+    color: #fff;
+}
+.role-cashier {
+    background: rgba(52, 152, 219, 0.1); 
+    color: #3498db;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+.role-chef {
+    background: rgba(230, 126, 34, 0.1); 
+    color: #e67e22;
+    border: 1px solid rgba(230, 126, 34, 0.2);
+}
+.role-shipper {
+    background: rgba(46, 204, 113, 0.1); 
+    color: #27ae60;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+/* Avatar nhân viên */
+.employee-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px; /* Bo góc vuông nhẹ thay vì tròn hẳn */
+    object-fit: cover;
+    background-color: #f1f2f6;
+}
+
+/* Trạng thái Online/Offline */
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+.dot-active { background-color: #2ecc71; box-shadow: 0 0 5px rgba(46, 204, 113, 0.5); }
+.dot-leave { background-color: #e74c3c; }
+
+/* Stats Card */
+.stats-card-employee {
+    border-radius: 12px;
+    transition: transform 0.2s;
+}
+.stats-card-employee:hover {
+    transform: translateY(-3px);
+}
+/* Nút hành động trong bảng */
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: all 0.2s;
+    background: #f8f9fa;
+    color: #666;
+    margin-left: 5px;
+}
+
+.action-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.action-btn.delete:hover {
+    background: #e74c3c;
+}
