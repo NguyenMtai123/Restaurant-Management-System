@@ -16,6 +16,9 @@ class MenuController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
+        // Đặt ảnh mặc định lên đầu
+        $menuItem->images = $menuItem->images->sortByDesc('is_featured')->values();
+
         $comments = $menuItem->comments()
             ->where('is_approved', true)
             ->latest()
@@ -41,6 +44,7 @@ class MenuController extends Controller
             'totalComments'
         ));
     }
+
 
     // AJAX COMMENT
     public function comment(Request $request, MenuItem $menuItem)

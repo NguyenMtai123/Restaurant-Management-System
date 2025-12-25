@@ -39,7 +39,7 @@
             <h4>
                 <a href="{{ route('customer.menu.show', $item->slug) }}">{{ $item->name }}</a>
             </h4>
-          <p>{{ $item->description }}</p>
+        <p>{{ $item->description ?? 'Không có mô tả' }}</p>
            <div class="menu-price-category">
         <span class="menu-price">{{ number_format($item->price) }} đ</span>
         <span class="menu-item-category">{{ $item->category->name }}</span>

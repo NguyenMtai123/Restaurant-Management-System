@@ -146,20 +146,20 @@ function initCart() {
   cartOverlay.addEventListener("click", toggleCart);
 
   // Apply coupon
-  applyCoupon.addEventListener("click", function () {
-    const couponCode = couponInput.value.trim();
-    if (couponCode === "WELCOME20") {
-      showToast("Áp dụng mã giảm giá 20% thành công!", "success");
-      couponInput.value = "";
-      updateCartSummary();
-    } else if (couponCode === "FREESHIP") {
-      showToast("Miễn phí vận chuyển đã được áp dụng!", "success");
-      couponInput.value = "";
-      updateCartSummary();
-    } else if (couponCode) {
-      showToast("Mã giảm giá không hợp lệ!", "error");
-    }
-  });
+//   applyCoupon.addEventListener("click", function () {
+//     const couponCode = couponInput.value.trim();
+//     if (couponCode === "WELCOME20") {
+//       showToast("Áp dụng mã giảm giá 20% thành công!", "success");
+//       couponInput.value = "";
+//       updateCartSummary();
+//     } else if (couponCode === "FREESHIP") {
+//       showToast("Miễn phí vận chuyển đã được áp dụng!", "success");
+//       couponInput.value = "";
+//       updateCartSummary();
+//     } else if (couponCode) {
+//       showToast("Mã giảm giá không hợp lệ!", "error");
+//     }
+//   });
 
   // Checkout button
 //   checkoutBtn.addEventListener("click", function () {

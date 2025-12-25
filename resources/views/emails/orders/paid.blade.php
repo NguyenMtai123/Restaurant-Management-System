@@ -45,6 +45,24 @@
                         <td>{{ number_format($item->unit_price) }} đ</td>
                     </tr>
                     @endforeach
+
+                    <tr>
+                        <td colspan="2">Tạm tính</td>
+                        <td>{{ number_format($order->subtotal) }} đ</td>
+                    </tr>
+
+                    @if($order->discount_amount > 0)
+                    <tr>
+                        <td colspan="2">Giảm giá</td>
+                        <td>-{{ number_format($order->discount_amount) }} đ</td>
+                    </tr>
+                    @endif
+
+                    <tr>
+                        <td colspan="2">VAT 10% / Phí vận chuyển</td>
+                        <td>{{ number_format($order->tax) }} đ</td>
+                    </tr>
+
                     <tr>
                         <td colspan="2" class="order-total">Tổng cộng</td>
                         <td class="order-total">{{ number_format($order->total_amount) }} đ</td>
@@ -52,12 +70,16 @@
                 </tbody>
             </table>
 
+
+
             <div class="customer-info">
                 <p><strong>Thông tin khách hàng:</strong></p>
                 <p>Tên: {{ $order->user->name }}</p>
                 <p>Email: {{ $order->user->email }}</p>
                 <p>SĐT: {{ $order->user->phone ?? 'Chưa cập nhật' }}</p>
+                <p>Địa chỉ: {{ $order->address ?? $order->user->address ?? 'Chưa cập nhật' }}</p>
             </div>
+
 
             <a href="{{ route('orders.show', $order->id) }}" class="btn">Xem đơn hàng</a>
         </div>

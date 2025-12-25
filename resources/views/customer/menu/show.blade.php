@@ -301,6 +301,10 @@ form.addEventListener('submit', function(e) {
 function prependComment(c) {
     const list = document.getElementById('commentList');
 
+    // Xóa thông báo "Chưa có đánh giá." nếu có
+    const emptyMsg = list.querySelector('p.text-muted');
+    if (emptyMsg) emptyMsg.remove();
+
     const stars = Array.from({length:5}, (_,i) =>
         `<i class="fas fa-star ${i < c.rating ? 'text-warning' : 'text-secondary'}"></i>`
     ).join('');
@@ -323,6 +327,27 @@ function prependComment(c) {
         comments[comments.length - 1].remove();
     }
 }
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e){
+        e.preventDefault();
+        const href = this.getAttribute("href");
+        if(!href || href === "#") return;
+
+        const target = document.querySelector(href);
+        if(target){
+            // Scroll section trên trang hiện tại
+            window.scrollTo({
+                top: target.offsetTop - 100,
+                behavior: "smooth"
+            });
+        } else {
+            // Nếu section không có → chuyển về home + hash
+            window.location.href = "{{ route('home') }}" + href;
+        }
+    });
+});
+
 
 </script>
 @endpush

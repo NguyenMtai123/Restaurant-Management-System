@@ -25,6 +25,13 @@
                 <span class="link_name">Đơn hàng</span>
             </a>
         </li>
+        <li class="{{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.coupons.index') }}">
+                <i class='bx bx-purchase-tag'></i>
+                <span class="link_name">Mã giảm giá</span>
+            </a>
+        </li>
+
         <li class="{{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
             <a href="{{ route('admin.posts.index') }}">
                 <i class='bx bx-news'></i>

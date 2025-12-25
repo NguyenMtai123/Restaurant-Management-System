@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Web\Auth\LoginController;
 use App\Http\Controllers\Api\Admin\AboutController;
 use App\Http\Controllers\Api\Admin\OrderController;
+use App\Http\Controllers\Api\Admin\CouponController;
 use App\Http\Controllers\Api\Admin\ContactController;
 use App\Http\Controllers\Api\Admin\ProfileController;
 use App\Http\Controllers\Api\Admin\SettingController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\EmployeeController;
 use App\Http\Controllers\Api\Admin\MenuItemController;
 use App\Http\Controllers\Api\Admin\DashboardController;
+use App\Http\Controllers\Api\Customer\PolicyController;
 use App\Http\Controllers\Api\Admin\StatisticsController;
 use App\Http\Controllers\Api\Customer\PaymentController;
 use App\Http\Controllers\Api\Customer\CheckoutController;
@@ -70,6 +72,8 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 
     Route::get('/profile', [ProfileUserController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileUserController::class, 'update'])->name('profile.update');
+    Route::post('/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('cart.applyCoupon');
+
 
 });
 
@@ -84,6 +88,15 @@ Route::prefix('cart')->group(function () {
     Route::post('/remove', [CartController::class, 'remove']);
 });
 
+Route::prefix('policy')->group(function () {
+    Route::get('/faq', [PolicyController::class, 'faq'])->name('policy.faq');
+    Route::get('/terms', [PolicyController::class, 'termsOfService'])->name('policy.terms');
+    Route::get('/refund', [PolicyController::class, 'refundPolicy'])->name('policy.refund');
+    Route::get('/shipping', [PolicyController::class, 'shippingPolicy'])->name('policy.shipping');
+    Route::get('/privacy', [PolicyController::class, 'privacyPolicy'])->name('policy.privacy');
+});
+
+
 // ---------------------------
 // ADMIN ROUTES
 // ---------------------------
@@ -92,6 +105,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/statistic', [StatisticsController::class, 'index'])->name('statistic');
     Route::get( '/statistics/export-pdf', [StatisticsController::class, 'exportPdf'])->name('statistics.export.pdf');
+
+    Route::resource('coupons', CouponController::class);
+    Route::get('coupons/{coupon}/send', [CouponController::class,'sendForm'])
+        ->name('coupons.send.form');
+    Route::post('coupons/{coupon}/send', [CouponController::class,'sendToUsers'])
+        ->name('coupons.send');
+
+        Route::post(
+    'coupons/send-multiple',
+    [CouponController::class,'sendMultiple']
+)->name('coupons.sendMultiple');
+
 
     // Menu items
     Route::resource('menu-items', MenuItemController::class);

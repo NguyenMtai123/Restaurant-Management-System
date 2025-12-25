@@ -23,7 +23,7 @@
 
         {{-- Card 2: Quản lý danh mục bài viết --}}
         <div class="col-md-6 col-lg-3">
-            <a href="{{ route('admin.posts.index') }}" class="text-decoration-none">
+            <a href="{{ route('admin.post-categories.index') }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 rounded-3 hover-scale">
                     <div class="card-body text-center">
                         <i class='bx bx-news bx-lg mb-3 text-success'></i>

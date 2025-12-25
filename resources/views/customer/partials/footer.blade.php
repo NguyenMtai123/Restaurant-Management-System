@@ -11,13 +11,13 @@
                     </div>
                 </div>
                 <p>Nhà hàng chuyên phục vụ đồ ăn mang về chất lượng cao với dịch vụ nhanh chóng, tiện lợi.</p>
-                <div class="footer-newsletter">
-                    <h4>Đăng ký nhận tin</h4>
-                    <div class="newsletter-form">
-                        <input type="email" placeholder="Email của bạn" />
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </div>
+               <div class="footer-newsletter">
+                    <h4>Đăng ký nhận mã</h4>
+                    <a href="{{ route('register') }}" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Đăng ký
+                    </a>
                 </div>
+
             </div>
 
             <!-- Column 2: Liên kết nhanh -->
@@ -36,11 +36,31 @@
             <div class="footer-column">
                 <h3>Chính sách</h3>
                 <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Chính sách bảo mật</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Điều khoản dịch vụ</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Chính sách giao hàng</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Chính sách hoàn tiền</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Câu hỏi thường gặp</a></li>
+                    <li>
+                        <a href="{{ route('policy.privacy') }}">
+                            <i class="fas fa-chevron-right"></i> Chính sách bảo mật
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('policy.terms') }}">
+                            <i class="fas fa-chevron-right"></i> Điều khoản dịch vụ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('policy.shipping') }}">
+                            <i class="fas fa-chevron-right"></i> Chính sách giao hàng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('policy.refund') }}">
+                            <i class="fas fa-chevron-right"></i> Chính sách hoàn tiền
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('policy.faq') }}">
+                            <i class="fas fa-chevron-right"></i> Câu hỏi thường gặp
+                        </a>
+                    </li>
                 </ul>
             </div>
 
