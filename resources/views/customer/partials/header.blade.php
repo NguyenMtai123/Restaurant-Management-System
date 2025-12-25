@@ -12,12 +12,12 @@
 
         <nav class="nav">
             <ul>
-                <li><a href="/customer/home" class="nav-link active"><i class="fas fa-home"></i> Trang chủ</a></li>
-                <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> Giới thiệu</a></li>
-                <li><a href="#menu" class="nav-link"><i class="fas fa-utensils"></i> Thực đơn</a></li>
-                <li><a href="#deals" class="nav-link"><i class="fas fa-tags"></i> Ưu đãi</a></li>
-                <li><a href="#order" class="nav-link"><i class="fas fa-shopping-bag"></i> Đặt hàng</a></li>
-                <li><a href="#contact" class="nav-link"><i class="fas fa-phone-alt"></i> Liên hệ</a></li>
+                <li><a href="/" class="nav-link active"><i class="fas fa-home"></i> Trang chủ</a></li>
+                <li><a href="{{ route('home') }}#about" class="nav-link"><i class="fas fa-info-circle"></i> Giới thiệu</a></li>
+                <li><a href="{{ route('home') }}#menu" class="nav-link"><i class="fas fa-utensils"></i> Thực đơn</a></li>
+                <li><a href="{{ route('home') }}#deals" class="nav-link"><i class="fas fa-tags"></i> Ưu đãi</a></li>
+                <li><a href="{{ route('home') }}#order" class="nav-link"><i class="fas fa-shopping-bag"></i> Đặt hàng</a></li>
+                <li><a href="{{ route('home') }}#contact" class="nav-link"><i class="fas fa-phone-alt"></i> Liên hệ</a></li>
             </ul>
         </nav>
 

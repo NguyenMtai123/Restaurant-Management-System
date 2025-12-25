@@ -26,7 +26,18 @@
 
     <div style="text-align:right; margin-top:12px;">
         <p>Tạm tính: <strong>{{ number_format($order->subtotal,0,',','.') }} đ</strong></p>
-        <p>Thuế: <strong>{{ number_format($order->tax,0,',','.') }} đ</strong></p>
-        <p>Tổng: <strong>{{ number_format($order->total_amount,0,',','.') }} đ</strong></p>
+        <p>Thuế (VAT 10%): <strong>{{ number_format($order->tax,0,',','.') }} đ</strong></p>
+
+        @if($order->discount_amount && $order->discount_amount > 0)
+            <p>Mã giảm giá ({{ $order->coupon?->code ?? 'Mã' }}):
+                <strong>-{{ number_format($order->discount_amount,0,',','.') }} đ</strong>
+            </p>
+        @endif
+
+        <p style="font-weight:bold; font-size:1.1rem;">
+            Tổng:
+            <strong>{{ number_format($order->subtotal + $order->tax - ($order->discount_amount ?? 0),0,',','.') }} đ</strong>
+        </p>
     </div>
+
 </div>

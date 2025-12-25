@@ -179,6 +179,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e){
+        e.preventDefault();
+        const href = this.getAttribute("href");
+
+        if(href === "#") return;
+
+        // Kiểm tra xem section có tồn tại không
+        const target = document.querySelector(href);
+        if(target){
+            // Section có trên trang → scroll bình thường
+            window.scrollTo({
+                top: target.offsetTop - 100,
+                behavior: "smooth"
+            });
+        } else {
+            // Section không có → chuyển về home và scroll sau khi load
+            window.location.href = "{{ route('home') }}" + href;
+        }
+    });
+});
 
 </script>
 @endsection

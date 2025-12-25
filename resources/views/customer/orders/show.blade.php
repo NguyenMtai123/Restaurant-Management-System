@@ -11,12 +11,15 @@
         <div>
             <p><strong>Khách hàng:</strong> {{ $order->user->name }}</p>
             <p><strong>Email:</strong> {{ $order->user->email }}</p>
+            <p><strong>Địa chỉ:</strong> {{ $order->address ?? $order->user->address ?? 'Chưa cập nhật' }}</p>
+            <p><strong>SĐT:</strong> {{ $order->user->phone ?? 'Chưa cập nhật' }}</p>
         </div>
         <div>
             <p><strong>Ngày đặt:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
             <p><strong>Phương thức:</strong> {{ $order->payments->last()?->method ?? 'Chưa thanh toán' }}</p>
         </div>
     </div>
+
 
     <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
         <thead style="background:#f8f9fa;">
@@ -41,9 +44,23 @@
 
     <div style="text-align:right; margin-bottom:20px;">
         <p>Tạm tính: <strong>{{ number_format($order->subtotal, 0, ',', '.') }} đ</strong></p>
-        <p>Thuế (VAT 10%): <strong>{{ number_format($order->tax, 0, ',', '.') }} đ</strong></p>
-        <p style="font-size:1.2rem;">Tổng cộng: <strong>{{ number_format($order->total_amount, 0, ',', '.') }} đ</strong></p>
+
+        @if($order->discount_amount && $order->discount_amount > 0)
+            <p>Giảm giá ({{ $order->coupon?->code ?? 'Mã giảm giá' }}):
+                <strong>-{{ number_format($order->discount_amount, 0, ',', '.') }} đ</strong>
+            </p>
+        @endif
+
+        <p>Phí vận chuyển (VAT 10%): <strong>{{ number_format($order->tax, 0, ',', '.') }} đ</strong></p>
+
+        <p style="font-size:1.2rem;">
+            <strong>
+                Tổng cộng:
+                {{ number_format($order->subtotal + $order->tax - ($order->discount_amount ?? 0), 0, ',', '.') }} đ
+            </strong>
+        </p>
     </div>
+
 
     <div style="text-align:center;">
         <a href="/customer/home" style="display:inline-block; padding:10px 20px; background:#0d6efd; color:#fff; border-radius:5px; text-decoration:none;">Quay về trang chủ</a>
@@ -68,5 +85,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     @endif
 });
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e){
+        e.preventDefault();
+        const href = this.getAttribute("href");
+
+        if(href === "#") return;
+
+        // Kiểm tra xem section có tồn tại không
+        const target = document.querySelector(href);
+        if(target){
+            // Section có trên trang → scroll bình thường
+            window.scrollTo({
+                top: target.offsetTop - 100,
+                behavior: "smooth"
+            });
+        } else {
+            // Section không có → chuyển về home và scroll sau khi load
+            window.location.href = "{{ route('home') }}" + href;
+        }
+    });
+});
+
 </script>
 @endsection

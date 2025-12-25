@@ -47,6 +47,42 @@
 <div class="cart-overlay" id="cartOverlay"></div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-start',
+    showConfirmButton: false,
+    timer: 2500,
+    timerProgressBar: true,
+    showCloseButton: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
+function showSuccess(msg){
+    Toast.fire({
+        icon: 'success',
+        title: msg
+    });
+}
+
+function showError(msg){
+    Toast.fire({
+        icon: 'error',
+        title: msg
+    });
+}
+
+function showInfo(msg){
+    Toast.fire({
+        icon: 'info',
+        title: msg
+    });
+}
+</script>
+
+<script>
 document.getElementById('checkoutBtn').addEventListener('click', function () {
     const btn = this;
 
@@ -118,4 +154,54 @@ document.getElementById('checkoutBtn').addEventListener('click', function () {
         });
     });
 });
+
+document.getElementById('applyCoupon').addEventListener('click', function(){
+    const btn = this;
+    const code = document.getElementById('couponInput').value.trim();
+
+    if(!code){
+        showInfo('Vui lòng nhập mã giảm giá');
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+
+    fetch('/apply-coupon', {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+            'X-CSRF-TOKEN':'{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ coupon_code: code })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success){
+            showSuccess(`${data.message} (-${Number(data.discount_amount).toLocaleString()} đ)`);
+
+            const subtotalEl = document.querySelector('.cart-subtotal');
+            const subtotal = Number(subtotalEl.innerText.replace(/\D/g,''));
+
+            const shipping = data.shipping_discount ? 0 : subtotal * 0.1;
+
+            document.querySelector('.cart-shipping').innerText =
+                shipping.toLocaleString() + ' đ';
+
+            const total = subtotal + shipping - data.discount_amount;
+            document.querySelector('.cart-total').innerText =
+                total.toLocaleString() + ' đ';
+        } else {
+            showError(data.error || 'Áp dụng mã thất bại');
+        }
+    })
+    .catch(() => {
+        showError('Không thể kết nối server');
+    })
+    .finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = 'Áp dụng';
+    });
+});
+
 </script>

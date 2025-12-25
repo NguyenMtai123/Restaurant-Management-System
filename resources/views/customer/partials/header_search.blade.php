@@ -1,3 +1,13 @@
+{{-- <div class="search-container">
+    <button class="search-btn" id="searchToggle">
+        <i class="fas fa-search"></i>
+    </button>
+    <div class="search-box" id="searchBox">
+        <input type="text" placeholder="Tìm kiếm món ăn..." id="searchInput" />
+        <button class="search-submit"><i class="fas fa-search"></i></button>
+    </div>
+</div> --}}
+
 <div class="search-container">
     <button class="search-btn" id="searchToggle">
         <i class="fas fa-search"></i>
@@ -11,6 +21,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.querySelector('.search-submit');
     const categoryButtons = document.querySelectorAll('.category-btn');
     const sortSelect = document.getElementById('sortSelect');
     const loadMoreBtn = document.getElementById('loadMore');
@@ -30,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         popular: parseInt(item.dataset.popular)
     }));
 
-    function renderMenuItems() {
+    function renderMenuItems(scroll = false) {
         const searchTerm = searchInput.value.toLowerCase().trim();
 
         // lọc theo category + search
@@ -53,15 +64,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const oldMsg = menuItemsContainer.querySelector('.no-results');
         if (oldMsg) oldMsg.remove();
 
-        // đảm bảo tất cả item gốc ở trong container (nếu bị di chuyển)
+        // ẩn hết trước
         menuItems.forEach(it => {
             if (it.element.parentNode !== menuItemsContainer) {
                 menuItemsContainer.appendChild(it.element);
             }
-            it.element.style.display = 'none'; // ẩn hết trước
+            it.element.style.display = 'none';
         });
 
-        // nếu không có sản phẩm thỏa điều kiện -> hiển thị thông báo và ẩn nút load more
+        // nếu không có sản phẩm thỏa điều kiện
         if (filtered.length === 0) {
             const noDiv = document.createElement('div');
             noDiv.className = 'no-results';
@@ -72,22 +83,28 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             menuItemsContainer.appendChild(noDiv);
             loadMoreBtn.style.display = 'none';
-            return;
+        } else {
+            // hiển thị những phần tử cần show
+            itemsToShow.forEach(item => {
+                if (item.element.parentNode !== menuItemsContainer) {
+                    menuItemsContainer.appendChild(item.element);
+                }
+                item.element.style.display = 'block';
+            });
+
+            // ẩn/hiện nút load more
+            loadMoreBtn.style.display = displayedItems >= filtered.length ? 'none' : 'inline-flex';
         }
 
-        // hiện những phần tử cần hiển thị (giữ element gốc để maintain event listeners)
-        itemsToShow.forEach(item => {
-            // nếu element không còn trong container thì append lại
-            if (item.element.parentNode !== menuItemsContainer) {
-                menuItemsContainer.appendChild(item.element);
-            }
-            item.element.style.display = 'block';
-        });
-
-        // ẩn/hiện nút load more
-        loadMoreBtn.style.display = displayedItems >= filtered.length ? 'none' : 'inline-flex';
+        // scroll xuống thực đơn nếu cần
+        if(scroll && filtered.length > 0) {
+            const menuSection = document.querySelector('#menu') || menuItemsContainer;
+            window.scrollTo({
+                top: menuSection.offsetTop - 100, // trừ header nếu cần
+                behavior: 'smooth'
+            });
+        }
     }
-
 
     // Category filter
     categoryButtons.forEach(btn => {
@@ -106,10 +123,25 @@ document.addEventListener('DOMContentLoaded', function () {
         renderMenuItems();
     });
 
-    // Search
+    // Search input: live search
     searchInput.addEventListener('input', function() {
         displayedItems = 6;
-        renderMenuItems();
+        renderMenuItems(true);
+    });
+
+    // Search submit button
+    searchBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const searchTerm = searchInput.value.trim();
+        if(!searchTerm) return;
+
+        // Nếu đang ở trang khác Home, redirect về Home
+        if(window.location.pathname !== '/customer/home') {
+            window.location.href = `/customer/home?search=${encodeURIComponent(searchTerm)}#menu`;
+        } else {
+            displayedItems = 6;
+            renderMenuItems(true);
+        }
     });
 
     // Load more
@@ -118,8 +150,14 @@ document.addEventListener('DOMContentLoaded', function () {
         renderMenuItems();
     });
 
-    // Ban đầu render
-    renderMenuItems();
+    // Kiểm tra từ khóa search từ URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get('search');
+    if(searchTerm) {
+        searchInput.value = searchTerm;
+        renderMenuItems(true);
+    } else {
+        renderMenuItems();
+    }
 });
-
 </script>
