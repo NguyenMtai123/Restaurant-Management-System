@@ -224,52 +224,54 @@
                     </table>
                 </div>
             </div>
-        </div>
+</div>
 <div class="row g-4 mb-4 mt-2">
     <div class="col-lg-7">
         <div class="card" style="border-radius:12px;">
-    <div class="card-body">
-        <h6 class="fw-bold mb-3">🏆 Top khách hàng chi tiêu</h6>
+            <div class="card-body">
+                <h6 class="fw-bold mb-3">🏆 Top khách hàng chi tiêu</h6>
 
-        @php
-            $maxSpent = $topCustomers->max('total_spent') ?: 1;
-        @endphp
+                @php
+                    $maxSpent = $topCustomers->max('total_spent') ?: 1;
+                @endphp
 
-        @foreach($topCustomers as $index => $c)
-        @php
-            $percent = round(($c->total_spent / $maxSpent) * 100);
-            $rankColor = match($index){
-                0 => 'bg-warning',
-                1 => 'bg-secondary',
-                2 => 'bg-bronze',
-                default => 'bg-light'
-            };
-        @endphp
+                @foreach($topCustomers as $index => $c)
+                @php
+                    $percent = round(($c->total_spent / $maxSpent) * 100);
+                    $rankColor = match($index){
+                        0 => 'bg-warning',
+                        1 => 'bg-secondary',
+                        2 => 'bg-info',
+                        3 => 'bg-primary',
+                        4 => 'bg-success',
+                        default => 'bg-light'
+                    };
+                @endphp
 
-        <div class="d-flex align-items-center mb-3">
-            <div class="me-3">
-                <div class="rounded-circle {{ $rankColor }} text-white fw-bold d-flex align-items-center justify-content-center"
-                     style="width:42px;height:42px;">
-                    #{{ $index+1 }}
+                <div class="d-flex align-items-center mb-3">
+                    <div class="me-3">
+                        <div class="rounded-circle {{ $rankColor }} text-white fw-bold d-flex align-items-center justify-content-center"
+                            style="width:42px;height:42px;">
+                            #{{ $index+1 }}
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column flex-fill">
+                        <div class="fw-semibold">{{ $c->name }}</div>
+                        <div class="small text-muted">{{ $c->orders_count }} đơn</div>
+
+                        <div class="progress mt-1" style="height:6px;">
+                            <div class="progress-bar bg-success" style="width: {{ $percent }}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="fw-bold text-end ms-3">
+                        {{ number_format($c->total_spent,0,',','.') }} ₫
+                    </div>
                 </div>
-            </div>
-
-            <div class="flex grow">
-                <div class="fw-semibold">{{ $c->name }}</div>
-                <div class="small text-muted">{{ $c->orders_count }} đơn</div>
-
-                <div class="progress mt-1" style="height:6px;">
-                    <div class="progress-bar bg-success" style="width: {{ $percent }}%"></div>
-                </div>
-            </div>
-
-            <div class="fw-bold text-end ms-3">
-                {{ number_format($c->total_spent,0,',','.') }} ₫
+                @endforeach
             </div>
         </div>
-        @endforeach
-    </div>
-</div>
     </div>
 
     <div class="col-lg-5">
