@@ -137,12 +137,13 @@
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ $user->avatar
                                                     ? asset('images/avatars/'.$user->avatar)
-                                                    : asset('images/avatar-default.png') }}"
+                                                    : asset('images/avatars/default.png')}}"
                                                     class="rounded-circle me-2"
                                                     width="40" height="40">
                                                 <div>
                                                     <div class="fw-semibold">{{ $user->name }}</div>
-                                                    <small class="text-muted">{{ ucfirst($user->role) }}</small>
+                                                    <small class="text-muted">{{ ucfirst($user->role->name ?? 'customer') }}</small>
+
                                                 </div>
                                             </div>
                                         </td>

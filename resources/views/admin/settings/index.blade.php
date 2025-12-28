@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title','Thiết lập')
+@php $user = Auth::user(); @endphp
 
 @section('content')
 <div class="container py-4">
@@ -9,6 +10,7 @@
     <div class="row g-4">
 
         {{-- Card 1: Quản lý danh mục món ăn --}}
+        @if($user->hasPermission('manage_menu'))
         <div class="col-md-6 col-lg-3">
             <a href="{{ route('admin.categories.index') }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 rounded-3 hover-scale">
@@ -20,8 +22,10 @@
                 </div>
             </a>
         </div>
+        @endif
 
         {{-- Card 2: Quản lý danh mục bài viết --}}
+        @if($user->hasPermission('manage_posts'))
         <div class="col-md-6 col-lg-3">
             <a href="{{ route('admin.post-categories.index') }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 rounded-3 hover-scale">
@@ -33,8 +37,24 @@
                 </div>
             </a>
         </div>
+        @endif
+
+        @if($user->hasPermission('manage_posts'))
+        <div class="col-md-6 col-lg-3">
+            <a href="{{ route('admin.posts.index') }}" class="text-decoration-none">
+                <div class="card shadow-sm border-0 rounded-3 hover-scale">
+                    <div class="card-body text-center">
+                        <i class='bx bx-file bx-lg mb-3 text-success'></i>
+                        <h5 class="card-title">Bài viết</h5>
+                        <p class="card-text text-muted">Quản lý bài viết, tin tức và thông báo.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endif
 
         {{-- Card 3: Quản lý liên hệ --}}
+        @if($user->hasPermission('manage_contacts'))
         <div class="col-md-6 col-lg-3">
             <a href="{{ route('admin.contacts.index') }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 rounded-3 hover-scale">
@@ -46,8 +66,10 @@
                 </div>
             </a>
         </div>
+        @endif
 
         {{-- Card 4: Giới thiệu --}}
+        @if($user->hasPermission('about_settings'))
         <div class="col-md-6 col-lg-3">
             <a href="{{ route('admin.abouts.index') }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 rounded-3 hover-scale">
@@ -59,6 +81,22 @@
                 </div>
             </a>
         </div>
+        @endif
+
+        @if($user->hasPermission('about_settings'))
+        <div class="col-md-6 col-lg-3">
+            <a href="{{ route('admin.roles.index') }}" class="text-decoration-none">
+                <div class="card shadow-sm border-0 rounded-3 hover-scale">
+                    <div class="card-body text-center">
+                        <i class='bx bx-shield-quarter bx-lg mb-3 text-info'></i>
+                        <h5 class="card-title">Vai trò</h5>
+                        <p class="card-text text-muted">Quản lý vai trò người dùng trong hệ thống.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endif
+
 
     </div>
 </div>

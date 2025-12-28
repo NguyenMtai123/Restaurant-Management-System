@@ -72,9 +72,4 @@ class MenuItem extends Model
         return asset('images/menu/default.png');
     }
 
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
 }

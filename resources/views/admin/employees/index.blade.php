@@ -125,68 +125,83 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($employees as $user)
-                                <tr>
-                                    <!-- Nhân viên -->
-                                    <td class="ps-4">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <img src="{{ $user->avatar
-                                                ? asset('images/avatars/'.$user->avatar)
-                                                : asset('images/avatars/default.png') }}"
-                                                class="rounded-circle"
-                                                width="40" height="40">
+                                @forelse($employees as $user)
+                                    <tr>
+                                        <!-- Nhân viên -->
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <img src="{{ $user->avatar
+                                                    ? asset('images/avatars/'.$user->avatar)
+                                                    : asset('images/avatars/default.png') }}"
+                                                    class="rounded-circle"
+                                                    width="40" height="40">
 
-                                            <div>
-                                                <div class="fw-semibold">{{ $user->name }}</div>
-                                                <small class="text-muted">ID: {{ $user->id }}</small>
+                                                <div>
+                                                    <div class="fw-semibold">{{ $user->name }}</div>
+                                                    <small class="text-muted">ID: {{ $user->id }}</small>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
 
-                                    <!-- Bộ phận -->
-                                    <td>
-                                        <span class="badge bg-secondary">
-                                            {{ $user->role === 'admin' ? 'Quản trị' : 'Nhân viên' }}
-                                        </span>
-                                    </td>
+                                        <!-- Bộ phận -->
+                                        <td>
+                                            <span class="badge bg-secondary">
+                                                {{ $user->role === 'admin' ? 'Quản trị' : 'Nhân viên' }}
+                                            </span>
+                                        </td>
 
-                                    <!-- Liên hệ -->
-                                    <td>
-                                        <div>{{ $user->phone ?? '—' }}</div>
-                                        <small class="text-muted">{{ $user->email }}</small>
-                                    </td>
+                                        <!-- Liên hệ -->
+                                        <td>
+                                            <div>{{ $user->phone ?? '—' }}</div>
+                                            <small class="text-muted">{{ $user->email }}</small>
+                                        </td>
 
-                                    <!-- Ngày vào làm -->
-                                    <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                                        <!-- Ngày vào làm -->
+                                        <td>{{ $user->created_at->format('d/m/Y') }}</td>
 
-                                    <!-- Trạng thái -->
-                                    <td>
-                                        <span class="badge
-                                            @if($user->status=='active') bg-success
-                                            @elseif($user->status=='inactive') bg-warning
-                                            @else bg-danger
-                                            @endif">
-                                            {{ ucfirst($user->status) }}
-                                        </span>
-                                    </td>
+                                        <!-- Trạng thái -->
+                                        <td>
+                                            <span class="badge
+                                                @if($user->status=='active') bg-success
+                                                @elseif($user->status=='inactive') bg-warning
+                                                @else bg-danger
+                                                @endif">
+                                                {{ ucfirst($user->status) }}
+                                            </span>
+                                        </td>
 
-                                    <!-- Hành động -->
-                                    <td class="text-end pe-4">
-                                        <button class="action-btn"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editEmployeeModal-{{ $user->id }}">
-                                            <i class="bx bx-edit"></i>
-                                        </button>
+                                        <!-- Hành động -->
+                                        <td class="text-end pe-4">
+                                            <button class="action-btn"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editEmployeeModal-{{ $user->id }}">
+                                                <i class="bx bx-edit"></i>
+                                            </button>
 
-                                        <button class="action-btn text-danger"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#deleteEmployeeModal-{{ $user->id }}">
-                                            <i class="bx bx-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                            <button class="action-btn text-danger"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteEmployeeModal-{{ $user->id }}">
+                                                <i class="bx bx-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center py-5">
+                                            <h6 class="text-muted mb-1">Không có nhân viên nào</h6>
+                                            <p class="text-muted small mb-3">
+                                                Chưa có nhân viên phù hợp với bộ lọc hiện tại
+                                            </p>
+                                            <button class="btn btn-primary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#addEmployeeModal">
+                                                <i class="bx bx-user-plus"></i> Thêm nhân viên
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
+
                         </table>
 
                     </div>

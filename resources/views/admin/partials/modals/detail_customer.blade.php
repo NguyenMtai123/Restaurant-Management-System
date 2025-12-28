@@ -11,7 +11,7 @@
                             <img id="modalAvatar" src="" class="rounded-circle mb-3" width="100" height="100">
                             <h5 class="fw-bold mb-1" id="modalName"></h5>
                             <span class="badge rounded-pill mb-3" id="modalRank"></span>
-                            <div class="d-grid gap-2 px-3">
+                            <div class="d-grid gap-2 px-3 mt-4">
                                 <button class="btn btn-outline-primary btn-sm"><i class='bx bx-envelope'></i> Gửi Email</button>
                                 <button class="btn btn-outline-success btn-sm"><i class='bx bx-phone'></i> Gọi điện</button>
                             </div>

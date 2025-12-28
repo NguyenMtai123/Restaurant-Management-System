@@ -36,7 +36,7 @@ class AuthApiController extends Controller
             "message" => "Đăng nhập thành công",
             "token" => $token,
             "user" => $user,
-            "role"  => $user->role,
+            "role"  => $user->role->name,
         ], 200);
     }
 

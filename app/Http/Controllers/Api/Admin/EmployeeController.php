@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -11,44 +12,47 @@ use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
-    // Danh sách nhân viên
+    // =======================
+    // DANH SÁCH NHÂN VIÊN
+    // =======================
     public function index(Request $request)
     {
-        $query = User::whereIn('role', ['admin','staff']);
+        $adminId = Role::where('name','admin')->value('id');
+        $staffId = Role::where('name','staff')->value('id');
+
+        $query = User::with('role')
+            ->whereIn('role_id', [$adminId, $staffId]);
 
         if ($request->filled('keyword')) {
             $keyword = $request->keyword;
             $query->where(function ($q) use ($keyword) {
-                $q->where('name', 'like', "%$keyword%")
-                ->orWhere('email', 'like', "%$keyword%")
-                ->orWhere('phone', 'like', "%$keyword%");
+                $q->where('name', 'like', "%{$keyword}%")
+                  ->orWhere('email', 'like', "%{$keyword}%")
+                  ->orWhere('phone', 'like', "%{$keyword}%");
             });
         }
 
         if ($request->filled('role') && $request->role !== 'all') {
-            $query->where('role', $request->role);
+            $roleId = Role::where('name', $request->role)->value('id');
+            $query->where('role_id', $roleId);
         }
 
-        switch ($request->sort) {
-            case 'date_asc':
-                $query->orderBy('created_at', 'asc');
-                break;
-            case 'name_asc':
-                $query->orderBy('name', 'asc');
-                break;
-            case 'name_desc':
-                $query->orderBy('name', 'desc');
-                break;
-            default:
-                $query->orderBy('created_at', 'desc'); // mới nhất
-        }
+        match ($request->get('sort','date_desc')) {
+            'name_asc'  => $query->orderBy('name'),
+            'name_desc' => $query->orderBy('name','desc'),
+            'date_asc'  => $query->orderBy('created_at'),
+            default     => $query->orderBy('created_at','desc'),
+        };
 
         $employees = $query->paginate(5)->withQueryString();
 
-        $totalEmployees    = $employees->total();
-        $activeEmployees   = User::whereIn('role',['admin','staff'])->where('status','active')->count();
-        $inactiveEmployees = User::whereIn('role',['admin','staff'])->where('status','inactive')->count();
-        $bannedEmployees   = User::whereIn('role',['admin','staff'])->where('status','banned')->count();
+        $totalEmployees  = $employees->total();
+        $activeEmployees = User::whereIn('role_id', [$adminId,$staffId])
+                                ->where('status','active')->count();
+        $inactiveEmployees = User::whereIn('role_id', [$adminId,$staffId])
+                                ->where('status','inactive')->count();
+        $bannedEmployees = User::whereIn('role_id', [$adminId,$staffId])
+                                ->where('status','banned')->count();
 
         return view('admin.employees.index', compact(
             'employees',
@@ -59,92 +63,101 @@ class EmployeeController extends Controller
         ));
     }
 
-
-    // Lưu nhân viên mới
+    // =======================
+    // THÊM NHÂN VIÊN
+    // =======================
     public function store(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
+            'name'     => 'required|max:255',
             'email'    => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed',
-            'phone'    => 'nullable|string|max:20',
-            'address'  => 'nullable|string|max:255',
+            'password' => 'required|min:6|confirmed',
+            'phone'    => 'nullable|max:20',
+            'address'  => 'nullable|max:255',
             'role'     => 'required|in:admin,staff',
             'status'   => 'required|in:active,inactive,banned',
-            'avatar'   => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'avatar'   => 'nullable|image|max:2048',
         ]);
 
-        $data = $request->only(['name','email','phone','address','role','status']);
-        $data['password'] = Hash::make($request->password);
+        $roleId = Role::where('name', $request->role)->value('id');
 
-        // Upload avatar nếu có
+        $data = $request->only(['name','email','phone','address','status']);
+        $data['password'] = Hash::make($request->password);
+        $data['role_id']  = $roleId;
+
         if ($request->hasFile('avatar')) {
-            $avatarName = time().'_'.$request->file('avatar')->getClientOriginalName();
-            $request->file('avatar')->move(public_path('images/avatars'), $avatarName);
+            $avatarName = time().'_'.$request->avatar->getClientOriginalName();
+            $request->avatar->move(public_path('images/avatars'), $avatarName);
             $data['avatar'] = $avatarName;
         }
 
         User::create($data);
 
         return redirect()->route('admin.employees.index')
-                         ->with('success','Thêm nhân viên thành công');
+            ->with('success','Thêm nhân viên thành công');
     }
 
-    // Cập nhật nhân viên
+    // =======================
+    // CẬP NHẬT NHÂN VIÊN
+    // =======================
     public function update(Request $request, User $employee)
     {
-        if ( Auth::id() === $employee->id && $employee->role === 'admin' && $request->status !== 'active' ) {
-            return redirect()->route('admin.employees.index')
-                ->with('error', 'Không thể khóa hoặc ngưng hoạt động tài khoản admin hiện tại');
+        if (
+            Auth::id() === $employee->id &&
+            $employee->role->name === 'admin' &&
+            $request->status !== 'active'
+        ) {
+            return back()->with('error','Không thể khóa admin đang đăng nhập');
         }
+
         $request->validate([
-            'name'     => 'required|string|max:255',
+            'name'     => 'required|max:255',
             'email'    => ['required','email', Rule::unique('users')->ignore($employee->id)],
-            'password' => 'nullable|string|min:6|confirmed',
-            'phone'    => 'nullable|string|max:20',
-            'address'  => 'nullable|string|max:255',
+            'password' => 'nullable|min:6|confirmed',
+            'phone'    => 'nullable|max:20',
+            'address'  => 'nullable|max:255',
             'role'     => 'required|in:admin,staff',
             'status'   => 'required|in:active,inactive,banned',
-            'avatar'   => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'avatar'   => 'nullable|image|max:2048',
         ]);
 
-        $data = [
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => $request->password ? Hash::make($request->password) : $employee->password,
-            'phone'    => $request->phone,
-            'address'  => $request->address,
-            'role'     => $request->role,
-            'status'   => $request->status,
-        ];
+        $roleId = Role::where('name',$request->role)->value('id');
 
-        // Upload avatar nếu có
+        $data = $request->only(['name','email','phone','address','status']);
+        $data['role_id'] = $roleId;
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
         if ($request->hasFile('avatar')) {
-            $avatarName = time().'_'.$request->file('avatar')->getClientOriginalName();
-            $request->file('avatar')->move(public_path('images/avatars'), $avatarName);
-            $data['avatar'] = $avatarName;
-
-            if($employee->avatar && file_exists(public_path('images/avatars/'.$employee->avatar))){
+            if ($employee->avatar && file_exists(public_path('images/avatars/'.$employee->avatar))) {
                 @unlink(public_path('images/avatars/'.$employee->avatar));
             }
+
+            $avatarName = time().'_'.$request->avatar->getClientOriginalName();
+            $request->avatar->move(public_path('images/avatars'), $avatarName);
+            $data['avatar'] = $avatarName;
         }
 
         $employee->update($data);
 
         return redirect()->route('admin.employees.index')
-                         ->with('success','Cập nhật nhân viên thành công');
+            ->with('success','Cập nhật nhân viên thành công');
     }
 
-    // Xóa nhân viên
+    // =======================
+    // XÓA NHÂN VIÊN
+    // =======================
     public function destroy(User $employee)
     {
-        // Không xóa admin đang đăng nhập
-        if(auth()->user()->id === $employee->id && $employee->role === 'admin') {
-            return redirect()->route('admin.employees.index')
-                            ->with('error','Không thể xóa admin hiện tại đang đăng nhập');
+        if (
+            auth()->id() === $employee->id &&
+            $employee->role->name === 'admin'
+        ) {
+            return back()->with('error','Không thể xóa admin đang đăng nhập');
         }
 
-        // Xóa avatar nếu tồn tại
         if ($employee->avatar && file_exists(public_path('images/avatars/'.$employee->avatar))) {
             @unlink(public_path('images/avatars/'.$employee->avatar));
         }
@@ -152,8 +165,6 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect()->route('admin.employees.index')
-                        ->with('success','Xóa nhân viên thành công');
+            ->with('success','Xóa nhân viên thành công');
     }
-
-
 }

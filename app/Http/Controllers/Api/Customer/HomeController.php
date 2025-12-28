@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index()
-{
+    {
     $user = Auth::user();
-    if ($user && $user->role === 'admin') {
+    if ($user && $user->role && $user->role->name === 'admin') {
         return redirect()->route('admin.dashboard');
     }
+
 
     $categories = Category::all();
     $menuItems = MenuItem::with(['category', 'images'])

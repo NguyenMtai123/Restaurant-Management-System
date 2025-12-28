@@ -8,53 +8,93 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Categories và Items trước vì item phụ thuộc vào category
+        /**
+         * =========================
+         * 1. RBAC (BẮT BUỘC TRƯỚC)
+         * =========================
+         */
+        $this->call([
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            RolePermissionSeeder::class,
+        ]);
+
+        /**
+         * =========================
+         * 2. USERS (CẦN ROLE)
+         * =========================
+         */
+        $this->call([
+            UsersTableSeeder::class,
+        ]);
+
+        /**
+         * =========================
+         * 3. MENU & CATEGORY
+         * =========================
+         */
         $this->call([
             MenuCategoriesSeeder::class,
             MenuItemsSeeder::class,
             MenuItemImagesSeeder::class,
         ]);
 
-        // 2. Users, Restaurants, Tables
-        $this->call([
-            UsersTableSeeder::class,
-        ]);
-
-        // 4. Cart và CartItem (cần user và menu_items)
+        /**
+         * =========================
+         * 4. CART
+         * =========================
+         */
         $this->call([
             CartsSeeder::class,
             CartItemsSeeder::class,
         ]);
 
-        // 5. Orders và OrderItems (cần user, booking, menu_items)
+        /**
+         * =========================
+         * 5. ORDERS
+         * =========================
+         */
         $this->call([
             OrdersSeeder::class,
             OrderItemsSeeder::class,
         ]);
 
-        // 6. Payments (cần order)
+        /**
+         * =========================
+         * 6. PAYMENTS
+         * =========================
+         */
         $this->call([
             PaymentsSeeder::class,
         ]);
 
-        // 7. Comments (cần user, menu_items, restaurant)
+        /**
+         * =========================
+         * 7. COMMENTS
+         * =========================
+         */
         $this->call([
             CommentsSeeder::class,
         ]);
 
-        $this->call([
-            ActivityLogsSeeder::class
-        ]);
-
+        /**
+         * =========================
+         * 8. POSTS
+         * =========================
+         */
         $this->call([
             PostCategorySeeder::class,
             PostSeeder::class,
         ]);
 
-         $this->call([
+        /**
+         * =========================
+         * 9. ABOUT + CONTACT
+         * =========================
+         */
+        $this->call([
             AboutSeeder::class,
             ContactSeeder::class,
-            FavoriteSeeder::class,
         ]);
     }
 }

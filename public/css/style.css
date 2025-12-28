@@ -428,3 +428,17 @@ body {
         transform: translateY(0);
     }
 }
+.permission-item {
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.permission-item:hover {
+    background: #f8f9fa;
+    border-color: #0d6efd;
+}
+
+.permission-checkbox:checked + span {
+    font-weight: 600;
+    color: #0d6efd;
+}

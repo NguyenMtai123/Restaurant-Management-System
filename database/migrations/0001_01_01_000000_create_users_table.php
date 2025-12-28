@@ -11,6 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();   // admin, staff, accountant...
+            $table->string('label');            // Quản trị, Nhân viên
+            $table->timestamps();
+        });
+
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->id();
+            $table->string('key')->unique();    // view_dashboard
+            $table->string('label');            // Xem dashboard
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,10 +35,17 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();
-            $table->enum('role', ['customer','staff','admin'])->default('customer');
+            $table->foreignId('role_id')->constrained('roles');
             $table->enum('status', ['active','inactive','banned'])->default('active');
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::create('role_permission', function (Blueprint $table) {
+            $table->foreignId('role_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('permission_id')->constrained()->cascadeOnDelete();
+            $table->primary(['role_id','permission_id']);
+            $table->timestamps(); // optional nhưng rất nên có
         });
 
 
@@ -48,7 +70,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('role_permission');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('roles');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
