@@ -254,7 +254,7 @@
                 </div>
             </div>
 
-            <div class="flex-grow-1">
+            <div class="flex grow">
                 <div class="fw-semibold">{{ $c->name }}</div>
                 <div class="small text-muted">{{ $c->orders_count }} đơn</div>
 
