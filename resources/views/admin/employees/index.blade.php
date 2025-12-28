@@ -75,9 +75,14 @@
                             <div class="col-md-3">
                                 <select name="role" class="form-select" onchange="this.form.submit()">
                                     <option value="all">Tất cả bộ phận</option>
-                                    <option value="admin" {{ request('role')=='admin'?'selected':'' }}>Quản trị viên</option>
-                                    <option value="staff" {{ request('role')=='staff'?'selected':'' }}>Nhân viên</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}"
+                                            {{ request('role') == $role->name ? 'selected' : '' }}>
+                                            {{ $role->label }}
+                                        </option>
+                                    @endforeach
                                 </select>
+
                             </div>
 
                             {{-- SORT --}}
@@ -145,8 +150,8 @@
 
                                         <!-- Bộ phận -->
                                         <td>
-                                            <span class="badge bg-secondary">
-                                                {{ $user->role === 'admin' ? 'Quản trị' : 'Nhân viên' }}
+                                           <span class="badge bg-secondary">
+                                                {{ $user->role->label ?? $user->role->name }}
                                             </span>
                                         </td>
 
