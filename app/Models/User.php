@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Favorite;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -23,10 +22,11 @@ class User extends Authenticatable
         'phone',
         'address',
         'avatar',
-        'role',
+        'role_id', // ✅ đúng
         'status',
         'email_verified_at',
     ];
+
 
     /**
      * Các thuộc tính ẩn khi serialize.
@@ -49,19 +49,6 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
-    public function favoriteMenuItems()
-    {
-        return $this->belongsToMany(
-            MenuItem::class,
-            'favorites'
-        )->withTimestamps();
-    }
-
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -72,4 +59,23 @@ class User extends Authenticatable
         return $this->belongsToMany(\App\Models\Coupon::class)
             ->withPivot(['is_used','sent_at','used_at']);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    // Check permission
+    public function hasPermission(string $permissionKey): bool
+    {
+        if (!$this->role) {
+            return false;
+        }
+
+        return $this->role
+            ->permissions()
+            ->where('key', $permissionKey)
+            ->exists();
+    }
+
 }

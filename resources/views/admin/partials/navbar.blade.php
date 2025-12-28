@@ -55,13 +55,11 @@
                 <li><a class="dropdown-item" href="#">Cài đặt</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
-                    <form id="logoutForm" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="dropdown-item text-danger">
-                            Đăng xuất
-                        </button>
-                    </form>
+                    <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        Đăng xuất
+                    </button>
                 </li>
+
             </ul>
         </div>
     </div>

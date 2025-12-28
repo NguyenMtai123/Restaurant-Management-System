@@ -14,29 +14,33 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'phone' => 'nullable|string|max:20',
-            'address' => 'nullable|string|max:255',
-            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
+            'phone' => 'nullable|max:20',
+            'address' => 'nullable|max:255',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $data = $request->only('name','email','phone','address');
 
         if ($request->hasFile('avatar')) {
+
             if ($user->avatar && file_exists(public_path($user->avatar))) {
-                @unlink(public_path($user->avatar));
+                unlink(public_path($user->avatar));
             }
+
             $file = $request->file('avatar');
             $filename = time().'_'.$file->getClientOriginalName();
             $file->move(public_path('images/avatars'), $filename);
-            $data['avatar'] = 'images/avatars/'.$filename;
+
+            $data['avatar'] = $filename;
         }
 
         $user->update($data);
 
-        return redirect()->back()->with('success','Cập nhật hồ sơ thành công');
+        return back()->with('success','Cập nhật hồ sơ thành công');
     }
+
 
     public function password(Request $request)
     {

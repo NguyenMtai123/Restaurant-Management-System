@@ -3,26 +3,31 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
+        $adminRole    = Role::where('name', 'admin')->firstOrFail();
+        $staffRole    = Role::where('name', 'staff')->firstOrFail();
+        $customerRole = Role::where('name', 'customer')->firstOrFail();
+
+        User::insert([
             [
                 'name' => 'Admin User',
                 'email' => 'admin@example.com',
                 'email_verified_at' => now(),
-                'password' => Hash::make('password123'), // password
+                'password' => Hash::make('password123'),
                 'phone' => '0987654321',
                 'address' => '123 Admin Street',
                 'avatar' => null,
-                'role' => 'admin',
+                'role_id' => $adminRole->id,
                 'status' => 'active',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Staff User',
@@ -32,10 +37,10 @@ class UsersTableSeeder extends Seeder
                 'phone' => '0987654322',
                 'address' => '456 Staff Street',
                 'avatar' => null,
-                'role' => 'staff',
+                'role_id' => $staffRole->id,
                 'status' => 'active',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Customer One',
@@ -45,10 +50,10 @@ class UsersTableSeeder extends Seeder
                 'phone' => '0987654323',
                 'address' => '789 Customer Street',
                 'avatar' => null,
-                'role' => 'customer',
+                'role_id' => $customerRole->id,
                 'status' => 'active',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Customer Two',
@@ -58,10 +63,10 @@ class UsersTableSeeder extends Seeder
                 'phone' => '0987654324',
                 'address' => '101 Customer Street',
                 'avatar' => null,
-                'role' => 'customer',
+                'role_id' => $customerRole->id,
                 'status' => 'active',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Customer Three',
@@ -71,10 +76,10 @@ class UsersTableSeeder extends Seeder
                 'phone' => '0987654325',
                 'address' => '202 Customer Street',
                 'avatar' => null,
-                'role' => 'customer',
+                'role_id' => $customerRole->id,
                 'status' => 'active',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
         ]);
     }

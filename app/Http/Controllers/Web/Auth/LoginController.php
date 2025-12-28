@@ -35,11 +35,14 @@ class LoginController extends Controller
         // Đăng nhập thành công, ghi nhớ nếu tick checkbox
         Auth::login($user, $request->filled('remember'));
 
-        return match($user->role) {
+        $role = $user->role->name;
+
+        return match ($role) {
             'admin' => redirect()->route('admin.dashboard'),
-            'staff' => redirect()->route('staff.dashboard'),
+            'staff' => redirect()->route('admin.dashboard'), // staff dùng chung dashboard
             default => redirect()->route('home'),
         };
+
     }
 
     public function logout(Request $request)
