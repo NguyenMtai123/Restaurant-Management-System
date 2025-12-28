@@ -64,8 +64,12 @@
                         <div class="col-md-6">
                             <label class="form-label">Chức vụ</label>
                             <select name="role" class="form-select">
-                                <option value="staff" {{ old('role')=='staff' ? 'selected' : '' }}>Nhân viên</option>
-                                <option value="admin" {{ old('role')=='admin' ? 'selected' : '' }}>Quản lý</option>
+                                @foreach($roles as $role)
+                                    <option value="{{ $role->name }}"
+                                        {{ old('role') == $role->name ? 'selected' : '' }}>
+                                        {{ $role->label }}
+                                    </option>
+                                @endforeach
                             </select>
                             @error('role') <small class="text-danger d-block">{{ $message }}</small> @enderror
                         </div>

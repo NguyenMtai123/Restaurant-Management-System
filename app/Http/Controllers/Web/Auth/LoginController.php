@@ -37,12 +37,11 @@ class LoginController extends Controller
 
         $role = $user->role->name;
 
-        return match ($role) {
-            'admin' => redirect()->route('admin.dashboard'),
-            'staff' => redirect()->route('admin.dashboard'), // staff dùng chung dashboard
-            default => redirect()->route('home'),
-        };
-
+        $roleName = $user->role->name;
+        if ($roleName === 'customer') {
+            return redirect()->route('home');
+        }
+        return redirect()->route('admin.dashboard');
     }
 
     public function logout(Request $request)
