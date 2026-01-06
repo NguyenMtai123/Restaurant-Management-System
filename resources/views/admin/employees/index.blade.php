@@ -56,7 +56,6 @@
             <div class="card border-0 shadow-sm mb-4" style="border-radius:12px;">
                 <div class="card-body p-3">
                      <div class="row g-3 align-items-center">
-                        {{-- FORM FILTER --}}
                         <form method="GET" class="col-md-10 row g-2">{{-- SEARCH --}}
                             <div class="col-md-4">
                                 <div class="input-group">
@@ -71,7 +70,6 @@
                                 </div>
                             </div>
 
-                            {{-- FILTER ROLE --}}
                             <div class="col-md-3">
                                 <select name="role" class="form-select" onchange="this.form.submit()">
                                     <option value="all">Tất cả bộ phận</option>
@@ -85,7 +83,6 @@
 
                             </div>
 
-                            {{-- SORT --}}
                             <div class="col-md-3">
                                 <select name="sort" class="form-select" onchange="this.form.submit()">
                                     <option value="date_desc" {{ request('sort')=='date_desc'?'selected':'' }}>Mới nhất</option>
@@ -95,7 +92,6 @@
                                 </select>
                             </div>
 
-                            {{-- BUTTON --}}
                             <div class="col-md-2 text-start">
                                 <button class="btn btn-primary">
                                     <i class="bx bx-filter"></i> Lọc

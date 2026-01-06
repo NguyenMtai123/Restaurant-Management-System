@@ -16,7 +16,6 @@ class HisOrderController extends Controller
         return view('customer.orders.history', compact('orders'));
     }
 
-    // Trả view partial cho modal
      public function show(Order $order)
     {
         $user = Auth::user();

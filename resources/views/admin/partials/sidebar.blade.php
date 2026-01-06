@@ -46,15 +46,6 @@
         </li>
         @endif
 
-        {{-- @if($user->hasPermission('manage_posts'))
-        <li class="{{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
-            <a href="{{ route('admin.posts.index') }}">
-                <i class='bx bx-news'></i>
-                <span class="link_name">Bài viết</span>
-            </a>
-        </li>
-        @endif --}}
-
         @if($user->hasPermission('view_statistics'))
         <li class="{{ request()->routeIs('admin.statistic') ? 'active' : '' }}">
             <a href="{{ route('admin.statistic') }}">

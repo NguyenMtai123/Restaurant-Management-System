@@ -12,23 +12,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // ======================
-        // ROLE ID
-        // ======================
         $customerRoleId = Role::where('name','customer')->value('id');
 
-        // ======================
         // THỐNG KÊ TỔNG QUAN
-        // ======================
         $totalOrders = Order::where('status','completed')->count();
         $totalRevenue = Order::where('status','completed')->sum('total_amount');
         $pendingOrders = Order::where('status','pending')->count();
 
         $totalCustomers = User::where('role_id',$customerRoleId)->count();
 
-        // ======================
         // DOANH THU TUẦN
-        // ======================
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek   = Carbon::now()->endOfWeek();
 
@@ -41,9 +34,7 @@ class DashboardController extends Controller
                 ->sum('total_amount');
         }
 
-        // ======================
         // DOANH THU THÁNG
-        // ======================
         $startOfMonth = Carbon::now()->startOfMonth();
         $daysInMonth  = $startOfMonth->daysInMonth;
 
@@ -56,9 +47,7 @@ class DashboardController extends Controller
                 ->sum('total_amount');
         }
 
-        // ======================
         // DOANH THU NĂM (THEO THÁNG)
-        // ======================
         $yearlyRevenue = [];
 
         for ($month = 1; $month <= 12; $month++) {
@@ -68,9 +57,7 @@ class DashboardController extends Controller
                 ->sum('total_amount');
         }
 
-        // ======================
         // ĐƠN GẦN ĐÂY
-        // ======================
         $recentOrders = Order::latest()->limit(5)->get();
 
         return view('admin.dashboard', compact(

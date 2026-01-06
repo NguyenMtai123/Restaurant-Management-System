@@ -21,10 +21,6 @@ class ContactCusController extends Controller
         ]);
 
         $contact = Contact::create($request->all());
-
-        // Nếu muốn gửi email thông báo admin
-        // Mail::to('admin@example.com')->send(new ContactNotification($contact));
-
         return response()->json([
             'success' => true,
             'message' => 'Tin nhắn của bạn đã được gửi thành công!'

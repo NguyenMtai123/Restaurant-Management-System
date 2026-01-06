@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="privacy-container">
         <header class="privacy-header">
@@ -32,7 +36,9 @@
                     <i class="fas fa-calendar-alt"></i>
                     <span>Cập nhật lần cuối: 01/01/2024</span>
                 </div>
-                <p>Chào mừng bạn đến với Take Away Express. Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn. Chính sách bảo mật này giải thích cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin của bạn.</p>
+                <p>Chào mừng bạn đến với Take Away Express. Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn. Chính
+                    sách bảo mật này giải thích cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin của bạn.
+                </p>
             </div>
 
             <div class="privacy-sections">
@@ -102,7 +108,8 @@
                             </div>
                             <div class="highlight-content">
                                 <h4>Cam kết của chúng tôi</h4>
-                                <p>Chúng tôi không bán, cho thuê hoặc chia sẻ thông tin cá nhân của bạn với bên thứ ba vì mục đích tiếp thị mà không có sự đồng ý của bạn.</p>
+                                <p>Chúng tôi không bán, cho thuê hoặc chia sẻ thông tin cá nhân của bạn với bên thứ ba
+                                    vì mục đích tiếp thị mà không có sự đồng ý của bạn.</p>
                             </div>
                         </div>
                     </div>
@@ -138,7 +145,8 @@
                                     <i class="fas fa-shield-alt"></i>
                                 </div>
                                 <h4>Bảo vệ quyền lợi</h4>
-                                <p>Để bảo vệ quyền lợi, tài sản hoặc an toàn của Take Away Express, người dùng hoặc công chúng</p>
+                                <p>Để bảo vệ quyền lợi, tài sản hoặc an toàn của Take Away Express, người dùng hoặc công
+                                    chúng</p>
                             </div>
                             <div class="sharing-card">
                                 <div class="sharing-icon">
@@ -164,11 +172,13 @@
                         <div class="security-measures">
                             <div class="measure">
                                 <h4><i class="fas fa-key"></i> Mã hóa dữ liệu</h4>
-                                <p>Sử dụng mã hóa SSL để bảo vệ thông tin truyền tải giữa thiết bị của bạn và máy chủ của chúng tôi.</p>
+                                <p>Sử dụng mã hóa SSL để bảo vệ thông tin truyền tải giữa thiết bị của bạn và máy chủ
+                                    của chúng tôi.</p>
                             </div>
                             <div class="measure">
                                 <h4><i class="fas fa-firewall"></i> Hệ thống bảo vệ</h4>
-                                <p>Triển khai tường lửa, hệ thống phát hiện xâm nhập và các biện pháp bảo mật vật lý.</p>
+                                <p>Triển khai tường lửa, hệ thống phát hiện xâm nhập và các biện pháp bảo mật vật lý.
+                                </p>
                             </div>
                             <div class="measure">
                                 <h4><i class="fas fa-user-shield"></i> Kiểm soát truy cập</h4>
@@ -176,13 +186,15 @@
                             </div>
                             <div class="measure">
                                 <h4><i class="fas fa-sync-alt"></i> Đánh giá định kỳ</h4>
-                                <p>Thường xuyên đánh giá và cập nhật các biện pháp bảo mật để đối phó với các mối đe dọa mới.</p>
+                                <p>Thường xuyên đánh giá và cập nhật các biện pháp bảo mật để đối phó với các mối đe dọa
+                                    mới.</p>
                             </div>
                         </div>
 
                         <div class="warning-note">
                             <i class="fas fa-info-circle"></i>
-                            <p>Mặc dù chúng tôi nỗ lực bảo vệ thông tin của bạn, không có phương pháp truyền tải qua Internet hoặc lưu trữ điện tử nào là 100% an toàn.</p>
+                            <p>Mặc dù chúng tôi nỗ lực bảo vệ thông tin của bạn, không có phương pháp truyền tải qua
+                                Internet hoặc lưu trữ điện tử nào là 100% an toàn.</p>
                         </div>
                     </div>
                 </section>
@@ -298,7 +310,8 @@
                         </div>
 
                         <div class="cookie-info">
-                            <p>Bạn có thể quản lý cài đặt cookie thông qua trình duyệt của mình. Tuy nhiên, việc tắt một số cookie có thể ảnh hưởng đến chức năng của website.</p>
+                            <p>Bạn có thể quản lý cài đặt cookie thông qua trình duyệt của mình. Tuy nhiên, việc tắt một
+                                số cookie có thể ảnh hưởng đến chức năng của website.</p>
                         </div>
                     </div>
                 </section>
@@ -311,7 +324,8 @@
                         <h2>7. Thay Đổi Chính Sách</h2>
                     </div>
                     <div class="section-content">
-                        <p>Chúng tôi có thể cập nhật chính sách bảo mật này theo thời gian. Chúng tôi sẽ thông báo cho bạn về bất kỳ thay đổi quan trọng nào bằng cách:</p>
+                        <p>Chúng tôi có thể cập nhật chính sách bảo mật này theo thời gian. Chúng tôi sẽ thông báo cho
+                            bạn về bất kỳ thay đổi quan trọng nào bằng cách:</p>
 
                         <div class="change-notifications">
                             <div class="notification-method">
@@ -332,7 +346,8 @@
                         </div>
 
                         <div class="policy-continue">
-                            <p>Việc bạn tiếp tục sử dụng dịch vụ của chúng tôi sau khi có thay đổi được coi là chấp nhận các điều khoản cập nhật.</p>
+                            <p>Việc bạn tiếp tục sử dụng dịch vụ của chúng tôi sau khi có thay đổi được coi là chấp nhận
+                                các điều khoản cập nhật.</p>
                         </div>
                     </div>
                 </section>
@@ -393,7 +408,8 @@
                 <div class="acceptance-section">
                     <div class="acceptance-box">
                         <h3><i class="fas fa-file-signature"></i> Xác nhận đã đọc và hiểu</h3>
-                        <p>Bằng cách sử dụng dịch vụ của Take Away Express, bạn xác nhận đã đọc, hiểu và đồng ý với chính sách bảo mật này.</p>
+                        <p>Bằng cách sử dụng dịch vụ của Take Away Express, bạn xác nhận đã đọc, hiểu và đồng ý với
+                            chính sách bảo mật này.</p>
                         <div class="acceptance-actions">
                             <button id="printPolicy" class="btn-action">
                                 <i class="fas fa-print"></i> In chính sách
@@ -429,4 +445,5 @@
 
     <script src="{{ asset('js/privacy-policy.js') }}"></script>
 </body>
+
 </html>

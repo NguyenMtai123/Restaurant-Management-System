@@ -119,17 +119,5 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { alertBox.remove(); }, 3000);
     @endif
 
-    // Preview avatar
-    // document.querySelectorAll('.avatar-input').forEach(input => {
-    //     input.addEventListener('change', function () {
-    //         if (this.files[0]) {
-    //             const reader = new FileReader();
-    //             reader.onload = e => {
-    //                 document.getElementById(this.dataset.preview).src = e.target.result;
-    //             };
-    //             reader.readAsDataURL(this.files[0]);
-    //         }
-    //     });
-    // });
 });
 </script>

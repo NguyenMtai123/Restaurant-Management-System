@@ -52,7 +52,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow border-0 text-small" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Hồ sơ</a></li>
-                <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.settings') }}">Cài đặt</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">

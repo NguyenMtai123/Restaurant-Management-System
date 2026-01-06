@@ -1,7 +1,6 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-content">
-            <!-- Column 1: Logo + Giới thiệu -->
             <div class="footer-column">
                 <div class="footer-logo">
                     <i class="fas fa-utensils"></i>
@@ -20,7 +19,6 @@
 
             </div>
 
-            <!-- Column 2: Liên kết nhanh -->
             <div class="footer-column">
                 <h3>Liên kết nhanh</h3>
                 <ul>
@@ -32,7 +30,6 @@
                 </ul>
             </div>
 
-            <!-- Column 3: Chính sách -->
             <div class="footer-column">
                 <h3>Chính sách</h3>
                 <ul>
@@ -64,7 +61,6 @@
                 </ul>
             </div>
 
-            <!-- Column 4: Tải ứng dụng -->
             <div class="footer-column">
                 <h3>Tải ứng dụng</h3>
                 <p>Tải ứng dụng để đặt hàng dễ dàng hơn và nhận nhiều ưu đãi.</p>

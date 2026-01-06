@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="faq-container">
         <header class="faq-header">
@@ -32,7 +36,8 @@
                     <i class="fas fa-calendar-alt"></i>
                     <span>Cập nhật lần cuối: 01/01/2024</span>
                 </div>
-                <p>Tại đây, bạn sẽ tìm thấy câu trả lời cho những câu hỏi phổ biến nhất về dịch vụ của Take Away Express. Nếu không tìm thấy câu trả lời bạn cần, vui lòng liên hệ với chúng tôi.</p>
+                <p>Tại đây, bạn sẽ tìm thấy câu trả lời cho những câu hỏi phổ biến nhất về dịch vụ của Take Away
+                    Express. Nếu không tìm thấy câu trả lời bạn cần, vui lòng liên hệ với chúng tôi.</p>
 
                 <div class="search-section">
                     <div class="search-box">
@@ -182,7 +187,8 @@
                                     </ol>
                                     <div class="answer-note">
                                         <i class="fas fa-info-circle"></i>
-                                        <span>Bạn có thể đặt hàng trước tối đa 7 ngày trên ứng dụng của chúng tôi.</span>
+                                        <span>Bạn có thể đặt hàng trước tối đa 7 ngày trên ứng dụng của chúng
+                                            tôi.</span>
                                     </div>
                                 </div>
                             </div>
@@ -200,11 +206,15 @@
                                 <div class="faq-answer">
                                     <p>Có, bạn có thể chỉnh sửa đơn hàng trong một khoảng thời gian nhất định:</p>
                                     <ul>
-                                        <li><strong>Trước khi nhà hàng xác nhận:</strong> Bạn có thể chỉnh sửa hoặc hủy đơn hàng bất kỳ lúc nào.</li>
-                                        <li><strong>Sau khi nhà hàng xác nhận:</strong> Bạn có thể chỉnh sửa trong vòng 5 phút sau khi nhận được xác nhận.</li>
-                                        <li><strong>Sau khi nhà hàng bắt đầu chế biến:</strong> Không thể chỉnh sửa đơn hàng. Vui lòng liên hệ hotline nếu có vấn đề khẩn cấp.</li>
+                                        <li><strong>Trước khi nhà hàng xác nhận:</strong> Bạn có thể chỉnh sửa hoặc hủy
+                                            đơn hàng bất kỳ lúc nào.</li>
+                                        <li><strong>Sau khi nhà hàng xác nhận:</strong> Bạn có thể chỉnh sửa trong vòng
+                                            5 phút sau khi nhận được xác nhận.</li>
+                                        <li><strong>Sau khi nhà hàng bắt đầu chế biến:</strong> Không thể chỉnh sửa đơn
+                                            hàng. Vui lòng liên hệ hotline nếu có vấn đề khẩn cấp.</li>
                                     </ul>
-                                    <p>Để chỉnh sửa đơn hàng, truy cập mục "Đơn hàng của tôi" trên ứng dụng/website và chọn "Chỉnh sửa".</p>
+                                    <p>Để chỉnh sửa đơn hàng, truy cập mục "Đơn hàng của tôi" trên ứng dụng/website và
+                                        chọn "Chỉnh sửa".</p>
                                 </div>
                             </div>
 
@@ -221,14 +231,17 @@
                                 <div class="faq-answer">
                                     <p>Bạn có thể dễ dàng đặt hàng cho người khác bằng cách:</p>
                                     <ol>
-                                        <li>Trong quá trình đặt hàng, ở bước "Thông tin giao hàng", chọn "Giao đến địa chỉ khác"</li>
+                                        <li>Trong quá trình đặt hàng, ở bước "Thông tin giao hàng", chọn "Giao đến địa
+                                            chỉ khác"</li>
                                         <li>Nhập thông tin người nhận: tên, số điện thoại, địa chỉ giao hàng</li>
-                                        <li>Thêm ghi chú đặc biệt nếu cần (ví dụ: đây là quà tặng, giao hàng kín đáo)</li>
+                                        <li>Thêm ghi chú đặc biệt nếu cần (ví dụ: đây là quà tặng, giao hàng kín đáo)
+                                        </li>
                                         <li>Tiếp tục các bước thanh toán như bình thường</li>
                                     </ol>
                                     <div class="answer-note">
                                         <i class="fas fa-lightbulb"></i>
-                                        <span>Bạn có thể lưu địa chỉ giao hàng cho người khác để sử dụng cho những lần đặt hàng sau.</span>
+                                        <span>Bạn có thể lưu địa chỉ giao hàng cho người khác để sử dụng cho những lần
+                                            đặt hàng sau.</span>
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +272,8 @@
                                             <div class="table-cell">100.000đ</div>
                                         </div>
                                     </div>
-                                    <p>Đơn hàng tối thiểu sẽ được hiển thị rõ ràng khi bạn chọn nhà hàng và địa chỉ giao hàng. Một số nhà hàng đối tác có thể có chính sách đơn tối thiểu riêng.</p>
+                                    <p>Đơn hàng tối thiểu sẽ được hiển thị rõ ràng khi bạn chọn nhà hàng và địa chỉ giao
+                                        hàng. Một số nhà hàng đối tác có thể có chính sách đơn tối thiểu riêng.</p>
                                 </div>
                             </div>
                         </div>
@@ -285,15 +299,21 @@
                                 <div class="faq-answer">
                                     <p>Thời gian giao hàng phụ thuộc vào nhiều yếu tố:</p>
                                     <ul>
-                                        <li><strong>Khoảng cách:</strong> 30-45 phút cho khu vực trung tâm, 45-60 phút cho khu vực ngoại thành</li>
-                                        <li><strong>Thời điểm đặt hàng:</strong> Giờ cao điểm có thể lâu hơn 15-20 phút</li>
-                                        <li><strong>Độ phức tạp của đơn hàng:</strong> Đơn hàng nhiều món hoặc món đặc biệt cần thêm thời gian chế biến</li>
-                                        <li><strong>Thời tiết và giao thông:</strong> Ảnh hưởng đến tốc độ di chuyển của tài xế</li>
+                                        <li><strong>Khoảng cách:</strong> 30-45 phút cho khu vực trung tâm, 45-60 phút
+                                            cho khu vực ngoại thành</li>
+                                        <li><strong>Thời điểm đặt hàng:</strong> Giờ cao điểm có thể lâu hơn 15-20 phút
+                                        </li>
+                                        <li><strong>Độ phức tạp của đơn hàng:</strong> Đơn hàng nhiều món hoặc món đặc
+                                            biệt cần thêm thời gian chế biến</li>
+                                        <li><strong>Thời tiết và giao thông:</strong> Ảnh hưởng đến tốc độ di chuyển của
+                                            tài xế</li>
                                     </ul>
-                                    <p>Khi đặt hàng, hệ thống sẽ hiển thị thời gian giao hàng dự kiến chính xác cho đơn hàng của bạn.</p>
+                                    <p>Khi đặt hàng, hệ thống sẽ hiển thị thời gian giao hàng dự kiến chính xác cho đơn
+                                        hàng của bạn.</p>
                                     <div class="answer-note">
                                         <i class="fas fa-clock"></i>
-                                        <span>Bạn có thể theo dõi trạng thái đơn hàng và vị trí tài xế thời gian thực trên ứng dụng.</span>
+                                        <span>Bạn có thể theo dõi trạng thái đơn hàng và vị trí tài xế thời gian thực
+                                            trên ứng dụng.</span>
                                     </div>
                                 </div>
                             </div>
@@ -333,7 +353,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <p>Chúng tôi đang mở rộng phạm vi phục vụ. Để kiểm tra chính xác khu vực của bạn, vui lòng sử dụng công cụ kiểm tra trên website hoặc liên hệ hotline.</p>
+                                    <p>Chúng tôi đang mở rộng phạm vi phục vụ. Để kiểm tra chính xác khu vực của bạn,
+                                        vui lòng sử dụng công cụ kiểm tra trên website hoặc liên hệ hotline.</p>
                                 </div>
                             </div>
 
@@ -356,7 +377,8 @@
                                             </div>
                                             <div class="method-content">
                                                 <h5>Ứng dụng di động</h5>
-                                                <p>Theo dõi trực tiếp trên ứng dụng Take Away Express với bản đồ thời gian thực, hiển thị vị trí tài xế và thời gian đến ước tính.</p>
+                                                <p>Theo dõi trực tiếp trên ứng dụng Take Away Express với bản đồ thời
+                                                    gian thực, hiển thị vị trí tài xế và thời gian đến ước tính.</p>
                                             </div>
                                         </div>
                                         <div class="method">
@@ -365,7 +387,8 @@
                                             </div>
                                             <div class="method-content">
                                                 <h5>Tin nhắn SMS/Email</h5>
-                                                <p>Nhận cập nhật tự động qua SMS và email về trạng thái đơn hàng: xác nhận, đang chế biến, đang giao, đã giao.</p>
+                                                <p>Nhận cập nhật tự động qua SMS và email về trạng thái đơn hàng: xác
+                                                    nhận, đang chế biến, đang giao, đã giao.</p>
                                             </div>
                                         </div>
                                         <div class="method">
@@ -374,7 +397,8 @@
                                             </div>
                                             <div class="method-content">
                                                 <h5>Website</h5>
-                                                <p>Truy cập mục "Theo dõi đơn hàng" trên website, nhập mã đơn hàng để xem trạng thái cập nhật.</p>
+                                                <p>Truy cập mục "Theo dõi đơn hàng" trên website, nhập mã đơn hàng để
+                                                    xem trạng thái cập nhật.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -394,13 +418,18 @@
                                 <div class="faq-answer">
                                     <p>Có, bạn có thể thay đổi địa chỉ giao hàng trong một số trường hợp:</p>
                                     <ul>
-                                        <li><strong>Trước khi nhà hàng xác nhận:</strong> Thay đổi trực tiếp trên ứng dụng/website</li>
-                                        <li><strong>Sau khi nhà hàng xác nhận nhưng chưa chế biến:</strong> Liên hệ hotline để được hỗ trợ thay đổi</li>
-                                        <li><strong>Sau khi nhà hàng bắt đầu chế biến:</strong> Không thể thay đổi địa chỉ. Nếu cần thiết, vui lòng hủy đơn và đặt lại (có thể áp dụng phí hủy)</li>
+                                        <li><strong>Trước khi nhà hàng xác nhận:</strong> Thay đổi trực tiếp trên ứng
+                                            dụng/website</li>
+                                        <li><strong>Sau khi nhà hàng xác nhận nhưng chưa chế biến:</strong> Liên hệ
+                                            hotline để được hỗ trợ thay đổi</li>
+                                        <li><strong>Sau khi nhà hàng bắt đầu chế biến:</strong> Không thể thay đổi địa
+                                            chỉ. Nếu cần thiết, vui lòng hủy đơn và đặt lại (có thể áp dụng phí hủy)
+                                        </li>
                                     </ul>
                                     <div class="answer-note warning">
                                         <i class="fas fa-exclamation-triangle"></i>
-                                        <span>Thay đổi địa chỉ giao hàng có thể ảnh hưởng đến thời gian giao hàng và phí vận chuyển.</span>
+                                        <span>Thay đổi địa chỉ giao hàng có thể ảnh hưởng đến thời gian giao hàng và phí
+                                            vận chuyển.</span>
                                     </div>
                                 </div>
                             </div>
@@ -473,7 +502,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p>Một số phương thức thanh toán có thể không khả dụng với một số nhà hàng đối tác. Phương thức thanh toán sẽ được hiển thị rõ ràng trong quá trình đặt hàng.</p>
+                                    <p>Một số phương thức thanh toán có thể không khả dụng với một số nhà hàng đối tác.
+                                        Phương thức thanh toán sẽ được hiển thị rõ ràng trong quá trình đặt hàng.</p>
                                 </div>
                             </div>
 
@@ -488,11 +518,15 @@
                                     </button>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>Hiện tại, Take Away Express chỉ chấp nhận thanh toán bằng Đồng Việt Nam (VND).</p>
-                                    <p>Nếu bạn sử dụng thẻ tín dụng/quốc tế, ngân hàng của bạn sẽ tự động chuyển đổi ngoại tệ sang VND theo tỷ giá của ngân hàng. Phí chuyển đổi ngoại tệ (nếu có) sẽ do ngân hàng phát hành thẻ quy định.</p>
+                                    <p>Hiện tại, Take Away Express chỉ chấp nhận thanh toán bằng Đồng Việt Nam (VND).
+                                    </p>
+                                    <p>Nếu bạn sử dụng thẻ tín dụng/quốc tế, ngân hàng của bạn sẽ tự động chuyển đổi
+                                        ngoại tệ sang VND theo tỷ giá của ngân hàng. Phí chuyển đổi ngoại tệ (nếu có) sẽ
+                                        do ngân hàng phát hành thẻ quy định.</p>
                                     <div class="answer-note">
                                         <i class="fas fa-info-circle"></i>
-                                        <span>Đối với thẻ quốc tế, vui lòng kiểm tra với ngân hàng phát hành thẻ về phí chuyển đổi ngoại tệ và các hạn chế giao dịch quốc tế.</span>
+                                        <span>Đối với thẻ quốc tế, vui lòng kiểm tra với ngân hàng phát hành thẻ về phí
+                                            chuyển đổi ngoại tệ và các hạn chế giao dịch quốc tế.</span>
                                     </div>
                                 </div>
                             </div>
@@ -517,9 +551,12 @@
                                     </ol>
                                     <div class="answer-note">
                                         <i class="fas fa-exclamation-circle"></i>
-                                        <span>Mỗi mã giảm giá/voucher có điều kiện sử dụng riêng (đơn hàng tối thiểu, áp dụng cho nhà hàng cụ thể, thời hạn sử dụng). Vui lòng kiểm tra kỹ điều kiện trước khi sử dụng.</span>
+                                        <span>Mỗi mã giảm giá/voucher có điều kiện sử dụng riêng (đơn hàng tối thiểu, áp
+                                            dụng cho nhà hàng cụ thể, thời hạn sử dụng). Vui lòng kiểm tra kỹ điều kiện
+                                            trước khi sử dụng.</span>
                                     </div>
-                                    <p>Nếu gặp vấn đề khi áp dụng mã, vui lòng liên hệ hotline hỗ trợ với mã voucher và mã đơn hàng để được hỗ trợ.</p>
+                                    <p>Nếu gặp vấn đề khi áp dụng mã, vui lòng liên hệ hotline hỗ trợ với mã voucher và
+                                        mã đơn hàng để được hỗ trợ.</p>
                                 </div>
                             </div>
 
@@ -604,7 +641,8 @@
                                     </ol>
                                     <div class="answer-note">
                                         <i class="fas fa-gift"></i>
-                                        <span>Khi đăng ký tài khoản mới, bạn sẽ nhận được voucher 50.000đ cho đơn hàng đầu tiên.</span>
+                                        <span>Khi đăng ký tài khoản mới, bạn sẽ nhận được voucher 50.000đ cho đơn hàng
+                                            đầu tiên.</span>
                                     </div>
                                 </div>
                             </div>
@@ -632,7 +670,8 @@
                                     </ol>
                                     <div class="answer-note warning">
                                         <i class="fas fa-exclamation-triangle"></i>
-                                        <span>Nếu không nhận được mã OTP, vui lòng kiểm tra hộp thư spam hoặc liên hệ hotline để được hỗ trợ.</span>
+                                        <span>Nếu không nhận được mã OTP, vui lòng kiểm tra hộp thư spam hoặc liên hệ
+                                            hotline để được hỗ trợ.</span>
                                     </div>
                                 </div>
                             </div>
@@ -656,14 +695,18 @@
                                         <li>Cập nhật các thông tin cần thay đổi:
                                             <ul>
                                                 <li><strong>Thông tin cơ bản:</strong> Tên, ngày sinh, giới tính</li>
-                                                <li><strong>Liên hệ:</strong> Số điện thoại, email (cần xác minh OTP)</li>
-                                                <li><strong>Địa chỉ:</strong> Thêm, chỉnh sửa hoặc xóa địa chỉ giao hàng</li>
-                                                <li><strong>Bảo mật:</strong> Thay đổi mật khẩu, cài đặt xác thực 2 lớp</li>
+                                                <li><strong>Liên hệ:</strong> Số điện thoại, email (cần xác minh OTP)
+                                                </li>
+                                                <li><strong>Địa chỉ:</strong> Thêm, chỉnh sửa hoặc xóa địa chỉ giao hàng
+                                                </li>
+                                                <li><strong>Bảo mật:</strong> Thay đổi mật khẩu, cài đặt xác thực 2 lớp
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>Nhấn "Lưu thay đổi"</li>
                                     </ol>
-                                    <p>Một số thông tin như số điện thoại và email chính cần xác minh OTP để đảm bảo bảo mật.</p>
+                                    <p>Một số thông tin như số điện thoại và email chính cần xác minh OTP để đảm bảo bảo
+                                        mật.</p>
                                 </div>
                             </div>
 
@@ -695,9 +738,13 @@
                                     </ol>
                                     <div class="answer-note warning">
                                         <i class="fas fa-exclamation-triangle"></i>
-                                        <span>Quá trình xóa tài khoản có thể mất đến 30 ngày để hoàn tất. Trong thời gian này, bạn có thể hủy yêu cầu bằng cách liên hệ bộ phận hỗ trợ.</span>
+                                        <span>Quá trình xóa tài khoản có thể mất đến 30 ngày để hoàn tất. Trong thời
+                                            gian này, bạn có thể hủy yêu cầu bằng cách liên hệ bộ phận hỗ trợ.</span>
                                     </div>
-                                    <p>Nếu gặp khó khăn trong việc xóa tài khoản, vui lòng liên hệ hotline hoặc gửi email đến <a href="mailto:support@takeawayexpress.vn">support@takeawayexpress.vn</a> với tiêu đề "Yêu cầu xóa tài khoản".</p>
+                                    <p>Nếu gặp khó khăn trong việc xóa tài khoản, vui lòng liên hệ hotline hoặc gửi
+                                        email đến <a
+                                            href="mailto:support@takeawayexpress.vn">support@takeawayexpress.vn</a> với
+                                        tiêu đề "Yêu cầu xóa tài khoản".</p>
                                 </div>
                             </div>
                         </div>
@@ -747,7 +794,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <p><strong>Lưu ý quan trọng:</strong> Yêu cầu hoàn tiền cần được gửi trong vòng 30 phút sau khi nhận hàng và có đầy đủ bằng chứng (hình ảnh, video).</p>
+                                    <p><strong>Lưu ý quan trọng:</strong> Yêu cầu hoàn tiền cần được gửi trong vòng 30
+                                        phút sau khi nhận hàng và có đầy đủ bằng chứng (hình ảnh, video).</p>
                                 </div>
                             </div>
 
@@ -764,16 +812,23 @@
                                 <div class="faq-answer">
                                     <p>Để yêu cầu hoàn tiền, thực hiện theo các bước sau:</p>
                                     <ol>
-                                        <li><strong>Báo cáo ngay lập tức:</strong> Liên hệ hotline hoặc chat trực tuyến trong vòng 30 phút sau khi nhận hàng</li>
+                                        <li><strong>Báo cáo ngay lập tức:</strong> Liên hệ hotline hoặc chat trực tuyến
+                                            trong vòng 30 phút sau khi nhận hàng</li>
                                         <li><strong>Cung cấp thông tin:</strong> Mã đơn hàng, mô tả vấn đề gặp phải</li>
-                                        <li><strong>Cung cấp bằng chứng:</strong> Chụp ảnh/video rõ ràng về sản phẩm và vấn đề</li>
-                                        <li><strong>Chờ xác minh:</strong> Đội ngũ hỗ trợ sẽ xem xét và liên hệ lại trong 1 giờ làm việc</li>
-                                        <li><strong>Nhận giải pháp:</strong> Nhận đề xuất giải pháp: giao lại, hoàn tiền, voucher bồi thường</li>
-                                        <li><strong>Nhận hoàn tiền:</strong> Nếu được chấp thuận, tiền sẽ được hoàn trong 1-10 ngày tùy phương thức thanh toán</li>
+                                        <li><strong>Cung cấp bằng chứng:</strong> Chụp ảnh/video rõ ràng về sản phẩm và
+                                            vấn đề</li>
+                                        <li><strong>Chờ xác minh:</strong> Đội ngũ hỗ trợ sẽ xem xét và liên hệ lại
+                                            trong 1 giờ làm việc</li>
+                                        <li><strong>Nhận giải pháp:</strong> Nhận đề xuất giải pháp: giao lại, hoàn
+                                            tiền, voucher bồi thường</li>
+                                        <li><strong>Nhận hoàn tiền:</strong> Nếu được chấp thuận, tiền sẽ được hoàn
+                                            trong 1-10 ngày tùy phương thức thanh toán</li>
                                     </ol>
                                     <div class="answer-note">
                                         <i class="fas fa-info-circle"></i>
-                                        <span>Bạn cũng có thể gửi yêu cầu hoàn tiền qua email đến <a href="mailto:refund@takeawayexpress.vn">refund@takeawayexpress.vn</a> với đầy đủ thông tin và bằng chứng.</span>
+                                        <span>Bạn cũng có thể gửi yêu cầu hoàn tiền qua email đến <a
+                                                href="mailto:refund@takeawayexpress.vn">refund@takeawayexpress.vn</a>
+                                            với đầy đủ thông tin và bằng chứng.</span>
                                     </div>
                                 </div>
                             </div>
@@ -822,7 +877,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p>Thời gian trên là ước tính và có thể thay đổi tùy thuộc vào ngân hàng, nhà cung cấp dịch vụ thanh toán. Bạn sẽ nhận được email/SMS xác nhận khi hoàn tiền thành công.</p>
+                                    <p>Thời gian trên là ước tính và có thể thay đổi tùy thuộc vào ngân hàng, nhà cung
+                                        cấp dịch vụ thanh toán. Bạn sẽ nhận được email/SMS xác nhận khi hoàn tiền thành
+                                        công.</p>
                                 </div>
                             </div>
 
@@ -837,7 +894,8 @@
                                     </button>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>Nếu bạn thanh toán bằng tiền mặt (COD), chúng tôi sẽ hoàn tiền qua một trong các phương thức sau:</p>
+                                    <p>Nếu bạn thanh toán bằng tiền mặt (COD), chúng tôi sẽ hoàn tiền qua một trong các
+                                        phương thức sau:</p>
                                     <div class="cash-refund-methods">
                                         <div class="method">
                                             <div class="method-icon">
@@ -845,7 +903,8 @@
                                             </div>
                                             <div class="method-content">
                                                 <h5>Chuyển khoản ngân hàng</h5>
-                                                <p>Cung cấp thông tin tài khoản ngân hàng: số tài khoản, tên ngân hàng, tên chủ tài khoản.</p>
+                                                <p>Cung cấp thông tin tài khoản ngân hàng: số tài khoản, tên ngân hàng,
+                                                    tên chủ tài khoản.</p>
                                             </div>
                                         </div>
                                         <div class="method">
@@ -863,7 +922,8 @@
                                             </div>
                                             <div class="method-content">
                                                 <h5>Take Away Wallet</h5>
-                                                <p>Nhận tiền hoàn vào ví Take Away để sử dụng cho đơn hàng tiếp theo (khuyến khích).</p>
+                                                <p>Nhận tiền hoàn vào ví Take Away để sử dụng cho đơn hàng tiếp theo
+                                                    (khuyến khích).</p>
                                             </div>
                                         </div>
                                     </div>
@@ -876,7 +936,8 @@
                                     </ol>
                                     <div class="answer-note">
                                         <i class="fas fa-lightbulb"></i>
-                                        <span>Chúng tôi khuyến khích chọn nhận voucher Take Away có giá trị cao hơn 10-20% so với số tiền hoàn.</span>
+                                        <span>Chúng tôi khuyến khích chọn nhận voucher Take Away có giá trị cao hơn
+                                            10-20% so với số tiền hoàn.</span>
                                     </div>
                                 </div>
                             </div>
@@ -921,7 +982,8 @@
                                             <div class="step-number">3</div>
                                             <div class="step-content">
                                                 <h5>Cập nhật ứng dụng</h5>
-                                                <p>Kiểm tra và cập nhật phiên bản mới nhất trên App Store/Google Play.</p>
+                                                <p>Kiểm tra và cập nhật phiên bản mới nhất trên App Store/Google Play.
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="step">
@@ -946,7 +1008,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p>Nếu vẫn gặp vấn đề, vui lòng liên hệ bộ phận hỗ trợ kỹ thuật qua hotline hoặc email <a href="mailto:techsupport@takeawayexpress.vn">techsupport@takeawayexpress.vn</a> với thông tin: loại thiết bị, hệ điều hành, phiên bản ứng dụng, mô tả chi tiết lỗi.</p>
+                                    <p>Nếu vẫn gặp vấn đề, vui lòng liên hệ bộ phận hỗ trợ kỹ thuật qua hotline hoặc
+                                        email <a
+                                            href="mailto:techsupport@takeawayexpress.vn">techsupport@takeawayexpress.vn</a>
+                                        với thông tin: loại thiết bị, hệ điều hành, phiên bản ứng dụng, mô tả chi tiết
+                                        lỗi.</p>
                                 </div>
                             </div>
 
@@ -999,7 +1065,8 @@
                                     </ol>
                                     <div class="answer-note">
                                         <i class="fas fa-info-circle"></i>
-                                        <span>Mã OTP có hiệu lực trong 5 phút. Nếu hết hạn, bạn cần yêu cầu mã mới.</span>
+                                        <span>Mã OTP có hiệu lực trong 5 phút. Nếu hết hạn, bạn cần yêu cầu mã
+                                            mới.</span>
                                     </div>
                                 </div>
                             </div>
@@ -1045,15 +1112,21 @@
                                     </div>
                                     <p><strong>Cách khắc phục:</strong></p>
                                     <ol>
-                                        <li><strong>Kiểm tra kết nối internet:</strong> Thử truy cập website khác để xác định lỗi</li>
+                                        <li><strong>Kiểm tra kết nối internet:</strong> Thử truy cập website khác để xác
+                                            định lỗi</li>
                                         <li><strong>Làm mới trang (F5):</strong> Nhấn F5 hoặc nút refresh</li>
-                                        <li><strong>Xóa cache và cookie:</strong> Vào cài đặt trình duyệt > Xóa dữ liệu duyệt web</li>
+                                        <li><strong>Xóa cache và cookie:</strong> Vào cài đặt trình duyệt > Xóa dữ liệu
+                                            duyệt web</li>
                                         <li><strong>Thử trình duyệt khác:</strong> Chrome, Firefox, Safari, Edge</li>
-                                        <li><strong>Tắt tiện ích mở rộng:</strong> Tạm thời tắt ad-blocker và các tiện ích khác</li>
-                                        <li><strong>Kiểm tra thời gian:</strong> Đảm bảo ngày giờ trên máy tính chính xác</li>
+                                        <li><strong>Tắt tiện ích mở rộng:</strong> Tạm thời tắt ad-blocker và các tiện
+                                            ích khác</li>
+                                        <li><strong>Kiểm tra thời gian:</strong> Đảm bảo ngày giờ trên máy tính chính
+                                            xác</li>
                                         <li><strong>Thử lại sau:</strong> Chờ 15-30 phút và thử lại</li>
                                     </ol>
-                                    <p>Nếu website vẫn không hoạt động, có thể chúng tôi đang bảo trì hệ thống. Vui lòng theo dõi thông báo trên trang Facebook chính thức hoặc sử dụng ứng dụng di động thay thế.</p>
+                                    <p>Nếu website vẫn không hoạt động, có thể chúng tôi đang bảo trì hệ thống. Vui lòng
+                                        theo dõi thông báo trên trang Facebook chính thức hoặc sử dụng ứng dụng di động
+                                        thay thế.</p>
                                 </div>
                             </div>
 
@@ -1068,15 +1141,20 @@
                                     </button>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>Để báo cáo lỗi kỹ thuật, vui lòng cung cấp càng nhiều thông tin chi tiết càng tốt:</p>
+                                    <p>Để báo cáo lỗi kỹ thuật, vui lòng cung cấp càng nhiều thông tin chi tiết càng
+                                        tốt:</p>
                                     <div class="bug-report-form">
                                         <h5>Thông tin cần cung cấp:</h5>
                                         <ul>
-                                            <li><strong>Mô tả lỗi:</strong> Chuyện gì xảy ra? Bạn đang làm gì khi lỗi xuất hiện?</li>
+                                            <li><strong>Mô tả lỗi:</strong> Chuyện gì xảy ra? Bạn đang làm gì khi lỗi
+                                                xuất hiện?</li>
                                             <li><strong>Thiết bị:</strong> Điện thoại/tablet/máy tính (hãng, model)</li>
-                                            <li><strong>Hệ điều hành:</strong> iOS/Android/Windows/macOS (phiên bản)</li>
-                                            <li><strong>Phiên bản ứng dụng:</strong> Số phiên bản (tìm trong Cài đặt > Giới thiệu)</li>
-                                            <li><strong>Trình duyệt:</strong> Chrome/Firefox/Safari/Edge (phiên bản, nếu dùng website)</li>
+                                            <li><strong>Hệ điều hành:</strong> iOS/Android/Windows/macOS (phiên bản)
+                                            </li>
+                                            <li><strong>Phiên bản ứng dụng:</strong> Số phiên bản (tìm trong Cài đặt >
+                                                Giới thiệu)</li>
+                                            <li><strong>Trình duyệt:</strong> Chrome/Firefox/Safari/Edge (phiên bản, nếu
+                                                dùng website)</li>
                                             <li><strong>Ảnh chụp màn hình/video:</strong> Ghi lại lỗi nếu có thể</li>
                                             <li><strong>Mã lỗi:</strong> Nếu có thông báo lỗi cụ thể</li>
                                             <li><strong>Thời gian xảy ra lỗi:</strong> Ngày, giờ chính xác</li>
@@ -1090,7 +1168,9 @@
                                             </div>
                                             <div class="method-content">
                                                 <h5>Email</h5>
-                                                <p>Gửi đến <a href="mailto:bugs@takeawayexpress.vn">bugs@takeawayexpress.vn</a> với tiêu đề "[Báo lỗi] - [Mô tả ngắn]"</p>
+                                                <p>Gửi đến <a
+                                                        href="mailto:bugs@takeawayexpress.vn">bugs@takeawayexpress.vn</a>
+                                                    với tiêu đề "[Báo lỗi] - [Mô tả ngắn]"</p>
                                             </div>
                                         </div>
                                         <div class="method">
@@ -1114,7 +1194,8 @@
                                     </div>
                                     <div class="answer-note">
                                         <i class="fas fa-lightbulb"></i>
-                                        <span>Báo cáo lỗi chi tiết giúp chúng tôi khắc phục nhanh hơn. Bạn có thể nhận được voucher cảm ơn khi báo cáo lỗi nghiêm trọng.</span>
+                                        <span>Báo cáo lỗi chi tiết giúp chúng tôi khắc phục nhanh hơn. Bạn có thể nhận
+                                            được voucher cảm ơn khi báo cáo lỗi nghiêm trọng.</span>
                                     </div>
                                 </div>
                             </div>
@@ -1184,8 +1265,10 @@
                 <div class="quick-nav">
                     <h4>Chính sách liên quan:</h4>
                     <div class="nav-links">
-                        <a href="{{ route('policy.shipping') }}"><i class="fas fa-shipping-fast"></i> Chính sách giao hàng</a>
-                        <a href="{{ route('policy.refund') }}"><i class="fas fa-money-bill-wave"></i> Chính sách hoàn tiền</a>
+                        <a href="{{ route('policy.shipping') }}"><i class="fas fa-shipping-fast"></i> Chính sách giao
+                            hàng</a>
+                        <a href="{{ route('policy.refund') }}"><i class="fas fa-money-bill-wave"></i> Chính sách hoàn
+                            tiền</a>
                         <a href="/"><i class="fas fa-home"></i> Trang chủ</a>
                     </div>
                 </div>
@@ -1195,7 +1278,8 @@
                         <i class="fas fa-bullhorn"></i>
                         <div>
                             <h4>Cập nhật FAQ</h4>
-                            <p>Trang FAQ được cập nhật thường xuyên với các câu hỏi mới nhất từ khách hàng. Hãy quay lại thường xuyên để xem cập nhật.</p>
+                            <p>Trang FAQ được cập nhật thường xuyên với các câu hỏi mới nhất từ khách hàng. Hãy quay lại
+                                thường xuyên để xem cập nhật.</p>
                         </div>
                     </div>
                 </div>
@@ -1210,4 +1294,5 @@
 
     <script src="{{ asset('js/faq.js') }}"></script>
 </body>
+
 </html>

@@ -47,6 +47,136 @@ input[type="date"]:focus {
     margin-right: 10px;
 }
 
-.rank-1 { background: #f1c40f; color: #fff; box-shadow: 0 2px 5px rgba(241, 196, 15, 0.4); }
-.rank-2 { background: #95a5a6; color: #fff; }
-.rank-3 { background: #d35400; color: #fff; }
+.rank-1 {
+    background: #f1c40f;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(241, 196, 15, 0.4);
+}
+.rank-2 {
+    background: #95a5a6;
+    color: #fff;
+}
+.rank-3 {
+    background: #d35400;
+    color: #fff;
+}
+
+/* nhỏ gọn: style cho dashboard */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 992px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.stats-card {
+    background: linear-gradient(180deg, #fff, #fbfbfd);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.stats-content h6 {
+    margin: 0;
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.stats-content h3 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.stats-icon {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.bg-icon-primary {
+    background: linear-gradient(135deg, #ff7a3d, #ff6b35);
+}
+
+.bg-icon-warning {
+    background: linear-gradient(135deg, #f6c343, #f59e0b);
+}
+
+.bg-icon-success {
+    background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+.bg-icon-danger {
+    background: linear-gradient(135deg, #fb7185, #ef4444);
+}
+
+.card-compare {
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    padding: 1rem;
+    background: #fff;
+}
+
+.delta {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.delta.up {
+    color: #10b981;
+}
+
+.delta.down {
+    color: #ef4444;
+}
+
+.small-muted {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.chart-toolbar {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.toggle-group .btn {
+    border-radius: 999px;
+    padding: 0.45rem 0.8rem;
+}
+
+.sparkline {
+    height: 34px;
+    width: 120px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* table image */
+.top-product-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* responsive tweaks */
+@media (max-width: 768px) {
+    .chart-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}

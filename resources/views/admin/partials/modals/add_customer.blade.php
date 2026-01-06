@@ -96,7 +96,6 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Nếu có lỗi validation → mở modal
     @if($errors->any())
         var addModal = new bootstrap.Modal(document.getElementById('addCustomerModal'));
         addModal.show();
@@ -110,17 +109,5 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { alertBox.remove(); }, 3000);
     @endif
 
-    // // Preview avatar
-    // document.querySelectorAll('.avatar-input').forEach(input => {
-    //     input.addEventListener('change', function () {
-    //         if (this.files[0]) {
-    //             const reader = new FileReader();
-    //             reader.onload = e => {
-    //                 document.getElementById(this.dataset.preview).src = e.target.result;
-    //             };
-    //             reader.readAsDataURL(this.files[0]);
-    //         }
-    //     });
-    // });
 });
 </script>

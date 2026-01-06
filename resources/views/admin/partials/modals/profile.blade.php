@@ -11,8 +11,6 @@
 
             <div class="modal-body p-0">
                 <div class="row g-0">
-
-                    {{-- CỘT TRÁI --}}
                     <div class="col-md-4 bg-light border-end d-flex flex-column align-items-center text-center p-4">
 
                         <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data" id="profileForm">
@@ -71,7 +69,6 @@
                         </form>
                     </div>
 
-                    {{-- CỘT PHẢI --}}
                     <div class="col-md-8">
                         <div class="p-3 border-bottom">
                             <ul class="nav nav-pills nav-fill small fw-bold">

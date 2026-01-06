@@ -9,7 +9,6 @@
 
 @section('content')
 <div class="card shadow-lg border-0 overflow-hidden">
-    <!-- HEADER -->
     <div class="card-header">
         <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i> Cập nhật món ăn</h4>
     </div>
@@ -22,10 +21,7 @@
             @method('PUT')
 
             <div class="row g-4">
-
-                <!-- LEFT: Thông tin cơ bản -->
                 <div class="col-md-6">
-                    <!-- Danh mục -->
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label fw-semibold">Danh mục</label>
@@ -47,7 +43,6 @@
                         </div>
                     </div>
 
-                    <!-- Tên -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Tên món</label>
                         <input type="text"
@@ -60,7 +55,6 @@
                         @enderror
                     </div>
 
-                    <!-- Slug -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Slug</label>
                         <input type="text"
@@ -72,7 +66,6 @@
                         @enderror
                     </div>
 
-                    <!-- Giá -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Giá (VNĐ)</label>
                         <div class="input-group">
@@ -88,7 +81,6 @@
                         @enderror
                     </div>
 
-                    <!-- Trạng thái -->
                     <div class="form-check form-switch mt-3">
                         <input class="form-check-input"
                                type="checkbox"
@@ -102,9 +94,7 @@
                     </div>
                 </div>
 
-                <!-- RIGHT: Mô tả + upload ảnh -->
                 <div class="col-md-6">
-                    <!-- Mô tả -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Mô tả</label>
                         <textarea name="description"
@@ -114,8 +104,6 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-
-                    <!-- Upload ảnh mới -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Thêm ảnh mới</label>
                         <input type="file"
@@ -127,7 +115,6 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
 
-                        <!-- Preview -->
                         <div class="row mt-3 g-2" id="previewImages"></div>
                     </div>
                 </div>
@@ -136,7 +123,6 @@
 
             <hr>
 
-            <!-- ACTION -->
             <div class="d-flex justify-content-between">
                 <a href="{{ route('admin.menu-items.index') }}" class="btn btn-secondary">
                     <i class="bi bi-arrow-left me-1"></i> Quay lại
@@ -150,7 +136,6 @@
     </div>
 </div>
 
-<!-- DANH SÁCH ẢNH -->
 <div class="card shadow-lg border-0 rounded-4 mt-3">
     <div class="card-header bg-light">
         <h5 class="mb-0"><i class="bi bi-images me-1"></i> Ảnh món ăn</h5>
@@ -165,13 +150,10 @@
                              style="height:150px;object-fit:cover">
 
                         <div class="d-flex flex-column gap-1">
-                            <!-- FEATURED -->
                             <button type="button"
                                     class="btn btn-sm {{ $img->is_featured ? 'btn-success' : 'btn-outline-success' }} btn-set-featured">
                                 {{ $img->is_featured ? 'Đang hiển thị' : 'Chọn hiển thị' }}
                             </button>
-
-                            <!-- DELETE -->
                             <button type="button"
                                     class="btn btn-sm btn-outline-danger btn-delete-image">
                                 Xóa

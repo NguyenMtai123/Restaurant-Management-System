@@ -30,7 +30,6 @@ class ContactController extends Controller
     // Xem chi tiết liên hệ
     public function show(Contact $contact)
     {
-        // Đánh dấu đã đọc
         if (!$contact->is_read) {
             $contact->update(['is_read' => true]);
         }

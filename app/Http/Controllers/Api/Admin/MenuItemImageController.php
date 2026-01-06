@@ -9,14 +9,12 @@ use App\Http\Controllers\Controller;
 
 class MenuItemImageController extends Controller
 {
-    // GET: load danh sách ảnh (HTML)
     public function index(MenuItem $menuItem)
     {
         $images = $menuItem->images()->orderByDesc('is_featured')->get();
         return view('admin.menu-items._images', compact('images'));
     }
 
-    // POST: upload nhiều ảnh
     public function store(Request $request, MenuItem $menuItem)
     {
         $request->validate([
@@ -39,7 +37,6 @@ class MenuItemImageController extends Controller
         return response()->json(['success' => true]);
     }
 
-    // DELETE: xóa ảnh
     public function destroy(MenuItemImage $image)
     {
         if (file_exists(public_path($image->image_path))) {
@@ -51,8 +48,6 @@ class MenuItemImageController extends Controller
         return response()->json(['success' => true]);
     }
 
-    // POST: set ảnh mặc định
-    // POST: set ảnh mặc định
         public function setFeatured(MenuItemImage $image)
         {
             MenuItemImage::where('menu_item_id', $image->menu_item_id)
@@ -60,7 +55,6 @@ class MenuItemImageController extends Controller
 
             $image->update(['is_featured' => true]);
 
-            // Trả về thông tin ảnh mới
             return response()->json([
                 'success' => true,
                 'image_id' => $image->id,

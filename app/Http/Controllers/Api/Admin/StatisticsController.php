@@ -19,10 +19,11 @@ class StatisticsController extends Controller
             }
         }
 
-        $from = $request->from ? Carbon::parse($request->from)->startOfDay() : Carbon::now()->startOfMonth();
+        // Default range: last 7 days if not provided
+        $from = $request->from ? Carbon::parse($request->from)->startOfDay() : Carbon::now()->startOfDay()->subDays(6);
         $to   = $request->to   ? Carbon::parse($request->to)->endOfDay()   : Carbon::now()->endOfDay();
 
-        // Basic KPIs (existing)
+        // KPIs (giữ như cũ)
         $totalRevenue = DB::table('orders')
             ->whereBetween('created_at', [$from, $to])
             ->where('status', 'completed')
@@ -48,84 +49,161 @@ class StatisticsController extends Controller
             ? round($cancelOrders / ($cancelOrders + $totalOrders) * 100, 2)
             : 0;
 
-        // --- SERIES: last 7 days (labels + current + previous 7 days) ---
-        $labels7 = [];
-        $data7 = [];
-        $prev7 = [];
+        // Determine period length and granularity
+        $periodLengthDays = $from->diffInDays($to) + 1;
 
-        // build current 7 days (6 days ago -> today)
-        for ($i = 6; $i >= 0; $i--) {
-            $date = Carbon::today()->subDays($i);
-            $labels7[] = $date->format('d/m');
-            $amount = DB::table('orders')
-                ->whereDate('created_at', $date)
-                ->where('status', 'completed')
-                ->sum('total_amount');
-            $data7[] = (float)$amount;
-        }
+        // Range override from UI (toggle buttons should send ?range=7|8w|12m)
+        $range = $request->get('range');
 
-        // previous 7-day window (7-13 days ago)
-        for ($i = 13; $i >= 7; $i--) {
-            $date = Carbon::today()->subDays($i);
-            $amount = DB::table('orders')
-                ->whereDate('created_at', $date)
-                ->where('status', 'completed')
-                ->sum('total_amount');
-            $prev7[] = (float)$amount;
+        if ($range === '7') {
+            $granularity = 'day';
+        } elseif ($range === '8w') {
+            $granularity = 'week';
+        } elseif ($range === '12m') {
+            $granularity = 'month';
+        } else {
+            // fallback automatic
+            if ($periodLengthDays <= 31) {
+                $granularity = 'day';
+            } elseif ($periodLengthDays <= 180) {
+                $granularity = 'week';
+            } else {
+                $granularity = 'month';
+            }
         }
 
-        // --- SERIES: last 8 weeks (week labels) ---
-        $labels8w = [];
-        $data8w = [];
-        $prev8w = [];
-        // current 8 weeks: from 7 weeks ago -> this week
-        for ($wk = 7; $wk >= 0; $wk--) {
-            $start = Carbon::now()->startOfWeek()->subWeeks($wk);
-            $end   = (clone $start)->endOfWeek();
-            $labels8w[] = $start->format('d/m');
-            $sum = DB::table('orders')
-                ->whereBetween('created_at', [$start->startOfDay(), $end->endOfDay()])
-                ->where('status', 'completed')
-                ->sum('total_amount');
-            $data8w[] = (float)$sum;
-        }
-        // previous 8 weeks (the 8 weeks immediately before those)
-        for ($wk = 15; $wk >= 8; $wk--) {
-            $start = Carbon::now()->startOfWeek()->subWeeks($wk);
-            $end   = (clone $start)->endOfWeek();
-            $sum = DB::table('orders')
-                ->whereBetween('created_at', [$start->startOfDay(), $end->endOfDay()])
-                ->where('status', 'completed')
-                ->sum('total_amount');
-            $prev8w[] = (float)$sum;
+        // Current period
+        $currentPeriodStart = $from->copy();
+        $currentPeriodEnd   = $to->copy();
+
+        // Compute previous period aligned to granularity
+        if ($granularity === 'day') {
+            $days = $currentPeriodStart->diffInDays($currentPeriodEnd) + 1;
+            $prevPeriodEnd = $currentPeriodStart->copy()->subDay();
+            $prevPeriodStart = $prevPeriodEnd->copy()->subDays($days - 1);
+        } elseif ($granularity === 'week') {
+            // Align to week boundaries
+            $currentWeekStart = $currentPeriodStart->copy()->startOfWeek();
+            $currentWeekEnd = $currentPeriodEnd->copy()->endOfWeek();
+            $weeks = $currentWeekStart->diffInWeeks($currentWeekEnd) + 1;
+
+            // previous period = the weeks immediately before currentWeekStart, same number of weeks
+            $prevPeriodEnd = $currentWeekStart->copy()->subWeek()->endOfWeek();
+            $prevPeriodStart = $prevPeriodEnd->copy()->subWeeks($weeks - 1)->startOfWeek();
+
+            // Also use week-aligned cursors for iteration below
+            $currentPeriodStart = $currentWeekStart;
+            $currentPeriodEnd = $currentWeekEnd;
+        } else { // month
+            $currentMonthStart = $currentPeriodStart->copy()->startOfMonth();
+            $currentMonthEnd = $currentPeriodEnd->copy()->endOfMonth();
+            $months = $currentMonthStart->diffInMonths($currentMonthEnd) + 1;
+
+            $prevPeriodEnd = $currentMonthStart->copy()->subMonth()->endOfMonth();
+            $prevPeriodStart = $prevPeriodEnd->copy()->subMonths($months - 1)->startOfMonth();
+
+            // align for iteration
+            $currentPeriodStart = $currentMonthStart;
+            $currentPeriodEnd = $currentMonthEnd;
         }
 
-        // --- SERIES: last 12 months ---
-        $labels12 = [];
-        $data12 = [];
-        $prev12 = [];
-        for ($m = 11; $m >= 0; $m--) {
-            $start = Carbon::now()->subMonths($m)->startOfMonth();
-            $end = Carbon::now()->subMonths($m)->endOfMonth();
-            $labels12[] = $start->format('M Y');
-            $sum = DB::table('orders')
-                ->whereBetween('created_at', [$start, $end])
-                ->where('status', 'completed')
-                ->sum('total_amount');
-            $data12[] = (float)$sum;
-        }
-        // previous 12 months (months -12 to -23)
-        for ($m = 23; $m >= 12; $m--) {
-            $start = Carbon::now()->subMonths($m)->startOfMonth();
-            $end = Carbon::now()->subMonths($m)->endOfMonth();
-            $sum = DB::table('orders')
-                ->whereBetween('created_at', [$start, $end])
-                ->where('status', 'completed')
-                ->sum('total_amount');
-            $prev12[] = (float)$sum;
+        // Prepare SQL grouping and PHP key/label generators
+        if ($granularity === 'day') {
+            $groupSql = "DATE(created_at)";
+            $makeKey = function (Carbon $d) { return $d->toDateString(); };
+            $makeLabel = function (Carbon $d) { return $d->format('d/m'); };
+            $cursorStart = $currentPeriodStart->copy();
+            $cursorEnd = $currentPeriodEnd->copy();
+            $cursorPrevStart = $prevPeriodStart->copy();
+            $cursorPrevEnd = $prevPeriodEnd->copy();
+            $advance = function (&$d) { $d->addDay(); };
+            $advancePrev = function (&$d) { $d->addDay(); };
+        } elseif ($granularity === 'week') {
+            // Use ISO year-week key consistent with DATE_FORMAT %x (ISO year) and %v (ISO week)
+            $groupSql = "CONCAT(DATE_FORMAT(created_at, '%x'), '-', LPAD(DATE_FORMAT(created_at, '%v'),2,'0'))";
+            $makeKey = function (Carbon $d) {
+                $s = $d->copy()->startOfWeek();
+                return $s->format('o') . '-' . str_pad($s->format('W'), 2, '0', STR_PAD_LEFT);
+            };
+            $makeLabel = function (Carbon $d) { return $d->copy()->startOfWeek()->format('d/m'); };
+            $cursorStart = $currentPeriodStart->copy()->startOfWeek();
+            $cursorEnd = $currentPeriodEnd->copy()->endOfWeek();
+            $cursorPrevStart = $prevPeriodStart->copy()->startOfWeek();
+            $cursorPrevEnd = $prevPeriodEnd->copy()->endOfWeek();
+            $advance = function (&$d) { $d->addWeek(); };
+            $advancePrev = function (&$d) { $d->addWeek(); };
+        } else {
+            // month
+            $groupSql = "DATE_FORMAT(created_at, '%Y-%m')";
+            $makeKey = function (Carbon $d) { return $d->format('Y-m'); };
+            $makeLabel = function (Carbon $d) { return $d->format('M Y'); };
+            $cursorStart = $currentPeriodStart->copy()->startOfMonth();
+            $cursorEnd = $currentPeriodEnd->copy()->endOfMonth();
+            $cursorPrevStart = $prevPeriodStart->copy()->startOfMonth();
+            $cursorPrevEnd = $prevPeriodEnd->copy()->endOfMonth();
+            $advance = function (&$d) { $d->addMonth(); };
+            $advancePrev = function (&$d) { $d->addMonth(); };
         }
 
-        // QUICK COMPARISONS: totals for today/yesterday, week, month (for delta %)
+        // Query aggregated sums for current period
+        $currentRows = DB::table('orders')
+            ->select(DB::raw("$groupSql as period_key"), DB::raw('SUM(total_amount) as total'))
+            ->whereBetween('created_at', [$cursorStart->copy()->startOfDay(), $cursorEnd->copy()->endOfDay()])
+            ->where('status', 'completed')
+            ->groupBy('period_key')
+            ->orderBy('period_key')
+            ->get()
+            ->pluck('total', 'period_key')
+            ->toArray();
+
+        // Query aggregated sums for previous period
+        $prevRows = DB::table('orders')
+            ->select(DB::raw("$groupSql as period_key"), DB::raw('SUM(total_amount) as total'))
+            ->whereBetween('created_at', [$cursorPrevStart->copy()->startOfDay(), $cursorPrevEnd->copy()->endOfDay()])
+            ->where('status', 'completed')
+            ->groupBy('period_key')
+            ->orderBy('period_key')
+            ->get()
+            ->pluck('total', 'period_key')
+            ->toArray();
+
+        // Build labels and aligned arrays for current period
+        $chartLabels = [];
+        $chartCurrent = [];
+
+        $cursor = $cursorStart->copy();
+        while ($cursor->lte($cursorEnd)) {
+            $key = $makeKey($cursor->copy());
+            $label = $makeLabel($cursor->copy());
+            $chartLabels[] = $label;
+            $chartCurrent[] = (float) ($currentRows[$key] ?? 0.0);
+
+            // advance cursor depending on granularity
+            $advance($cursor);
+        }
+
+        // Build previous period array
+        $prevTemp = [];
+        $cursorP = $cursorPrevStart->copy();
+        while ($cursorP->lte($cursorPrevEnd)) {
+            $keyP = $makeKey($cursorP->copy());
+            $prevTemp[] = (float) ($prevRows[$keyP] ?? 0.0);
+            $advancePrev($cursorP);
+        }
+
+        // Align lengths: pad front with zeros if prev shorter, slice if longer
+        $len = count($chartLabels);
+        if (count($prevTemp) < $len) {
+            $pad = array_fill(0, $len - count($prevTemp), 0.0);
+            $chartPrevious = array_merge($pad, $prevTemp);
+        } else {
+            $chartPrevious = array_slice($prevTemp, -$len);
+        }
+        if (empty($chartPrevious)) {
+            $chartPrevious = array_fill(0, $len, 0.0);
+        }
+
+        // QUICK COMPARISONS: today / yesterday / week / month (unchanged)
         $today = Carbon::today();
         $yesterday = Carbon::yesterday();
 
@@ -154,7 +232,6 @@ class StatisticsController extends Controller
             ->where('status', 'completed')
             ->sum('total_amount');
 
-        // month comparison
         $startMonth = Carbon::now()->startOfMonth();
         $endMonth = Carbon::now()->endOfMonth();
         $startMonthLast = (clone $startMonth)->subMonth();
@@ -170,7 +247,7 @@ class StatisticsController extends Controller
             ->where('status', 'completed')
             ->sum('total_amount');
 
-        // Category share (same as before)
+        // Category share
         $categoryShare = DB::table('menu_categories')
             ->leftJoin('menu_items', 'menu_categories.id', '=', 'menu_items.category_id')
             ->leftJoin('order_items', 'menu_items.id', '=', 'order_items.menu_item_id')
@@ -181,7 +258,7 @@ class StatisticsController extends Controller
             ->groupBy('menu_categories.id','menu_categories.name')
             ->get();
 
-        // Top 5 products (sold) - keep existing shape (img/revenue/vat)
+        // Top products (sold)
         $VAT_RATE = 0.1;
         $topProducts = DB::table('menu_items')
             ->join('menu_categories', 'menu_categories.id', '=', 'menu_items.category_id')
@@ -207,7 +284,7 @@ class StatisticsController extends Controller
             ->limit(5)
             ->get();
 
-        // Top 5 products by revenue
+        // Top products by revenue
         $topProductsRevenue = DB::table('menu_items')
             ->join('order_items', 'menu_items.id', '=', 'order_items.menu_item_id')
             ->join('orders', 'orders.id', '=', 'order_items.order_id')
@@ -218,19 +295,17 @@ class StatisticsController extends Controller
             ->orderByDesc('revenue')
             ->limit(5)
             ->get();
-        // ===== DOANH THU 12 THÁNG =====
+
+        // Monthly revenue - giữ như cũ (12 tháng hiện tại)
         $monthlyRevenue = [];
-
         for ($m = 1; $m <= 12; $m++) {
-            $start = Carbon::create(now()->year, $m, 1)->startOfMonth();
-            $end   = Carbon::create(now()->year, $m, 1)->endOfMonth();
-
+            $startMonthLoop = Carbon::create(now()->year, $m, 1)->startOfMonth();
+            $endMonthLoop   = Carbon::create(now()->year, $m, 1)->endOfMonth();
             $monthlyRevenue[] = (float) DB::table('orders')
-                ->whereBetween('created_at', [$start, $end])
+                ->whereBetween('created_at', [$startMonthLoop, $endMonthLoop])
                 ->where('status', 'completed')
                 ->sum('total_amount');
         }
-
 
         // Top customers
         $topCustomers = DB::table('users')
@@ -248,14 +323,11 @@ class StatisticsController extends Controller
             ->limit(5)
             ->get();
 
+        // Return view with unified chart arrays + granularity
         return view('admin.statistic.index', compact(
             'from','to',
             'totalRevenue','totalOrders','totalItems','cancelRate',
-            // series and labels
-            'labels7','data7','prev7',
-            'labels8w','data8w','prev8w',
-            'labels12','data12','prev12',
-            // quick compares
+            'chartLabels','chartCurrent','chartPrevious','granularity',
             'revenueToday','revenueYesterday','weekThis','weekLast','monthThis','monthLast',
             'categoryShare','topProducts','topProductsRevenue','topCustomers','monthlyRevenue'
         ));

@@ -77,15 +77,6 @@ class DatabaseSeeder extends Seeder
             CommentsSeeder::class,
         ]);
 
-        /**
-         * =========================
-         * 8. POSTS
-         * =========================
-         */
-        $this->call([
-            PostCategorySeeder::class,
-            PostSeeder::class,
-        ]);
 
         /**
          * =========================

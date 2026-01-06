@@ -24,35 +24,6 @@
         </div>
         @endif
 
-        {{-- Card 2: Quản lý danh mục bài viết --}}
-        @if($user->hasPermission('manage_posts'))
-        <div class="col-md-6 col-lg-3">
-            <a href="{{ route('admin.post-categories.index') }}" class="text-decoration-none">
-                <div class="card shadow-sm border-0 rounded-3 hover-scale">
-                    <div class="card-body text-center">
-                        <i class='bx bx-news bx-lg mb-3 text-success'></i>
-                        <h5 class="card-title">Danh mục bài viết</h5>
-                        <p class="card-text text-muted">Quản lý các bài viết, tin tức và thông báo.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endif
-
-        @if($user->hasPermission('manage_posts'))
-        <div class="col-md-6 col-lg-3">
-            <a href="{{ route('admin.posts.index') }}" class="text-decoration-none">
-                <div class="card shadow-sm border-0 rounded-3 hover-scale">
-                    <div class="card-body text-center">
-                        <i class='bx bx-file bx-lg mb-3 text-success'></i>
-                        <h5 class="card-title">Bài viết</h5>
-                        <p class="card-text text-muted">Quản lý bài viết, tin tức và thông báo.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endif
-
         {{-- Card 3: Quản lý liên hệ --}}
         @if($user->hasPermission('manage_contacts'))
         <div class="col-md-6 col-lg-3">

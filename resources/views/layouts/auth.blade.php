@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'FoodieHub')</title>
-    <!-- CSS chính -->
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
-    <!-- FontAwesome Icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -18,15 +16,10 @@
 
     <!-- Nội dung bên phải -->
     <div class="login-form">
-        {{-- <div class="logo">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo">
-        </div>
-        <h2>Đăng nhập</h2> --}}
         @yield('content')
     </div>
 </div>
 
-<!-- JS chung -->
 @stack('scripts')
 
 </body>

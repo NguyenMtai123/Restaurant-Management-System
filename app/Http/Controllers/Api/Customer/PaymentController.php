@@ -42,7 +42,7 @@ class PaymentController extends Controller
             'status' => 'pending', // chờ xác nhận
         ]);
 
-        $order->update(['status' => 'pending']); // hoặc 'awaiting_payment_confirmation'
+        $order->update(['status' => 'pending']);
 
         // Gửi email xác nhận đơn hàng
         Mail::to($order->user->email)->send(new OrderPaidMail($order));
@@ -56,13 +56,13 @@ class PaymentController extends Controller
 
     public function vnpay_payment(Request $request)
     {
-        $orderId = $request->query('order_id'); // dùng query string từ GET
+        $orderId = $request->query('order_id');
         $order = Order::findOrFail($orderId);
 
         $vnp_TmnCode = "SBZ91UGR";
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_HashSecret = "LXF9ZK655RYARCK1QP9GMO6V2WMQYDSN";
-        $vnp_Returnurl = route('vnpay.return'); // route callback
+        $vnp_Returnurl = route('vnpay.return');
 
         $vnp_TxnRef = $order->order_number;
         $vnp_Amount = $order->total_amount * 100;

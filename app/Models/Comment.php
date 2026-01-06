@@ -7,19 +7,16 @@ class Comment extends Model
 {
     protected $fillable = ['user_id','parent_id','content_menu','rating','is_approved'];
 
-    // Polymorphic: bình luận cho menu_item hoặc restaurant
-    public function commentable()
+    public function menuItem()
     {
-        return $this->morphTo();
+        return $this->belongsTo(MenuItem::class, 'commentable_id', 'id');
     }
 
-    // Relation: người tạo comment
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Bình luận con (reply)
     public function replies()
     {
         return $this->hasMany(Comment::class,'parent_id');

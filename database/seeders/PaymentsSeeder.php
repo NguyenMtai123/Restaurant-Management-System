@@ -20,7 +20,7 @@ class PaymentsSeeder extends Seeder
             ],
             [
                 'order_id' => 2,
-                'method' => 'credit_card',
+                'method' => 'cash',
                 'amount' => 148500,
                 'status' => 'pending',
                 'created_at' => now(),

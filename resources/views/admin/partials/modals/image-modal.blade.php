@@ -7,7 +7,6 @@
                 </div>
 
                 <div class="modal-body">
-                    {{-- FORM UPLOAD --}}
                     <form id="uploadImagesForm" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="images[]" multiple class="form-control mb-3">

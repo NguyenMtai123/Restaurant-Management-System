@@ -39,7 +39,6 @@ class HomeController extends Controller
         ->take(3)
         ->get();
 
-    // Lấy About đang sử dụng
     $about = About::where('is_used', true)->first();
 
     return view('customer.home', compact('user','categories','menuItems','cartCount','testimonials','about'));

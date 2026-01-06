@@ -12,8 +12,6 @@
         <div class="card-body p-3">
                   <form method="GET" action="{{ route('admin.menu-items.index') }}">
                     <div class="row align-items-center g-3">
-
-                        {{-- SEARCH --}}
                         <div class="col-md-4">
                             <div class="input-group">
                                 <span class="input-group-text bg-white border-end-0">
@@ -28,8 +26,6 @@
                                 >
                             </div>
                         </div>
-
-                        {{-- CATEGORY --}}
                         <div class="col-md-3">
                             <select name="category_id" class="form-select">
                                 <option value="all">Tất cả danh mục</option>
@@ -43,8 +39,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-                        {{-- ACTION --}}
                         <div class="col-md-5 text-md-end">
                             <button class="btn btn-outline-secondary me-2">
                                 <i class='bx bx-filter'></i> Lọc
@@ -75,11 +69,9 @@
                             <tbody>
                                @forelse($menuItems as $product)
                                     <tr>
-                                        {{-- STT --}}
                                         <td class="ps-4 fw-bold text-muted">
                                             #{{ $menuItems->firstItem() + $loop->index }}
                                         </td>
-                                        {{-- SẢN PHẨM --}}
                                         <td>
                                             <div class="product-img-group d-flex align-items-center gap-2">
                                                 <img
@@ -97,20 +89,15 @@
                                                 </div>
                                             </div>
                                         </td>
-
-                                        {{-- DANH MỤC --}}
                                         <td>
                                             <span class="badge bg-light text-dark border">
                                                 {{ $product->category->name ?? '---' }}
                                             </span>
                                         </td>
 
-                                        {{-- GIÁ --}}
                                         <td class="fw-bold">
                                             {{ number_format($product->price) }} đ
                                         </td>
-
-                                        {{-- TRẠNG THÁI --}}
                                         <td>
                                         @php
                                                 $statusClass = $product->is_available ? 'badge-stock' : 'badge-out';
@@ -122,7 +109,6 @@
                                             </span>
                                         </td>
 
-                                        {{-- ACTION --}}
                                         <td class="text-end pe-4">
                                             <a href="{{ route('admin.menu-items.edit', $product->id) }}"
                                             class="btn btn-sm btn-warning">
@@ -138,7 +124,6 @@
                                             </button>
                                         </td>
                                     </tr>
-                                    <!-- Modal Xóa sản phẩm -->
                                     <div class="modal fade" id="deleteModal-{{ $product->id }}" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
@@ -161,7 +146,6 @@
                                         </div>
                                     </div>
                                @empty
-                                    {{-- 🔔 THÔNG BÁO KHÔNG CÓ KẾT QUẢ --}}
                                     <tr>
                                         <td colspan="6" class="text-center py-5">
                                             <p class="mb-0 fw-semibold">Không tìm thấy sản phẩm phù hợp</p>
@@ -178,7 +162,6 @@
                 <div class="card-footer bg-white border-0 py-3">
                     <div class="d-flex justify-content-between align-items-center">
 
-                        {{-- Thông tin --}}
                         <div class="text-muted small">
                             Hiển thị
                             <strong>{{ $menuItems->firstItem() }}</strong>
@@ -188,7 +171,6 @@
                             <strong>{{ $menuItems->total() }}</strong> sản phẩm
                         </div>
 
-                        {{-- Pagination --}}
                         {{ $menuItems->links('pagination::bootstrap-5') }}
 
                     </div>
