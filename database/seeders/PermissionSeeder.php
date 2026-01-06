@@ -17,7 +17,6 @@ class PermissionSeeder extends Seeder
             ['key' => 'manage_orders',    'label' => 'Quản lý đơn hàng'],
             ['key' => 'manage_menu',      'label' => 'Quản lý menu & danh mục'],
             ['key' => 'manage_coupons',   'label' => 'Quản lý mã giảm giá'],
-            ['key' => 'manage_posts',     'label' => 'Quản lý bài viết'],
             ['key' => 'manage_employees', 'label' => 'Quản lý nhân viên'],
             ['key' => 'manage_contacts',  'label' => 'Quản lý liên hệ'],
             ['key' => 'manage_settings',  'label' => 'Quản lý cấu hình'],

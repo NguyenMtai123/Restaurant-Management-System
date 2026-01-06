@@ -48,7 +48,6 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        // 2. Xóa session cũ
         $request->session()->invalidate();
 
         // 3. Tạo lại CSRF token mới (bảo mật)

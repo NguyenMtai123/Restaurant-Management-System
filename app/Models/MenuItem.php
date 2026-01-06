@@ -19,7 +19,6 @@ class MenuItem extends Model
         'is_available',
     ];
 
-    // Nếu muốn, expose featured_image_url trong JSON
     protected $appends = ['featured_image_url'];
 
     public function category()
@@ -44,10 +43,9 @@ class MenuItem extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'commentable_id');
+        return $this->hasMany(Comment::class, 'commentable_id', 'id');
     }
 
-    // Trả về url của ảnh mặc định (featured) hoặc fallback
     public function getFeaturedImageUrlAttribute()
     {
         // Nếu relation images đã được eager-loaded, dùng collection để tránh query

@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // =========================
-    // DANH SÁCH KHÁCH HÀNG
-    // =========================
     public function index(Request $request)
     {
         $customerRoleId = Role::where('name','customer')->value('id');
@@ -43,9 +40,6 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    // =========================
-    // TẠO USER MỚI
-    // =========================
     public function store(Request $request)
     {
         $request->validate([
@@ -75,9 +69,6 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success','Thêm user thành công');
     }
 
-    // =========================
-    // CẬP NHẬT USER
-    // =========================
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -111,9 +102,6 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success','Cập nhật user thành công');
     }
 
-    // =========================
-    // XÓA USER
-    // =========================
     public function destroy(User $user)
     {
         if ($user->avatar && file_exists(public_path('images/avatars/'.$user->avatar))) {
@@ -125,9 +113,6 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success','Xóa user thành công');
     }
 
-    // =========================
-    // CHI TIẾT USER (AJAX)
-    // =========================
     public function show(User $user)
     {
         $user->load(['orders' => fn ($q) => $q->latest()->limit(3)]);

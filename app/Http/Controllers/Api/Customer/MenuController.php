@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
-    // CHI TIẾT MÓN
     public function show($slug)
     {
         $menuItem = MenuItem::with(['category', 'images'])
             ->where('slug', $slug)
             ->firstOrFail();
 
-        // Đặt ảnh mặc định lên đầu
         $menuItem->images = $menuItem->images->sortByDesc('is_featured')->values();
 
         $comments = $menuItem->comments()

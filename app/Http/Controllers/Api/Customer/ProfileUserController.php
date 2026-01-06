@@ -18,7 +18,6 @@ class ProfileUserController extends Controller
     {
         $user = Auth::user();
 
-        // Validate dữ liệu
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
@@ -26,19 +25,13 @@ class ProfileUserController extends Controller
             'avatar' => 'nullable|image|max:2048',
         ]);
 
-        // Xử lý avatar nếu có
         if($request->hasFile('avatar')){
-            // Tạo tên file duy nhất
             $avatarName = time() . '_' . $request->file('avatar')->getClientOriginalName();
-            // Move file vào public/images/avatars
             $request->file('avatar')->move(public_path('images/avatars'), $avatarName);
             $data['avatar'] = $avatarName;
         }
 
-        // Cập nhật thông tin user
         $user->update($data);
-
-        // Redirect về home sau khi update
         return redirect()->route('home')->with('success', 'Cập nhật thông tin thành công!');
     }
 }

@@ -3,7 +3,6 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow">
 
-                <!-- HEADER -->
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title">
                         <i class="bx bx-trash"></i> Xác nhận xóa
@@ -11,7 +10,6 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <!-- BODY -->
                 <div class="modal-body text-center">
                     <i class="bx bx-error-circle text-danger fs-1 mb-3"></i>
 
@@ -28,7 +26,6 @@
                     </p>
                 </div>
 
-                <!-- FOOTER -->
                 <div class="modal-footer justify-content-center">
                     <button type="button"
                             class="btn btn-light px-4"

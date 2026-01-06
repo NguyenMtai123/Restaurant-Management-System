@@ -9,8 +9,7 @@
 @endpush
 
 @section('content')
-   <div class="container mt-4">
-    <!-- HEADER -->
+<div class="container mt-4">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-2">
         <h4 class="mb-2 mb-md-0">Chi tiết món ăn</h4>
         <div class="btn-group">
@@ -26,11 +25,9 @@
     </div>
 
     <div class="row g-4">
-        <!-- ẢNH -->
         <div class="col-lg-5 col-md-6">
             <div class="card shadow-sm rounded-4">
                 <div class="card-body text-center">
-                    {{-- ẢNH HIỂN THỊ --}}
                     <img
                         src="{{ $menuItem->featuredImage
                             ? asset($menuItem->featuredImage->image_path)
@@ -40,7 +37,6 @@
                         onmouseover="this.style.transform='scale(1.05)';"
                         onmouseout="this.style.transform='scale(1)';">
 
-                    {{-- GALLERY --}}
                     <div class="row g-2 justify-content-center mt-2">
                         @foreach($menuItem->images as $img)
                             <div class="col-3">
@@ -59,7 +55,6 @@
             </div>
         </div>
 
-        <!-- THÔNG TIN -->
         <div class="col-lg-7 col-md-6">
             <div class="card shadow-sm rounded-4">
                 <div class="card-body">
@@ -115,6 +110,7 @@
             </div>
         </div>
     </div>
+</div>
 <style>
 .hover-scale {
     transition: transform 0.3s;

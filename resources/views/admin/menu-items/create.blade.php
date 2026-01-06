@@ -10,7 +10,6 @@
 @section('content')
 <div class="card shadow-lg border-0 overflow-hidden">
 
-    <!-- HEADER -->
     <div class="card-header py-3">
         <h4 class="mb-0">
             <i class="bi bi-plus-circle me-2"></i> Thêm món ăn mới
@@ -25,10 +24,7 @@
 
             <div class="row g-4">
 
-                <!-- LEFT -->
                 <div class="col-md-6">
-
-                    <!-- Danh mục -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Danh mục</label>
@@ -50,8 +46,6 @@
                             <input type="text" class="form-control" name="code" value="{{ $nextCode }}" readonly>
                         </div>
                     </div>
-
-                    <!-- Tên -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Tên món</label>
                         <input type="text"
@@ -65,7 +59,6 @@
                         @enderror
                     </div>
 
-                    <!-- Slug -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Slug</label>
                         <input type="text"
@@ -78,7 +71,6 @@
                         @enderror
                     </div>
 
-                    <!-- Giá -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Giá (VNĐ)</label>
                         <div class="input-group">
@@ -95,7 +87,6 @@
                         @enderror
                     </div>
 
-                    <!-- Trạng thái -->
                     <div class="form-check form-switch mt-4">
                         <input class="form-check-input"
                                type="checkbox"
@@ -112,10 +103,7 @@
 
                 </div>
 
-                <!-- RIGHT -->
                 <div class="col-md-6">
-
-                    <!-- Mô tả -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Mô tả</label>
                         <textarea name="description"
@@ -127,7 +115,6 @@
                         @enderror
                     </div>
 
-                    <!-- Upload ảnh -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Ảnh món ăn</label>
                         <input type="file"
@@ -139,7 +126,6 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
 
-                        <!-- Preview -->
                         <div class="row mt-3 g-2" id="previewImages"></div>
                     </div>
 
@@ -148,7 +134,6 @@
 
             <hr>
 
-            <!-- ACTION -->
             <div class="d-flex justify-content-between">
                 <a href="{{ route('admin.menu-items.index') }}"
                    class="btn btn-outline-secondary">

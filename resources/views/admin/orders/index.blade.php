@@ -12,8 +12,6 @@
                 <div class="card-body p-3">
                    <form method="GET" action="{{ route('admin.orders.index') }}">
                         <div class="row align-items-center g-3">
-
-                            {{-- SEARCH --}}
                             <div class="col-md-4">
                                 <div class="input-group">
                                     <span class="input-group-text bg-white border-end-0">
@@ -26,8 +24,6 @@
                                         value="{{ request('keyword') }}">
                                 </div>
                             </div>
-
-                            {{-- STATUS --}}
                             <div class="col-md-3">
                                 <select name="status" class="form-select" id="statusFilter">
                                     <option value="all">Tất cả trạng thái</option>
@@ -37,7 +33,6 @@
                                 </select>
                             </div>
 
-                            {{-- DATE --}}
                             <div class="col-md-2">
                                 <input type="date"
                                     name="date"
@@ -45,7 +40,6 @@
                                     value="{{ request('date') }}">
                             </div>
 
-                            {{-- ACTION --}}
                             <div class="col-md-1 ">
                                 <button class="btn btn-outline-primary w-100">
                                     <i class="bx bx-filter"></i> Lọc
@@ -82,34 +76,23 @@
                             <tbody>
                                 @forelse($orders as $order)
                                     <tr>
-                                        {{-- MÃ ĐƠN --}}
                                         <td class="ps-4 fw-semibold">
                                             {{ $order->order_number }}
                                         </td>
-
-                                        {{-- KHÁCH HÀNG --}}
                                         <td>
                                             {{ $order->user?->name ?? 'Khách vãng lai' }}
                                         </td>
-
-                                        {{-- NGÀY ĐẶT --}}
                                         <td>
                                             {{ $order->created_at->format('d/m/Y H:i') }}
                                         </td>
-
-                                        {{-- TỔNG TIỀN --}}
                                         <td class="fw-bold">
                                             <span style="color:rgb(206, 15, 15)">{{ number_format($order->total_amount) }} đ</span>
                                         </td>
-
-                                        {{-- THANH TOÁN --}}
                                         <td>
                                             <span class="badge bg-info-subtle text-info">
                                                 {{ strtoupper($order->payment_method ?? 'COD') }}
                                             </span>
                                         </td>
-
-                                        {{-- TRẠNG THÁI --}}
                                         <td>
                                             @php
                                                 $statusMap = [
@@ -125,29 +108,19 @@
                                                 {{ $text }}
                                             </span>
                                         </td>
-
-                                        {{-- HÀNH ĐỘNG --}}
                                         <td class="text-end pe-4">
-                                            {{-- XEM --}}
                                             <button
                                                 class="btn btn-sm btn-info btn-view-order"
                                                 data-id="{{ $order->id }}"
                                                 title="Xem chi tiết">
                                                 <i class="bx bx-show"></i>
                                             </button>
-
-
-                                            {{-- CẬP NHẬT --}}
-
                                             <button class="btn btn-sm btn-warning"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#statusModal-{{ $order->id }}"
                                                     title="Cập nhật trạng thái">
                                                 <i class="bx bx-edit"></i>
                                             </button>
-
-
-                                            {{-- HỦY --}}
                                             @if($order->status === 'cancelled')
                                             <button type="button" class="btn btn-sm btn-danger"
                                                     data-bs-toggle="modal"
@@ -159,7 +132,6 @@
                                         </td>
                                     </tr>
                                     @include('admin.partials.modals.update_status')
-                                    <!-- MODAL XÓA/HỦY ĐƠN -->
                                     <div class="modal fade" id="deleteModal-{{ $order->id }}" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
@@ -195,16 +167,12 @@
                 </div>
                <div class="card-footer bg-white border-0 py-3">
                     <div class="d-flex justify-content-between align-items-center">
-
-                        {{-- INFO --}}
                         <div class="text-muted small">
                             Hiển thị
                             <strong>{{ $orders->firstItem() }}</strong> –
                             <strong>{{ $orders->lastItem() }}</strong>
                             / {{ $orders->total() }} đơn hàng
                         </div>
-
-                        {{-- PAGINATION --}}
                         {{ $orders->links('pagination::bootstrap-5') }}
 
                     </div>

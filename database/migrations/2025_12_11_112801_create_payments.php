@@ -9,7 +9,7 @@ return new class extends Migration {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->enum('method', ['cash','credit_card','bank_transfer','online'])->default('cash');
+            $table->enum('method', ['cash','online'])->default('cash');
             $table->decimal('amount', 12, 2);
             $table->enum('status', ['pending','paid','refunded','failed'])->default('pending');
             $table->timestamps();

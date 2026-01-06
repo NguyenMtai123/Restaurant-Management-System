@@ -50,7 +50,6 @@ class CouponController extends Controller
         return back()->with('success','Đã xóa mã');
     }
 
-    /* ====== GỬI NHIỀU MÃ ====== */
     public function sendMultiple(Request $request)
     {
         $request->validate([

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="refund-container">
         <header class="refund-header">
@@ -32,7 +36,9 @@
                     <i class="fas fa-calendar-alt"></i>
                     <span>Cập nhật lần cuối: 01/01/2024</span>
                 </div>
-                <p>Take Away Express cam kết đảm bảo quyền lợi của khách hàng với chính sách hoàn tiền minh bạch, công bằng và nhanh chóng. Chính sách này quy định các điều kiện, quy trình và thời gian xử lý yêu cầu hoàn tiền.</p>
+                <p>Take Away Express cam kết đảm bảo quyền lợi của khách hàng với chính sách hoàn tiền minh bạch, công
+                    bằng và nhanh chóng. Chính sách này quy định các điều kiện, quy trình và thời gian xử lý yêu cầu
+                    hoàn tiền.</p>
                 <div class="refund-highlight">
                     <i class="fas fa-shield-alt"></i>
                     <div>
@@ -140,7 +146,9 @@
                             <i class="fas fa-info-circle"></i>
                             <div>
                                 <h5>Lưu ý quan trọng:</h5>
-                                <p>Yêu cầu hoàn tiền cần được gửi trong vòng 30 phút sau khi nhận hàng và có đầy đủ bằng chứng (hình ảnh, video). Các trường hợp không có bằng chứng sẽ được xem xét riêng.</p>
+                                <p>Yêu cầu hoàn tiền cần được gửi trong vòng 30 phút sau khi nhận hàng và có đầy đủ bằng
+                                    chứng (hình ảnh, video). Các trường hợp không có bằng chứng sẽ được xem xét riêng.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -161,7 +169,8 @@
                                 </div>
                                 <div class="non-refundable-content">
                                     <h4>Thay đổi ý định</h4>
-                                    <p>Khách hàng thay đổi ý định sau khi đã nhận hàng và không có vấn đề về chất lượng.</p>
+                                    <p>Khách hàng thay đổi ý định sau khi đã nhận hàng và không có vấn đề về chất lượng.
+                                    </p>
                                 </div>
                             </div>
                             <div class="non-refundable-item">
@@ -215,7 +224,9 @@
                             <i class="fas fa-exclamation-triangle"></i>
                             <div>
                                 <h5>Ngoại lệ đặc biệt:</h5>
-                                <p>Trong một số trường hợp đặc biệt (dị ứng thực phẩm nghiêm trọng, vấn đề sức khỏe), chúng tôi sẽ xem xét hoàn tiền dù thuộc các trường hợp trên. Vui lòng liên hệ hotline để được hỗ trợ.</p>
+                                <p>Trong một số trường hợp đặc biệt (dị ứng thực phẩm nghiêm trọng, vấn đề sức khỏe),
+                                    chúng tôi sẽ xem xét hoàn tiền dù thuộc các trường hợp trên. Vui lòng liên hệ
+                                    hotline để được hỗ trợ.</p>
                             </div>
                         </div>
                     </div>
@@ -237,7 +248,8 @@
                                 </div>
                                 <div class="timeline-content">
                                     <h4>Báo cáo sự cố</h4>
-                                    <p>Liên hệ ngay với Take Away Express trong vòng 30 phút sau khi nhận hàng qua hotline, chat trực tuyến hoặc email.</p>
+                                    <p>Liên hệ ngay với Take Away Express trong vòng 30 phút sau khi nhận hàng qua
+                                        hotline, chat trực tuyến hoặc email.</p>
                                     <div class="timeline-detail">
                                         <i class="fas fa-clock"></i>
                                         <span>Thời hạn: Trong vòng 30 phút sau khi nhận hàng</span>
@@ -251,7 +263,8 @@
                                 </div>
                                 <div class="timeline-content">
                                     <h4>Cung cấp bằng chứng</h4>
-                                    <p>Chụp ảnh/video rõ ràng về sản phẩm và vấn đề gặp phải. Gửi kèm mã đơn hàng và thông tin liên hệ.</p>
+                                    <p>Chụp ảnh/video rõ ràng về sản phẩm và vấn đề gặp phải. Gửi kèm mã đơn hàng và
+                                        thông tin liên hệ.</p>
                                     <div class="timeline-detail">
                                         <i class="fas fa-camera"></i>
                                         <span>Bằng chứng cần thiết: Ảnh rõ nét, video ngắn</span>
@@ -265,7 +278,8 @@
                                 </div>
                                 <div class="timeline-content">
                                     <h4>Xác minh thông tin</h4>
-                                    <p>Đội ngũ hỗ trợ sẽ kiểm tra thông tin, xem xét bằng chứng và liên hệ lại trong vòng 1 giờ làm việc.</p>
+                                    <p>Đội ngũ hỗ trợ sẽ kiểm tra thông tin, xem xét bằng chứng và liên hệ lại trong
+                                        vòng 1 giờ làm việc.</p>
                                     <div class="timeline-detail">
                                         <i class="fas fa-user-check"></i>
                                         <span>Thời gian xác minh: 1 giờ làm việc</span>
@@ -279,7 +293,8 @@
                                 </div>
                                 <div class="timeline-content">
                                     <h4>Chấp thuận yêu cầu</h4>
-                                    <p>Nếu yêu cầu hợp lệ, chúng tôi sẽ gửi xác nhận chấp thuận hoàn tiền qua email/SMS.</p>
+                                    <p>Nếu yêu cầu hợp lệ, chúng tôi sẽ gửi xác nhận chấp thuận hoàn tiền qua email/SMS.
+                                    </p>
                                     <div class="timeline-detail">
                                         <i class="fas fa-check-circle"></i>
                                         <span>Tỷ lệ chấp thuận: 95% các trường hợp có đủ bằng chứng</span>
@@ -293,7 +308,8 @@
                                 </div>
                                 <div class="timeline-content">
                                     <h4>Xử lý hoàn tiền</h4>
-                                    <p>Bộ phận tài chính sẽ xử lý hoàn tiền theo phương thức thanh toán ban đầu của khách hàng.</p>
+                                    <p>Bộ phận tài chính sẽ xử lý hoàn tiền theo phương thức thanh toán ban đầu của
+                                        khách hàng.</p>
                                     <div class="timeline-detail">
                                         <i class="fas fa-credit-card"></i>
                                         <span>Thời gian xử lý: 1-10 ngày tùy phương thức thanh toán</span>
@@ -306,7 +322,8 @@
                                 </div>
                                 <div class="timeline-content">
                                     <h4>Hoàn tất & Xác nhận</h4>
-                                    <p>Gửi xác nhận hoàn tiền thành công. Khách hàng có thể kiểm tra tài khoản hoặc ví điện tử.</p>
+                                    <p>Gửi xác nhận hoàn tiền thành công. Khách hàng có thể kiểm tra tài khoản hoặc ví
+                                        điện tử.</p>
                                     <div class="timeline-detail">
                                         <i class="fas fa-envelope"></i>
                                         <span>Nhận email/SMS xác nhận hoàn tiền thành công</span>
@@ -324,7 +341,8 @@
                                     </div>
                                     <div class="tip-content">
                                         <h5>Chụp ảnh rõ ràng</h5>
-                                        <p>Ảnh cần thể hiện rõ vấn đề, có mã đơn hàng và toàn bộ sản phẩm trong khung hình.</p>
+                                        <p>Ảnh cần thể hiện rõ vấn đề, có mã đơn hàng và toàn bộ sản phẩm trong khung
+                                            hình.</p>
                                     </div>
                                 </div>
                                 <div class="tip">
@@ -333,7 +351,8 @@
                                     </div>
                                     <div class="tip-content">
                                         <h5>Liên hệ ngay lập tức</h5>
-                                        <p>Báo cáo càng sớm càng tốt, tốt nhất là trong vòng 15 phút sau khi nhận hàng.</p>
+                                        <p>Báo cáo càng sớm càng tốt, tốt nhất là trong vòng 15 phút sau khi nhận hàng.
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="tip">
@@ -440,7 +459,9 @@
                             </div>
                             <div class="note-content">
                                 <h5>Lưu ý về thời gian xử lý:</h5>
-                                <p>Thời gian trên là ước tính và có thể thay đổi tùy thuộc vào ngân hàng, nhà cung cấp dịch vụ thanh toán và khối lượng công việc. Các ngày lễ, cuối tuần có thể làm chậm quá trình xử lý.</p>
+                                <p>Thời gian trên là ước tính và có thể thay đổi tùy thuộc vào ngân hàng, nhà cung cấp
+                                    dịch vụ thanh toán và khối lượng công việc. Các ngày lễ, cuối tuần có thể làm chậm
+                                    quá trình xử lý.</p>
                             </div>
                         </div>
                     </div>
@@ -460,7 +481,8 @@
                                 <div class="calculator-inputs">
                                     <div class="input-group">
                                         <label for="orderAmount">Tổng giá trị đơn hàng (VND)</label>
-                                        <input type="number" id="orderAmount" placeholder="Nhập số tiền" value="250000" min="0">
+                                        <input type="number" id="orderAmount" placeholder="Nhập số tiền"
+                                            value="250000" min="0">
                                     </div>
                                     <div class="input-group">
                                         <label for="issueType">Loại vấn đề</label>
@@ -473,7 +495,8 @@
                                     </div>
                                     <div class="input-group" id="partialAmountGroup" style="display: none;">
                                         <label for="affectedAmount">Giá trị phần bị ảnh hưởng (VND)</label>
-                                        <input type="number" id="affectedAmount" placeholder="Nhập số tiền" value="0" min="0">
+                                        <input type="number" id="affectedAmount" placeholder="Nhập số tiền"
+                                            value="0" min="0">
                                     </div>
                                     <button id="calculateRefund" class="btn-calculate">
                                         <i class="fas fa-calculator"></i>
@@ -502,7 +525,8 @@
                                             <span id="totalRefund">250.000đ</span>
                                         </div>
                                         <div class="result-note">
-                                            <small><i class="fas fa-info-circle"></i> Số tiền thực tế có thể thay đổi tùy trường hợp cụ thể</small>
+                                            <small><i class="fas fa-info-circle"></i> Số tiền thực tế có thể thay đổi
+                                                tùy trường hợp cụ thể</small>
                                         </div>
                                     </div>
                                 </div>
@@ -518,7 +542,8 @@
                                     </div>
                                     <div class="rule-content">
                                         <h5>Toàn bộ đơn hàng</h5>
-                                        <p>Hoàn 100% giá trị đơn hàng + 100% phí giao hàng nếu toàn bộ đơn có vấn đề.</p>
+                                        <p>Hoàn 100% giá trị đơn hàng + 100% phí giao hàng nếu toàn bộ đơn có vấn đề.
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="rule">
@@ -536,7 +561,8 @@
                                     </div>
                                     <div class="rule-content">
                                         <h5>Giao hàng trễ</h5>
-                                        <p>Trễ 30-60 phút: hoàn 20% phí giao hàng. Trên 60 phút: hoàn 50% phí giao hàng.</p>
+                                        <p>Trễ 30-60 phút: hoàn 20% phí giao hàng. Trên 60 phút: hoàn 50% phí giao hàng.
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="rule">
@@ -545,7 +571,8 @@
                                     </div>
                                     <div class="rule-content">
                                         <h5>Voucher bồi thường</h5>
-                                        <p>Ngoài tiền hoàn, khách hàng có thể nhận thêm voucher 10-20% cho lần mua sau.</p>
+                                        <p>Ngoài tiền hoàn, khách hàng có thể nhận thêm voucher 10-20% cho lần mua sau.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -670,38 +697,47 @@
                             <div class="faq-list">
                                 <div class="faq-item">
                                     <div class="faq-question">
-                                        <h5><i class="fas fa-question-circle"></i> Tôi cần những gì để yêu cầu hoàn tiền?</h5>
+                                        <h5><i class="fas fa-question-circle"></i> Tôi cần những gì để yêu cầu hoàn
+                                            tiền?</h5>
                                         <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
                                     </div>
                                     <div class="faq-answer">
-                                        <p>Bạn cần có: (1) Mã đơn hàng, (2) Hình ảnh/video bằng chứng rõ ràng, (3) Thông tin tài khoản ngân hàng nếu thanh toán trực tuyến, (4) Mô tả chi tiết vấn đề gặp phải.</p>
+                                        <p>Bạn cần có: (1) Mã đơn hàng, (2) Hình ảnh/video bằng chứng rõ ràng, (3) Thông
+                                            tin tài khoản ngân hàng nếu thanh toán trực tuyến, (4) Mô tả chi tiết vấn đề
+                                            gặp phải.</p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
                                     <div class="faq-question">
-                                        <h5><i class="fas fa-question-circle"></i> Tôi có thể yêu cầu hoàn tiền sau bao lâu?</h5>
+                                        <h5><i class="fas fa-question-circle"></i> Tôi có thể yêu cầu hoàn tiền sau bao
+                                            lâu?</h5>
                                         <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
                                     </div>
                                     <div class="faq-answer">
-                                        <p>Bạn có thể yêu cầu hoàn tiền trong vòng 30 phút sau khi nhận hàng. Đối với trường hợp phát hiện muộn (vật lạ trong thức ăn), thời hạn là 2 giờ.</p>
+                                        <p>Bạn có thể yêu cầu hoàn tiền trong vòng 30 phút sau khi nhận hàng. Đối với
+                                            trường hợp phát hiện muộn (vật lạ trong thức ăn), thời hạn là 2 giờ.</p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
                                     <div class="faq-question">
-                                        <h5><i class="fas fa-question-circle"></i> Tôi thanh toán bằng tiền mặt thì nhận hoàn tiền bằng cách nào?</h5>
+                                        <h5><i class="fas fa-question-circle"></i> Tôi thanh toán bằng tiền mặt thì
+                                            nhận hoàn tiền bằng cách nào?</h5>
                                         <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
                                     </div>
                                     <div class="faq-answer">
-                                        <p>Đối với thanh toán tiền mặt, chúng tôi sẽ hoàn tiền qua chuyển khoản ngân hàng hoặc ví điện tử theo thông tin bạn cung cấp.</p>
+                                        <p>Đối với thanh toán tiền mặt, chúng tôi sẽ hoàn tiền qua chuyển khoản ngân
+                                            hàng hoặc ví điện tử theo thông tin bạn cung cấp.</p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
                                     <div class="faq-question">
-                                        <h5><i class="fas fa-question-circle"></i> Tôi có thể nhận voucher thay vì tiền mặt không?</h5>
+                                        <h5><i class="fas fa-question-circle"></i> Tôi có thể nhận voucher thay vì tiền
+                                            mặt không?</h5>
                                         <button class="faq-toggle"><i class="fas fa-chevron-down"></i></button>
                                     </div>
                                     <div class="faq-answer">
-                                        <p>Có, bạn có thể chọn nhận voucher có giá trị cao hơn 10-20% so với số tiền hoàn để sử dụng cho đơn hàng tiếp theo.</p>
+                                        <p>Có, bạn có thể chọn nhận voucher có giá trị cao hơn 10-20% so với số tiền
+                                            hoàn để sử dụng cho đơn hàng tiếp theo.</p>
                                     </div>
                                 </div>
                             </div>
@@ -767,7 +803,8 @@
                         <i class="fas fa-bullhorn"></i>
                         <div>
                             <h4>Cập nhật chính sách</h4>
-                            <p>Chính sách hoàn tiền có thể được cập nhật để bảo vệ quyền lợi khách hàng tốt hơn. Vui lòng kiểm tra thường xuyên để nắm bắt các thay đổi mới nhất.</p>
+                            <p>Chính sách hoàn tiền có thể được cập nhật để bảo vệ quyền lợi khách hàng tốt hơn. Vui
+                                lòng kiểm tra thường xuyên để nắm bắt các thay đổi mới nhất.</p>
                         </div>
                     </div>
                 </div>
@@ -844,7 +881,8 @@
                     </div>
                     <div class="form-group" id="bankDetails" style="display: none;">
                         <label for="bankInfo">Thông tin ngân hàng</label>
-                        <input type="text" id="bankInfo" placeholder="Số tài khoản - Tên ngân hàng - Chủ tài khoản">
+                        <input type="text" id="bankInfo"
+                            placeholder="Số tài khoản - Tên ngân hàng - Chủ tài khoản">
                     </div>
                     <div class="form-group" id="walletDetails" style="display: none;">
                         <label for="walletInfo">Thông tin ví điện tử</label>
@@ -865,4 +903,5 @@
 
     <script src="{{ asset('js/refund-policy.js') }}"></script>
 </body>
+
 </html>

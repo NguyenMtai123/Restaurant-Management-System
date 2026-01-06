@@ -7,7 +7,6 @@
 
 @section('content')
 
-{{-- HEADER: nút thêm modal + nút gửi gọi JS submit --}}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h4 class="fw-bold mb-1">🎟 Quản lý mã giảm giá</h4>
@@ -15,12 +14,9 @@
     </div>
 
     <div class="d-flex gap-2">
-        {{-- Mở modal Thêm --}}
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCoupon">
             <i class="bx bx-plus"></i> Thêm mã
         </button>
-
-        {{-- Gửi mã: gọi submit form sendForm --}}
         <button type="button" class="btn btn-success" onclick="document.getElementById('sendForm').submit()">
             <i class="bx bx-mail-send"></i> Gửi mã đã chọn
         </button>
@@ -28,13 +24,11 @@
 </div>
 
 <div class="row g-4">
-    {{-- LEFT: COUPON LIST inside sendForm --}}
     <div class="col-lg-12">
         <form id="sendForm" method="POST" action="{{ route('admin.coupons.sendMultiple') }}">
             @csrf
 
             <div class="row g-4">
-                {{-- LEFT: COUPON LIST --}}
                 <div class="col-lg-8">
                     <div class="card shadow-sm">
                         <div class="card-header bg-light d-flex justify-content-between align-items-center">
@@ -43,7 +37,6 @@
                                 <strong>Danh sách mã giảm giá</strong>
                             </div>
 
-                            {{-- search coupon --}}
                             <div style="min-width:260px;">
                                 <input id="searchCoupon" type="text" class="form-control form-control-sm" placeholder="🔍 Tìm mã / tên">
                             </div>
@@ -108,7 +101,6 @@
                                         </td>
 
                                         <td class="text-end">
-                                            {{-- nút sửa mở modal edit (type=button) --}}
                                             <button type="button"
                                                     class="btn btn-sm btn-warning"
                                                     data-bs-toggle="modal"
@@ -117,7 +109,6 @@
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
-                                            {{-- nút xóa mở modal delete --}}
                                             <button type="button"
                                                     class="btn btn-sm btn-danger"
                                                     data-bs-toggle="modal"
@@ -150,13 +141,11 @@
                     </div>
                 </div>
 
-                {{-- RIGHT: USER SELECT is inside send form so selected users submitted --}}
                <div class="col-lg-4">
                     <div class="card shadow-sm">
                         <div class="card-header bg-light position-relative">
                             <strong>Người nhận</strong>
 
-                            {{-- SEARCH AUTOCOMPLETE --}}
                             <div class="mt-2 position-relative">
                                 <input id="searchUser"
                                     type="text"
@@ -196,13 +185,11 @@
                 </div>
 
             </div>
-                {{-- LEFT: COUPON LIST --}}
 
-        </form> {{-- end sendForm --}}
-    </div> {{-- end col-left --}}
-</div> {{-- end row --}}
+        </form>
+    </div>
+</div>
 
-{{-- ===== MODAL CREATE (outside sendForm) ===== --}}
 <div class="modal fade" id="createCoupon" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <form method="POST" action="{{ route('admin.coupons.store') }}">
@@ -285,7 +272,6 @@
     </div>
 </div>
 
-{{-- ===== MODAL EDIT & DELETE for each coupon (outside sendForm) ===== --}}
 @foreach($coupons as $coupon)
     {{-- EDIT --}}
     <div class="modal fade" id="edit{{ $coupon->id }}" tabindex="-1">
@@ -395,7 +381,6 @@
     </div>
 @endforeach
 
-{{-- STYLE --}}
 <style>
 .hover-bg:hover {
     background: #f5f7fa;

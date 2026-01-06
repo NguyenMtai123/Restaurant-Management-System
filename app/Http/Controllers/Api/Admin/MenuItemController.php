@@ -16,21 +16,18 @@ class MenuItemController extends Controller
 
         $query = MenuItem::with('category', 'featuredImage');
 
-        // 🔍 Tìm kiếm theo tên
         if ($request->filled('keyword')) {
             $query->where('name', 'like', '%' . $request->keyword . '%');
         }
 
-        // 🗂 Lọc theo danh mục
         if ($request->filled('category_id') && $request->category_id !== 'all') {
             $query->where('category_id', $request->category_id);
         }
 
-        // 📄 Phân trang
         $menuItems = $query
             ->latest()
             ->paginate(5)
-            ->withQueryString(); // giữ query khi chuyển trang
+            ->withQueryString();
 
         return view('admin.menu-items.index', compact(
             'menuItems',
@@ -79,7 +76,6 @@ class MenuItemController extends Controller
             $data['slug'] = $request->slug;
         }
 
-        // **Sinh code tự động**
         $lastItem = MenuItem::orderByDesc('id')->first();
         if($lastItem) {
             $number = (int)substr($lastItem->code, 2) + 1; // lấy số cuối mã SP
@@ -89,7 +85,6 @@ class MenuItemController extends Controller
         $data['code'] = 'SP' . str_pad($number, 4, '0', STR_PAD_LEFT);
         $menuItem = MenuItem::create($data);
 
-        // Nếu có ảnh upload qua form create (images[])
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $idx => $file) {
                 $name = time() . '_' . uniqid() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
@@ -102,7 +97,6 @@ class MenuItemController extends Controller
             }
         }
 
-        // Nếu request Ajax -> trả về JSON
         if ($request->ajax()) {
             return response()->json(['success' => true, 'message' => 'Đã thêm món', 'data' => $menuItem], 201);
         }
@@ -148,7 +142,6 @@ class MenuItemController extends Controller
 
         $menu_item->update($data);
 
-        // Nếu upload ảnh trực tiếp kèm form update -> chuyển sang MenuItemImageController.upload
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
                 $name = time() . '_' . uniqid() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
@@ -170,7 +163,6 @@ class MenuItemController extends Controller
 
     public function destroy(Request $request, MenuItem $menu_item)
     {
-        // xóa file ảnh vật lý
         foreach ($menu_item->images as $img) {
             if (file_exists(public_path($img->image_path))) {
                 @unlink(public_path($img->image_path));

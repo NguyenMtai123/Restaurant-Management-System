@@ -14,7 +14,6 @@ class MenuItemImage extends Model
         'is_featured'
     ];
 
-    // Thêm accessor 'url' vào JSON khi serialize
     protected $appends = ['url'];
 
     public function menuItem()

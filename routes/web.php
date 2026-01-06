@@ -173,13 +173,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         ->name('coupons.sendMultiple')
         ->middleware('permission:manage_coupons');
 
-    // Posts & Categories
-    Route::resource('posts', PostController::class)
-        ->middleware('permission:manage_posts');
-
-    Route::resource('post-categories', PostCategoryController::class)
-        ->middleware('permission:manage_posts');
-
     // Employees
     Route::resource('employees', EmployeeController::class)
         ->parameters(['employees' => 'employee'])
@@ -220,85 +213,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         ->name('profile.password');
 
 });
-
-
-// Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
-
-//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-//     Route::get('/statistic', [StatisticsController::class, 'index'])->name('statistic');
-//     Route::get( '/statistics/export-pdf', [StatisticsController::class, 'exportPdf'])->name('statistics.export.pdf');
-
-//     Route::resource('coupons', CouponController::class);
-//     Route::get('coupons/{coupon}/send', [CouponController::class,'sendForm'])
-//         ->name('coupons.send.form');
-//     Route::post('coupons/{coupon}/send', [CouponController::class,'sendToUsers'])
-//         ->name('coupons.send');
-
-//         Route::post(
-//         'coupons/send-multiple',
-//         [CouponController::class,'sendMultiple']
-//     )->name('coupons.sendMultiple');
-
-//     Route::resource('roles', RoleController::class);
-
-//     // Menu items
-//     Route::resource('menu-items', MenuItemController::class);
-
-//     Route::get('menu-items/{menuItem}/images', [MenuItemImageController::class, 'index']);
-//     Route::post('menu-items/{menuItem}/images', [MenuItemImageController::class, 'store']);
-//     Route::delete('menu-item-images/{image}', [MenuItemImageController::class, 'destroy']);
-//     Route::post('menu-item-images/{image}/set-featured', [MenuItemImageController::class, 'setFeatured']);
-
-//     // Categories
-//     Route::resource('categories', CategoryController::class);
-
-//     // Users
-//     Route::prefix('users')->group(function () {
-//         Route::get('/', [UserController::class, 'index'])->name('users.index');
-//         Route::get('/create', [UserController::class, 'create'])->name('users.create');
-//         Route::post('/store', [UserController::class, 'store'])->name('users.store');
-//         Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-//         Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
-//         Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-//     });
-
-//     // Orders
-//     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
-//     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-//     Route::put('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
-//     Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
-//     Route::get('/orders-export/pdf', [OrderController::class, 'exportPdf'])->name('orders.export.pdf');
-//     Route::get('customers/{user}', [UserController::class, 'show'])
-//     ->name('admin.users.show');
-//     Route::resource('posts', PostController::class);
-//     Route::resource('post-categories', PostCategoryController::class);
-
-//     Route::resource('employees', EmployeeController::class)
-//         ->parameters(['employees' => 'employee']);
-//     Route::resource('contacts', ContactController::class)
-//          ->only(['index','show','destroy']);
-
-//     Route::get('contacts/{contact}/toggle-read', [ContactController::class,'toggleRead'])
-//          ->name('contacts.toggle-read');
-//     Route::resource('abouts', AboutController::class);
-
-//     // Route riêng để bật is_used (nếu muốn tách ra)
-//     Route::post('abouts/{about}/set-used', [AboutController::class, 'setUsed'])->name('abouts.set-used');
-//     Route::get('settings', [SettingController::class, 'index'])->name('settings');
-//      Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::put('profile/password', [ProfileController::class, 'password'])->name('profile.password');
-
-
-// });
-
-// // ---------------------------
-// // STAFF ROUTES (ví dụ)
-// // ---------------------------
-// Route::middleware(['auth', 'role:staff'])->group(function () {
-//     Route::get('/staff/dashboard', function () {
-//         return 'Staff Dashboard';
-//     })->name('staff.dashboard');
-// });
 
 // Route gốc `/` → tự động vào home
 Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -36,8 +36,6 @@ class CheckoutController extends Controller
                 return response()->json(['success' => false, 'error' => "Sản phẩm trong giỏ không tồn tại (id: {$item->menu_item_id})"], 400);
             }
         }
-
-        // Tính subtotal
         $subtotal = $cart->items->sum(fn($i) => $i->quantity * $i->menuItem->price);
 
         // Lấy coupon từ session (nếu có)
@@ -46,13 +44,6 @@ class CheckoutController extends Controller
         $shippingDiscount = $couponData['shipping_discount'] ?? 0;
         $couponId = $couponData['coupon_id'] ?? null;
         $appliedCoupon = null;
-
-        // ================== XỬ LÝ MÃ CỨNG ==================
-        // $couponData = session('coupon', []);
-        // $discount = 0;
-        // $shippingDiscount = 0;
-        // $couponId = null;
-        // $appliedCoupon = null;
 
         if (!empty($couponData['code'])) {
             $code = strtoupper($couponData['code']);
@@ -78,12 +69,12 @@ class CheckoutController extends Controller
                 $discount = round($subtotal * 0.2, 2);
             }
 
-            // ===== FREESHIP =====
             if ($code === 'FREESHIP') {
                 if ($subtotal >= 200000) {
                     $shippingDiscount = 1;
                 }
             }
+
         }
 
 
@@ -329,7 +320,7 @@ class CheckoutController extends Controller
                 $usedByUser = \DB::table('coupon_user')
                     ->where('coupon_id', $coupon->id)
                     ->where('user_id', $user->id)
-                    ->where('is_used', 1)  // chỉ tính đã dùng
+                    ->where('is_used', 1)
                     ->exists();
 
                 if ($usedByUser) {

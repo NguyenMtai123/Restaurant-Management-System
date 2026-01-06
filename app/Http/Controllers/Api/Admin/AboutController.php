@@ -66,13 +66,10 @@ class AboutController extends Controller
         'map_embed' => 'nullable|string',
         'phone' => 'nullable|string|max:20',
         'email' => 'nullable|email|max:150',
-        // bỏ rule boolean để tránh lỗi khi checkbox gửi "on"
         'is_used' => 'nullable'
     ]);
 
     $data = $request->all();
-
-    // đảm bảo lưu 0/1
     $data['is_used'] = $request->boolean('is_used');
 
     if ($request->hasFile('image')) {
@@ -85,8 +82,6 @@ class AboutController extends Controller
     }
 
     $about->update($data);
-
-    // Dùng $data['is_used'] thay vì $about->is_used (instance chưa refresh)
     if ($data['is_used']) {
         About::where('id', '<>', $about->id)->update(['is_used' => 0]);
     }
