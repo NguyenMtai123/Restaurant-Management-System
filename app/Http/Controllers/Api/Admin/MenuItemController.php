@@ -130,7 +130,7 @@ class MenuItemController extends Controller
         ]);
 
         $data = $request->only(['category_id','name','description','price']);
-        $data['is_available'] = $request->has('is_available') ? (bool)$request->is_available : true;
+        $data['is_available'] = $request->boolean('is_available');
 
         if (empty($request->slug)) {
             $slug = Str::slug($request->name);
