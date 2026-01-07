@@ -30,6 +30,7 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
             padding: 24px;
         }
+
         .menu-image {
             width: 100%;
             height: 320px;
@@ -151,9 +152,15 @@
                     <!-- Actions -->
                     <div class="d-flex gap-3 mt-4 flex-wrap row">
                         <div class="col-md-6">
-                            <button class="btn btn-success btn-cart add-to-cart" data-id="{{ $menuItem->id }}">
-                                <i class="fas fa-cart-plus me-1"></i> Thêm giỏ
-                            </button>
+                            @if ($menuItem->is_available)
+                                <button class="btn btn-success btn-cart add-to-cart" data-id="{{ $menuItem->id }}">
+                                    <i class="fas fa-cart-plus me-1"></i> Thêm giỏ
+                                </button>
+                            @else
+                                <button class="btn btn-secondary btn-cart" disabled>
+                                    <i class="fas fa-ban me-1"></i> Hết hàng
+                                </button>
+                            @endif
                         </div>
 
                         <div class="col-md-6">
@@ -162,6 +169,7 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
