@@ -95,12 +95,12 @@
 
                 </form>
 
-                <div class="col-md-3 text-end">
+                {{-- <div class="col-md-3 text-end">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#addCustomerModal">
                         <i class='bx bx-user-plus'></i> Thêm khách hàng
                     </button>
-                </div>
+                </div> --}}
 
             </div>
         </div>
@@ -223,7 +223,7 @@
 
             const userId = btn.dataset.id;
 
-            fetch(`/admin/customers/${userId}`)
+            fetch(`/admin/users/${userId}`)
                 .then(res => res.json())
                 .then(data => {
 
