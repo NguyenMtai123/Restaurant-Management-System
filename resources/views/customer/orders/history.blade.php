@@ -14,7 +14,7 @@
                         <th>Ngày đặt</th>
                         <th>Trạng thái</th>
                         <th>Tổng tiền</th>
-                        <th>Chi tiết</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,8 +25,34 @@
                             <td class="status {{ $order->status }}">{{ ucfirst($order->status) }}</td>
                             <td>{{ number_format($order->total_amount, 0, ',', '.') }} đ</td>
                             <td>
-                                <button class="btn-view" onclick="showOrderDetail({{ $order->id }})">Xem</button>
+                                <button class="btn-view" onclick="showOrderDetail({{ $order->id }})">
+                                    Xem
+                                </button>
+
+                                {{-- HỦY ĐƠN --}}
+                                @if ($order->status === 'pending' or $order->status === 'delivered')
+                                    <form action="{{ route('orders.cancel', $order) }}" method="POST" style="display:inline;"
+                                        onsubmit="return confirm('Bạn chắc chắn muốn hủy đơn này?')">
+                                        @csrf
+                                        <button type="submit" class="btn-cancel">
+                                            Hủy
+                                        </button>
+                                    </form>
+                                @endif
+
+                                {{-- XÁC NHẬN ĐÃ NHẬN --}}
+                                @if ($order->status === 'delivered')
+                                    <form action="{{ route('orders.confirmReceived', $order) }}" method="POST"
+                                        style="display:inline;" onsubmit="return confirm('Bạn xác nhận đã nhận hàng?')">
+                                        @csrf
+                                        <button type="submit" class="btn-confirm">
+                                            Đã nhận hàng
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
+
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -84,6 +110,34 @@
             background: #f8f8f8;
         }
 
+        .status.pending {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .status.completed {
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .status.cancelled {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .btn-cancel {
+            padding: 5px 10px;
+            background: #dc3545;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cancel:hover {
+            background: #bb2d3b;
+        }
+
         .status.paid {
             color: #198754;
             font-weight: bold;
@@ -107,6 +161,19 @@
             text-decoration: none;
             cursor: pointer;
             transition: background 0.3s;
+        }
+
+        .btn-confirm {
+            padding: 5px 10px;
+            background: #198754;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-confirm:hover {
+            background: #157347;
         }
 
         .btn-view:hover {
