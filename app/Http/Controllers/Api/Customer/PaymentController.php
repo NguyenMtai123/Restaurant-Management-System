@@ -123,7 +123,7 @@ class PaymentController extends Controller
             'status' => 'paid',
         ]);
 
-        $order->update(['status' => 'completed']);
+        $order->update(['status' => 'delivered']);
         Mail::to($order->user->email)->send(new OrderPaidMail($order));
 
         return redirect()->route('orders.show', $order->id)
